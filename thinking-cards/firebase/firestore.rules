@@ -1,26 +1,121 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Categories: publicly readable, admin-only writes
+
+    // ── Helper functions ──────────────────────────────────────────────
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function hasAll(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnly(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    // ── Categories ────────────────────────────────────────────────────
     match /categories/{categoryId} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.token.admin == true;
+
+      allow create: if isAdmin()
+        && hasAll(['name', 'description', 'icon', 'color', 'order'])
+        && hasOnly(['name', 'description', 'icon', 'color', 'order'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 500
+        && request.resource.data.icon is string
+        && request.resource.data.icon.size() > 0
+        && request.resource.data.icon.size() <= 50
+        && request.resource.data.color is string
+        && request.resource.data.color.matches('^#[0-9A-Fa-f]{6}$')
+        && request.resource.data.order is int;
+
+      allow update: if isAdmin()
+        && hasOnly(['name', 'description', 'icon', 'color', 'order'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 500
+        && request.resource.data.icon is string
+        && request.resource.data.icon.size() > 0
+        && request.resource.data.icon.size() <= 50
+        && request.resource.data.color is string
+        && request.resource.data.color.matches('^#[0-9A-Fa-f]{6}$')
+        && request.resource.data.order is int;
+
+      allow delete: if isAdmin();
     }
 
-    // Cards: authenticated read, admin-only writes
+    // ── Cards ─────────────────────────────────────────────────────────
     match /cards/{cardId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.token.admin == true;
+      allow read: if isAuthenticated();
+
+      allow create: if isAdmin()
+        && hasAll(['questionText', 'categoryId', 'cardNumber'])
+        && hasOnly(['questionText', 'categoryId', 'cardNumber'])
+        && request.resource.data.questionText is string
+        && request.resource.data.questionText.size() > 0
+        && request.resource.data.questionText.size() <= 2000
+        && request.resource.data.categoryId is string
+        && request.resource.data.categoryId.size() > 0
+        && request.resource.data.cardNumber is int
+        && request.resource.data.cardNumber > 0;
+
+      allow update: if isAdmin()
+        && hasOnly(['questionText', 'categoryId', 'cardNumber'])
+        && request.resource.data.questionText is string
+        && request.resource.data.questionText.size() > 0
+        && request.resource.data.questionText.size() <= 2000
+        && request.resource.data.categoryId is string
+        && request.resource.data.categoryId.size() > 0
+        && request.resource.data.cardNumber is int
+        && request.resource.data.cardNumber > 0;
+
+      allow delete: if isAdmin();
     }
 
-    // Favorites: users can only read/write their own favorites
+    // ── Favorites ─────────────────────────────────────────────────────
     match /users/{userId}/favorites/{cardId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if isOwner(userId);
+
+      allow create: if isOwner(userId)
+        && hasAll(['addedAt'])
+        && hasOnly(['addedAt'])
+        && request.resource.data.addedAt is timestamp;
+
+      allow update: if false;
+      allow delete: if isOwner(userId);
     }
 
-    // Progress: users can only read/write their own progress
+    // ── Progress ──────────────────────────────────────────────────────
     match /users/{userId}/progress/{cardId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if isOwner(userId);
+
+      allow create: if isOwner(userId)
+        && hasAll(['seenAt'])
+        && hasOnly(['seenAt'])
+        && request.resource.data.seenAt is timestamp;
+
+      allow update: if false;
+      allow delete: if isOwner(userId);
+    }
+
+    // ── Catch-all deny ────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
