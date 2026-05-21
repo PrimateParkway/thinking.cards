@@ -20,7 +20,13 @@ export class AuthService {
   readonly isLoggedIn = computed(() => !!this.currentUser());
   readonly isAdmin = signal(false);
 
+  readonly authReady: Promise<void>;
+
   constructor() {
+    let resolveReady: () => void;
+    this.authReady = new Promise((r) => (resolveReady = r));
+    let first = true;
+
     onAuthStateChanged(this.auth, (user) => {
       this.zone.run(async () => {
         this.currentUser.set(user);
@@ -29,6 +35,10 @@ export class AuthService {
           this.isAdmin.set(!!token.claims['admin']);
         } else {
           this.isAdmin.set(false);
+        }
+        if (first) {
+          first = false;
+          resolveReady!();
         }
       });
     });

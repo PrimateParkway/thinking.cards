@@ -5,6 +5,7 @@ import { adminGuard } from './core/guards/admin.guard';
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/home/home.component').then((m) => m.HomeComponent),
     data: { animation: 'home' },

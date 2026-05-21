@@ -8,6 +8,7 @@ describe('adminGuard', () => {
   let mockAuth: {
     isLoggedIn: ReturnType<typeof vi.fn>;
     isAdmin: ReturnType<typeof vi.fn>;
+    authReady: Promise<void>;
   };
   let mockRouter: { createUrlTree: ReturnType<typeof vi.fn> };
   let injector: Injector;
@@ -17,6 +18,7 @@ describe('adminGuard', () => {
     mockAuth = {
       isLoggedIn: vi.fn(),
       isAdmin: vi.fn(),
+      authReady: Promise.resolve(),
     };
     mockRouter = { createUrlTree: vi.fn().mockReturnValue(fakeUrlTree) };
 
@@ -30,22 +32,22 @@ describe('adminGuard', () => {
     injector = TestBed.inject(Injector);
   });
 
-  it('allows access when user is logged in and admin', () => {
+  it('allows access when user is logged in and admin', async () => {
     mockAuth.isLoggedIn.mockReturnValue(true);
     mockAuth.isAdmin.mockReturnValue(true);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       adminGuard({} as any, {} as any),
     );
 
     expect(result).toBe(true);
   });
 
-  it('denies access when user is logged in but not admin', () => {
+  it('denies access when user is logged in but not admin', async () => {
     mockAuth.isLoggedIn.mockReturnValue(true);
     mockAuth.isAdmin.mockReturnValue(false);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       adminGuard({} as any, {} as any),
     );
 
@@ -53,22 +55,22 @@ describe('adminGuard', () => {
     expect(mockRouter.createUrlTree).toHaveBeenCalledWith(['/']);
   });
 
-  it('denies access when user is not logged in', () => {
+  it('denies access when user is not logged in', async () => {
     mockAuth.isLoggedIn.mockReturnValue(false);
     mockAuth.isAdmin.mockReturnValue(false);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       adminGuard({} as any, {} as any),
     );
 
     expect(result).toBe(fakeUrlTree);
   });
 
-  it('denies access when user is not logged in even if admin flag is set', () => {
+  it('denies access when user is not logged in even if admin flag is set', async () => {
     mockAuth.isLoggedIn.mockReturnValue(false);
     mockAuth.isAdmin.mockReturnValue(true);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       adminGuard({} as any, {} as any),
     );
 

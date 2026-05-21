@@ -5,13 +5,13 @@ import { authGuard } from './auth.guard';
 import { AuthService } from '../services/auth.service';
 
 describe('authGuard', () => {
-  let mockAuth: { isLoggedIn: ReturnType<typeof vi.fn> };
+  let mockAuth: { isLoggedIn: ReturnType<typeof vi.fn>; authReady: Promise<void> };
   let mockRouter: { createUrlTree: ReturnType<typeof vi.fn> };
   let injector: Injector;
   const fakeUrlTree = {} as UrlTree;
 
   beforeEach(() => {
-    mockAuth = { isLoggedIn: vi.fn() };
+    mockAuth = { isLoggedIn: vi.fn(), authReady: Promise.resolve() };
     mockRouter = { createUrlTree: vi.fn().mockReturnValue(fakeUrlTree) };
 
     TestBed.configureTestingModule({
@@ -24,20 +24,20 @@ describe('authGuard', () => {
     injector = TestBed.inject(Injector);
   });
 
-  it('returns true when user is logged in', () => {
+  it('returns true when user is logged in', async () => {
     mockAuth.isLoggedIn.mockReturnValue(true);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       authGuard({} as any, {} as any),
     );
 
     expect(result).toBe(true);
   });
 
-  it('redirects to /login when user is not logged in', () => {
+  it('redirects to /login when user is not logged in', async () => {
     mockAuth.isLoggedIn.mockReturnValue(false);
 
-    const result = runInInjectionContext(injector, () =>
+    const result = await runInInjectionContext(injector, () =>
       authGuard({} as any, {} as any),
     );
 

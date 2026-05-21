@@ -5,6 +5,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { CardService } from '../../core/services/card.service';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { ProgressService } from '../../core/services/progress.service';
+import { StreakService } from '../../core/services/streak.service';
 import { Card } from '../../core/models/card.model';
 
 @Component({
@@ -28,6 +29,19 @@ import { Card } from '../../core/models/card.model';
         <div class="stat">
           <span class="stat-value">{{ decksExplored() }}</span>
           <span class="stat-label">Decks</span>
+        </div>
+      </div>
+
+      <div class="streak-card">
+        <svg class="streak-icon" viewBox="0 0 24 24" [attr.fill]="streak().activeToday ? '#ff6b6b' : 'none'" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22c-4.97 0-9-2.69-9-6 0-2.48 1.51-4.26 3.21-5.88C8.52 8 10 6 10 3c0 0 2 2 2 5 1-1 2-3 2-5 3 3 5 6 5 10 0 3.31-4.03 6-9 6z"/>
+        </svg>
+        <div class="streak-info">
+          <span class="streak-count">{{ streak().current }}</span>
+          <span class="streak-label">day streak</span>
+        </div>
+        <div class="streak-best">
+          Best: {{ streak().longest }}
         </div>
       </div>
 
@@ -121,6 +135,49 @@ import { Card } from '../../core/models/card.model';
       letter-spacing: 0.5px;
     }
 
+    .streak-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      margin-bottom: 24px;
+    }
+
+    .streak-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .streak-info {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .streak-count {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .streak-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .streak-best {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
     .progress-section {
       width: 100%;
       max-width: 320px;
@@ -202,6 +259,7 @@ export class ProfileComponent {
   private cardService = inject(CardService);
   private favoritesService = inject(FavoritesService);
   private progressService = inject(ProgressService);
+  private streakService = inject(StreakService);
 
   private allCards = toSignal(this.cardService.getAllCards(), {
     initialValue: [] as Card[],
@@ -215,6 +273,8 @@ export class ProfileComponent {
   });
 
   userEmail = computed(() => this.auth.currentUser()?.email ?? '');
+
+  streak = this.streakService.streak;
 
   cardsSeen = computed(() => this.progressService.seenIds().size);
 
