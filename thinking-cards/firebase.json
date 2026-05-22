@@ -1,10 +1,33 @@
 {
+  "functions": {
+    "source": "functions"
+  },
   "firestore": {
     "rules": "firebase/firestore.rules"
   },
   "hosting": {
     "public": "dist/thinking-cards/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "/**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "/@(index.html|ngsw.json|ngsw-worker.js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ],
     "rewrites": [
       {
         "source": "**",

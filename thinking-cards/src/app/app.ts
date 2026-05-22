@@ -1,5 +1,6 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd, ChildrenOutletContexts } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { filter } from 'rxjs';
 import { TopBarComponent } from './shared/components/top-bar.component';
 import { BottomBarComponent } from './shared/components/bottom-bar.component';
@@ -42,10 +43,18 @@ export class App {
   private router = inject(Router);
   private currentUrl = signal(this.router.url);
 
+  private swUpdate = inject(SwUpdate);
+
   constructor() {
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe((e) => this.currentUrl.set(e.urlAfterRedirects));
+
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.versionUpdates
+        .pipe(filter((e) => e.type === 'VERSION_READY'))
+        .subscribe(() => document.location.reload());
+    }
   }
 
   showBottomBar = computed(() => {
