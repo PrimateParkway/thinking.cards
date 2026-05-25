@@ -15,18 +15,35 @@ import { AuthService } from '../../core/services/auth.service';
         @if (error()) {
           <p class="error">{{ error() }}</p>
         }
+        @if (resetSent()) {
+          <p class="success">Reset link sent! Check your email.</p>
+        }
 
-        <form (ngSubmit)="onLogin()">
-          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-          <button type="submit" class="btn-primary">Sign In</button>
-        </form>
+        @if (showReset()) {
+          <form (ngSubmit)="onReset()">
+            <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+            <button type="submit" class="btn-primary">Send Reset Link</button>
+          </form>
+          <p class="switch">
+            <a (click)="showReset.set(false)">Back to sign in</a>
+          </p>
+        } @else {
+          <form (ngSubmit)="onLogin()">
+            <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+            <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+            <button type="submit" class="btn-primary">Sign In</button>
+          </form>
 
-        <button class="btn-google" (click)="onGoogle()">Sign in with Google</button>
+          <button class="btn-google" (click)="onGoogle()">Sign in with Google</button>
 
-        <p class="switch">
-          Don't have an account? <a routerLink="/register">Register</a>
-        </p>
+          <p class="forgot">
+            <a (click)="showReset.set(true)">Forgot password?</a>
+          </p>
+
+          <p class="switch">
+            Don't have an account? <a routerLink="/register">Register</a>
+          </p>
+        }
       </div>
     </div>
   `,
@@ -98,10 +115,25 @@ import { AuthService } from '../../core/services/auth.service';
       transition: background 0.2s;
       &:hover { background: rgba(15,52,96,0.8); }
     }
+    .forgot {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      a { cursor: pointer; }
+    }
+    .success {
+      color: #4caf50;
+      background: rgba(76,175,80,0.1);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
     .switch {
       margin-top: 20px;
       font-size: 0.85rem;
       color: var(--text-muted);
+      a { cursor: pointer; }
     }
   `
 })
@@ -112,6 +144,17 @@ export class LoginComponent {
   email = '';
   password = '';
   error = signal('');
+  showReset = signal(false);
+  resetSent = signal(false);
+
+  onReset() {
+    this.error.set('');
+    this.resetSent.set(false);
+    this.auth.sendPasswordReset(this.email).subscribe({
+      next: () => this.resetSent.set(true),
+      error: (e) => this.error.set(e.message),
+    });
+  }
 
   onLogin() {
     this.auth.login(this.email, this.password).subscribe({

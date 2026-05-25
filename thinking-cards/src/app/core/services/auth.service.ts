@@ -6,14 +6,17 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   onAuthStateChanged,
   User,
 } from 'firebase/auth';
-import { from } from 'rxjs';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { from, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private auth = getAuth();
+  private db = getFirestore();
   private zone = inject(NgZone);
 
   readonly currentUser = signal<User | null>(null);
@@ -49,11 +52,27 @@ export class AuthService {
   }
 
   register(email: string, password: string) {
-    return from(createUserWithEmailAndPassword(this.auth, email, password));
+    return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
+      tap((cred) => this.saveUserDoc(cred.user)),
+    );
   }
 
   loginWithGoogle() {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider()));
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+      tap((cred) => this.saveUserDoc(cred.user)),
+    );
+  }
+
+  private saveUserDoc(user: User): void {
+    const ref = doc(this.db, 'users', user.uid);
+    setDoc(ref, {
+      email: user.email ?? '',
+      createdAt: user.metadata.creationTime ?? new Date().toISOString(),
+    }, { merge: true });
+  }
+
+  sendPasswordReset(email: string) {
+    return from(sendPasswordResetEmail(this.auth, email));
   }
 
   logout() {
