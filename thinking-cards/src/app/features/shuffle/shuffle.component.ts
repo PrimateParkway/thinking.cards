@@ -27,6 +27,7 @@ import { Category } from '../../core/models/category.model';
           <app-question-card
             [card]="card"
             [color]="categoryColor()"
+            [categoryName]="categoryName()"
             [favorited]="isFavorited()"
             (toggleFavorite)="onToggleFavorite()"
           />
@@ -113,8 +114,23 @@ export class ShuffleComponent {
   constructor() {
     effect(() => {
       const cards = this.allCards();
-      if (cards.length && !untracked(() => this.shuffled().length)) {
+      if (!cards.length) return;
+
+      const existing = untracked(() => this.shuffled());
+      if (!existing.length) {
+        // First load — shuffle all cards
         this.shuffled.set(this.fisherYates([...cards]));
+      } else {
+        // Cards changed — remove deleted cards from the shuffled deck
+        const validIds = new Set(cards.map(c => c.id));
+        const filtered = existing.filter(c => validIds.has(c.id));
+        if (filtered.length < existing.length) {
+          this.shuffled.set(filtered);
+          const idx = untracked(() => this.currentIndex());
+          if (idx >= filtered.length) {
+            this.currentIndex.set(Math.max(0, filtered.length - 1));
+          }
+        }
       }
     });
 
