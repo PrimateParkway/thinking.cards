@@ -1,12 +1,18 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs';
 import { CardService } from '../../core/services/card.service';
 import { StreakService } from '../../core/services/streak.service';
 import { CategoryIconComponent } from '../../shared/components/category-icon.component';
 import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
+
+interface QuizProgress {
+  index: number;
+  score: number;
+  totalAnswered: number;
+}
 
 type QuizState = 'question' | 'answered' | 'complete';
 
@@ -369,7 +375,15 @@ export class QuizComponent {
   cards = toSignal(
     this.route.paramMap.pipe(
       map(params => params.get('id')!),
-      switchMap(id => this.cardService.getCardsByCategory(id))
+      switchMap(id => this.cardService.getCardsByCategory(id)),
+      tap(cards => {
+        const saved = this.loadProgress(this.categoryId()!);
+        if (saved && saved.index < cards.length) {
+          this.currentIndex.set(saved.index);
+          this.score.set(saved.score);
+          this.totalAnswered.set(saved.totalAnswered);
+        }
+      })
     ),
     { initialValue: [] as Card[] }
   );
@@ -409,17 +423,20 @@ export class QuizComponent {
     }
 
     this.streakService.recordActivity();
+    this.persistProgress();
   }
 
   nextQuestion() {
     if (this.isLastQuestion()) {
       this.state.set('complete');
+      this.clearProgress(this.categoryId()!);
       return;
     }
 
     this.currentIndex.update(i => i + 1);
     this.selectedIndex.set(-1);
     this.state.set('question');
+    this.persistProgress();
   }
 
   playAgain() {
@@ -428,9 +445,31 @@ export class QuizComponent {
     this.score.set(0);
     this.totalAnswered.set(0);
     this.state.set('question');
+    this.clearProgress(this.categoryId()!);
   }
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  private persistProgress(): void {
+    const catId = this.categoryId();
+    if (!catId) return;
+    const data: QuizProgress = {
+      index: this.currentIndex(),
+      score: this.score(),
+      totalAnswered: this.totalAnswered(),
+    };
+    localStorage.setItem(`quiz-pos:${catId}`, JSON.stringify(data));
+  }
+
+  private loadProgress(categoryId: string): QuizProgress | null {
+    const raw = localStorage.getItem(`quiz-pos:${categoryId}`);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  }
+
+  private clearProgress(categoryId: string): void {
+    localStorage.removeItem(`quiz-pos:${categoryId}`);
   }
 }
