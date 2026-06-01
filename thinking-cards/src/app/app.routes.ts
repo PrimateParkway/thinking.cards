@@ -79,6 +79,15 @@ export const routes: Routes = [
     data: { animation: 'badges' },
   },
   {
+    path: 'themes',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/themes/themes.component').then(
+        (m) => m.ThemesComponent
+      ),
+    data: { animation: 'themes' },
+  },
+  {
     path: 'profile',
     canActivate: [authGuard],
     loadComponent: () =>

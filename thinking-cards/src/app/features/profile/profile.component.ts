@@ -6,7 +6,6 @@ import { CardService } from '../../core/services/card.service';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { ProgressService } from '../../core/services/progress.service';
 import { StreakService } from '../../core/services/streak.service';
-import { ThemeService, DARK_THEMES, LIGHT_THEMES } from '../../core/services/theme.service';
 import { BadgeService } from '../../core/services/badge.service';
 import { Card } from '../../core/models/card.model';
 
@@ -66,47 +65,13 @@ import { Card } from '../../core/models/card.model';
         Badges ({{ badgeService.earnedCount() }}/{{ badgeService.totalCount() }})
       </button>
 
-      <div class="theme-section">
-        <span class="theme-heading">Dark</span>
-        @for (t of darkThemes; track t.name) {
-          <button
-            class="theme-option"
-            [class.active]="themeService.theme() === t.name"
-            (click)="themeService.setTheme(t.name)"
-          >
-            <span class="theme-colors">
-              <span class="color-dot" [style.background]="t.bg"></span>
-              <span class="color-dot" [style.background]="t.accent"></span>
-            </span>
-            <span class="theme-label">{{ t.label }}</span>
-            @if (themeService.theme() === t.name) {
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            }
-          </button>
-        }
-
-        <span class="theme-heading light-heading">Light</span>
-        @for (t of lightThemes; track t.name) {
-          <button
-            class="theme-option"
-            [class.active]="themeService.theme() === t.name"
-            (click)="themeService.setTheme(t.name)"
-          >
-            <span class="theme-colors">
-              <span class="color-dot light-dot" [style.background]="t.bg"></span>
-              <span class="color-dot" [style.background]="t.accent"></span>
-            </span>
-            <span class="theme-label">{{ t.label }}</span>
-            @if (themeService.theme() === t.name) {
-              <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            }
-          </button>
-        }
-      </div>
+      <button class="action-btn themes-btn" (click)="goThemes()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        Themes
+      </button>
 
       @if (auth.isAdmin()) {
         <button class="action-btn admin-btn" (click)="goAdmin()">
@@ -285,75 +250,7 @@ import { Card } from '../../core/models/card.model';
       height: 20px;
     }
 
-    .theme-section {
-      width: 100%;
-      max-width: 320px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .theme-heading {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .light-heading {
-      margin-top: 10px;
-    }
-
-    .theme-option {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 10px 14px;
-      border-radius: 10px;
-      background: var(--hover-overlay);
-      color: var(--text);
-      transition: background 0.15s;
-
-      &:hover { background: var(--bg-surface); }
-
-      &.active {
-        background: var(--bg-surface);
-        outline: 2px solid var(--accent);
-      }
-    }
-
-    .theme-colors {
-      display: flex;
-      gap: 4px;
-    }
-
-    .color-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-    }
-
-    .light-dot {
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
-    }
-
-    .theme-label {
-      flex: 1;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-align: left;
-    }
-
-    .check-icon {
-      width: 18px;
-      height: 18px;
-      color: var(--accent);
-    }
-
-    .badges-btn {
+    .badges-btn, .themes-btn {
       background: var(--hover-overlay);
       color: var(--text);
       margin-bottom: 24px;
@@ -384,7 +281,6 @@ import { Card } from '../../core/models/card.model';
 })
 export class ProfileComponent {
   readonly auth = inject(AuthService);
-  readonly themeService = inject(ThemeService);
   readonly badgeService = inject(BadgeService);
   private router = inject(Router);
   private cardService = inject(CardService);
@@ -396,8 +292,6 @@ export class ProfileComponent {
     initialValue: [] as Card[],
   });
 
-  readonly darkThemes = DARK_THEMES;
-  readonly lightThemes = LIGHT_THEMES;
   readonly avatarBg = 'var(--accent)';
 
   avatarLetter = computed(() => {
@@ -432,6 +326,10 @@ export class ProfileComponent {
 
   goBadges() {
     this.router.navigate(['/badges']);
+  }
+
+  goThemes() {
+    this.router.navigate(['/themes']);
   }
 
   goAdmin() {
