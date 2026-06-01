@@ -7,6 +7,7 @@ import { FavoritesService } from '../../core/services/favorites.service';
 import { ProgressService } from '../../core/services/progress.service';
 import { StreakService } from '../../core/services/streak.service';
 import { ThemeService, DARK_THEMES, LIGHT_THEMES } from '../../core/services/theme.service';
+import { BadgeService } from '../../core/services/badge.service';
 import { Card } from '../../core/models/card.model';
 
 @Component({
@@ -55,6 +56,15 @@ import { Card } from '../../core/models/card.model';
           <div class="progress-fill" [style.width.%]="overallPercent()"></div>
         </div>
       </div>
+
+      <button class="action-btn badges-btn" (click)="goBadges()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 9 7 12 7s5-3 7.5-3a2.5 2.5 0 0 1 0 5H18"/>
+          <path d="M12 7v13"/>
+          <path d="M8 20h8"/>
+        </svg>
+        Badges ({{ badgeService.earnedCount() }}/{{ badgeService.totalCount() }})
+      </button>
 
       <div class="theme-section">
         <span class="theme-heading">Dark</span>
@@ -343,6 +353,14 @@ import { Card } from '../../core/models/card.model';
       color: var(--accent);
     }
 
+    .badges-btn {
+      background: var(--hover-overlay);
+      color: var(--text);
+      margin-bottom: 24px;
+
+      &:hover { opacity: 0.85; }
+    }
+
     .admin-btn {
       background: var(--hover-overlay);
       color: var(--text);
@@ -367,6 +385,7 @@ import { Card } from '../../core/models/card.model';
 export class ProfileComponent {
   readonly auth = inject(AuthService);
   readonly themeService = inject(ThemeService);
+  readonly badgeService = inject(BadgeService);
   private router = inject(Router);
   private cardService = inject(CardService);
   private favoritesService = inject(FavoritesService);
@@ -410,6 +429,10 @@ export class ProfileComponent {
     const seen = this.progressService.seenIds().size;
     return Math.round((seen / total) * 100);
   });
+
+  goBadges() {
+    this.router.navigate(['/badges']);
+  }
 
   goAdmin() {
     this.router.navigate(['/admin']);

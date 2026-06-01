@@ -70,6 +70,15 @@ export const routes: Routes = [
     data: { animation: 'quiz' },
   },
   {
+    path: 'badges',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/badges/badges.component').then(
+        (m) => m.BadgesComponent
+      ),
+    data: { animation: 'badges' },
+  },
+  {
     path: 'profile',
     canActivate: [authGuard],
     loadComponent: () =>
