@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, map, tap } from 'rxjs';
 import { CardService } from '../../core/services/card.service';
+import { ProgressService } from '../../core/services/progress.service';
 import { StreakService } from '../../core/services/streak.service';
 import { CategoryIconComponent } from '../../shared/components/category-icon.component';
 import { Card } from '../../core/models/card.model';
@@ -12,6 +13,8 @@ interface QuizProgress {
   index: number;
   score: number;
   totalAnswered: number;
+  completed?: boolean;
+  totalCards?: number;
 }
 
 type QuizState = 'question' | 'answered' | 'complete';
@@ -350,6 +353,7 @@ export class QuizComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private cardService = inject(CardService);
+  private progressService = inject(ProgressService);
   private streakService = inject(StreakService);
 
   currentIndex = signal(0);
@@ -378,7 +382,13 @@ export class QuizComponent {
       switchMap(id => this.cardService.getCardsByCategory(id)),
       tap(cards => {
         const saved = this.loadProgress(this.categoryId()!);
-        if (saved && saved.index < cards.length) {
+        if (!saved) return;
+        if (saved.completed) {
+          this.score.set(saved.score);
+          this.totalAnswered.set(saved.totalCards ?? cards.length);
+          this.currentIndex.set(cards.length - 1);
+          this.state.set('complete');
+        } else if (saved.index < cards.length) {
           this.currentIndex.set(saved.index);
           this.score.set(saved.score);
           this.totalAnswered.set(saved.totalAnswered);
@@ -418,8 +428,11 @@ export class QuizComponent {
     this.totalAnswered.update(v => v + 1);
 
     const card = this.currentCard();
-    if (card && index === card.correctIndex) {
-      this.score.update(v => v + 1);
+    if (card) {
+      if (index === card.correctIndex) {
+        this.score.update(v => v + 1);
+      }
+      this.progressService.markSeen(card.id);
     }
 
     this.streakService.recordActivity();
@@ -429,7 +442,7 @@ export class QuizComponent {
   nextQuestion() {
     if (this.isLastQuestion()) {
       this.state.set('complete');
-      this.clearProgress(this.categoryId()!);
+      this.saveCompleted();
       return;
     }
 
@@ -450,6 +463,19 @@ export class QuizComponent {
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  private saveCompleted(): void {
+    const catId = this.categoryId();
+    if (!catId) return;
+    const data: QuizProgress = {
+      index: this.currentIndex(),
+      score: this.score(),
+      totalAnswered: this.totalAnswered(),
+      completed: true,
+      totalCards: this.cards().length,
+    };
+    localStorage.setItem(`quiz-pos:${catId}`, JSON.stringify(data));
   }
 
   private persistProgress(): void {
