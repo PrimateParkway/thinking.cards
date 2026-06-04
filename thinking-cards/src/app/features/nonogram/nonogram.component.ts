@@ -229,13 +229,12 @@ import { Category } from '../../core/models/category.model';
     .grid-wrapper {
       width: 100%;
       margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
     }
     .nonogram-grid {
-      display: grid;
+      display: inline-grid;
       gap: 0;
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
     }
     .corner-spacer {
       /* empty top-left corner */
@@ -263,7 +262,6 @@ import { Category } from '../../core/models/category.model';
       line-height: 1.1;
     }
     .nono-cell {
-      aspect-ratio: 1;
       border: 1px solid rgba(255, 255, 255, 0.15);
       cursor: pointer;
       display: flex;
@@ -282,10 +280,10 @@ import { Category } from '../../core/models/category.model';
       background: #00b894;
     }
     /* Responsive cell sizes */
-    .grid-5 .nono-cell { min-height: 48px; }
-    .grid-8 .nono-cell { min-height: 36px; }
-    .grid-10 .nono-cell { min-height: 30px; }
-    .grid-15 .nono-cell { min-height: 22px; }
+    .grid-5 .nono-cell { width: 48px; height: 48px; }
+    .grid-8 .nono-cell { width: 36px; height: 36px; }
+    .grid-10 .nono-cell { width: 30px; height: 30px; }
+    .grid-15 .nono-cell { width: 22px; height: 22px; }
     .grid-8 .clue-num { font-size: 0.65rem; }
     .grid-10 .clue-num { font-size: 0.6rem; }
     .grid-15 .clue-num { font-size: 0.52rem; }
