@@ -262,12 +262,12 @@ import { Category } from '../../core/models/category.model';
       line-height: 1.1;
     }
     .nono-cell {
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--grid-border);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-surface);
+      background: var(--grid-cell-bg);
       transition: background 0.12s;
       -webkit-tap-highlight-color: transparent;
       user-select: none;

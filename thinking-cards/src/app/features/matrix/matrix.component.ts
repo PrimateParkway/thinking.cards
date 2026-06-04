@@ -400,11 +400,11 @@ interface GridSection {
     }
     .grid-cell {
       height: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--grid-border);
       text-align: center;
       vertical-align: middle;
       cursor: pointer;
-      background: var(--bg-surface);
+      background: var(--grid-cell-bg);
       transition: background 0.15s;
       -webkit-tap-highlight-color: transparent;
       &:hover { background: var(--hover-overlay); }
@@ -422,15 +422,15 @@ interface GridSection {
     .check-mark { color: #00b894; }
 
     .section-border-left {
-      border-left: 3px solid rgba(255, 255, 255, 0.3);
+      border-left: 3px solid var(--grid-border);
     }
     tr.block-start td,
     tr.block-start th {
-      border-top: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid var(--grid-border);
     }
     .void-cell {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: var(--hover-overlay);
+      border: 1px solid var(--grid-border);
     }
 
     .feedback {

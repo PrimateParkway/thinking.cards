@@ -13,6 +13,8 @@
   --bar-bg: rgba(26, 26, 46, 0.9);
   --bar-border: rgba(255, 255, 255, 0.06);
   --hover-overlay: rgba(255, 255, 255, 0.06);
+  --grid-border: rgba(255, 255, 255, 0.15);
+  --grid-cell-bg: var(--bg-surface);
 
   --socratic: #0098b3;
   --thisorthat: #ed6d1e;
@@ -32,6 +34,8 @@
   --bar-bg: rgba(245, 245, 247, 0.9);
   --bar-border: rgba(0, 0, 0, 0.08);
   --hover-overlay: rgba(0, 0, 0, 0.06);
+  --grid-border: rgba(0, 0, 0, 0.2);
+  --grid-cell-bg: #dce1e8;
 }
 
 :root[data-theme="ocean"] {
@@ -84,6 +88,8 @@
   --bar-bg: rgba(243, 238, 248, 0.9);
   --bar-border: rgba(0, 0, 0, 0.08);
   --hover-overlay: rgba(0, 0, 0, 0.06);
+  --grid-border: rgba(0, 0, 0, 0.18);
+  --grid-cell-bg: #ddd5e8;
 }
 
 *, *::before, *::after {
