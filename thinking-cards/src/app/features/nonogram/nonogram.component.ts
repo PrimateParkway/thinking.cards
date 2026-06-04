@@ -76,13 +76,9 @@ import { Category } from '../../core/models/category.model';
                   <div
                     class="nono-cell"
                     [class.cell-filled]="cellAt(r, c) === 1"
-                    [class.cell-x]="cellAt(r, c) === 2"
                     [class.cell-solved]="solved()"
-                    (click)="cycleCell(r, c)"
+                    (click)="toggleCell(r, c)"
                   >
-                    @if (cellAt(r, c) === 2) {
-                      <span class="x-mark">&times;</span>
-                    }
                   </div>
                 }
               }
@@ -224,6 +220,10 @@ import { Category } from '../../core/models/category.model';
       background: rgba(225, 112, 85, 0.2);
       color: #e17055;
     }
+    .difficulty-pill[data-difficulty="Extreme"] {
+      background: rgba(162, 94, 255, 0.2);
+      color: #a25eff;
+    }
 
     /* Grid */
     .grid-wrapper {
@@ -281,24 +281,16 @@ import { Category } from '../../core/models/category.model';
     .nono-cell.cell-filled.cell-solved {
       background: #00b894;
     }
-    .nono-cell.cell-x {
-      background: rgba(233, 69, 96, 0.1);
-    }
-    .x-mark {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #e94560;
-      pointer-events: none;
-      line-height: 1;
-    }
-
     /* Responsive cell sizes */
     .grid-5 .nono-cell { min-height: 48px; }
     .grid-8 .nono-cell { min-height: 36px; }
     .grid-10 .nono-cell { min-height: 30px; }
+    .grid-15 .nono-cell { min-height: 22px; }
     .grid-8 .clue-num { font-size: 0.65rem; }
     .grid-10 .clue-num { font-size: 0.6rem; }
-    .grid-10 .x-mark { font-size: 0.8rem; }
+    .grid-15 .clue-num { font-size: 0.52rem; }
+    .grid-15 .row-clue-cell { gap: 4px; }
+    .grid-15 .col-clue-cell { gap: 2px; }
 
     /* Nav & actions */
     .nav-row {
@@ -466,7 +458,8 @@ export class NonogramComponent implements OnDestroy {
     const cols = this.gridCols();
     if (cols <= 5) return 'grid-5';
     if (cols <= 8) return 'grid-8';
-    return 'grid-10';
+    if (cols <= 10) return 'grid-10';
+    return 'grid-15';
   });
 
   rowClues = computed(() => this.solution().map(row => computeClues(row)));
@@ -491,12 +484,11 @@ export class NonogramComponent implements OnDestroy {
     return this.gridState()[`${row},${col}`] ?? 0;
   }
 
-  cycleCell(row: number, col: number): void {
+  toggleCell(row: number, col: number): void {
     if (this.solved()) return;
     const key = `${row},${col}`;
     const current = this.gridState()[key] ?? 0;
-    const next = (current + 1) % 3;
-    this.gridState.update(gs => ({ ...gs, [key]: next }));
+    this.gridState.update(gs => ({ ...gs, [key]: current === 1 ? 0 : 1 }));
     this.checkSolved();
     this.persistProgress();
   }
@@ -513,7 +505,7 @@ export class NonogramComponent implements OnDestroy {
     const newState: Record<string, number> = {};
     for (let r = 0; r < sol.length; r++) {
       for (let c = 0; c < sol[r].length; c++) {
-        newState[`${r},${c}`] = sol[r][c] === 1 ? 1 : 2;
+        newState[`${r},${c}`] = sol[r][c];
       }
     }
     this.gridState.set(newState);
