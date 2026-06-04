@@ -97,6 +97,24 @@ export const routes: Routes = [
     data: { animation: 'matrix' },
   },
   {
+    path: 'cryptogram/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/cryptogram/cryptogram.component').then(
+        (m) => m.CryptogramComponent
+      ),
+    data: { animation: 'cryptogram' },
+  },
+  {
+    path: 'nonogram/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/nonogram/nonogram.component').then(
+        (m) => m.NonogramComponent
+      ),
+    data: { animation: 'nonogram' },
+  },
+  {
     path: 'badges',
     canActivate: [authGuard],
     loadComponent: () =>

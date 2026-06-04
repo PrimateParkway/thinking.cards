@@ -78,22 +78,44 @@ export class PuzzlesComponent {
   );
 
   puzzleCategories = computed(() =>
-    this.allCategories().filter(c => c.type === 'matrix')
+    this.allCategories().filter(c => c.type === 'matrix' || c.type === 'cryptogram' || c.type === 'nonogram')
   );
 
   progressFor(cat: Category): number {
+    if (cat.type === 'cryptogram') {
+      const data = this.userState.allCryptogramProgress().get(cat.id);
+      if (!data) return 0;
+      const solved = data.solvedPuzzles?.length ?? 0;
+      const total = this.puzzleCardCountFor(cat.id);
+      return total ? Math.round((solved / total) * 100) : 0;
+    }
+    if (cat.type === 'nonogram') {
+      const data = this.userState.allNonogramProgress().get(cat.id);
+      if (!data) return 0;
+      const solved = data.solvedPuzzles?.length ?? 0;
+      const total = this.puzzleCardCountFor(cat.id);
+      return total ? Math.round((solved / total) * 100) : 0;
+    }
     const data = this.userState.allMatrixProgress().get(cat.id);
     if (!data) return 0;
     const solved = data.solvedPuzzles?.length ?? 0;
-    const total = this.cardCountFor(cat.id);
+    const total = this.puzzleCardCountFor(cat.id);
     return total ? Math.round((solved / total) * 100) : 0;
   }
 
-  private cardCountFor(categoryId: string): number {
-    return this.allCards().filter(c => c.categoryId === categoryId).length;
+  private puzzleCardCountFor(categoryId: string): number {
+    return this.allCards().filter(c => c.categoryId === categoryId).length - 1;
   }
 
   openPuzzle(cat: Category) {
+    if (cat.type === 'cryptogram') {
+      this.router.navigate(['/cryptogram', cat.id]);
+      return;
+    }
+    if (cat.type === 'nonogram') {
+      this.router.navigate(['/nonogram', cat.id]);
+      return;
+    }
     this.router.navigate(['/matrix', cat.id]);
   }
 }

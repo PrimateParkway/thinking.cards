@@ -28,11 +28,27 @@ interface GridSection {
         <div class="header-bar" [style.border-color]="cat.color">
           <app-category-icon [name]="cat.name" class="title-icon" />
           <h2 class="cat-title" [style.color]="cat.color">{{ cat.name }}</h2>
+          <button class="info-btn" (click)="showInstructions()" title="How to play">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+          </button>
           <span class="timer">{{ formattedTime() }}</span>
         </div>
       }
 
       @if (currentCard(); as card) {
+        @if (isInstructionCard()) {
+          <div class="instructions-panel">
+            <h2 class="instructions-title">{{ card.questionText }}</h2>
+            <div class="instructions-body">{{ card.explanation }}</div>
+            <button class="btn primary start-btn" (click)="nextPuzzle()">
+              Start puzzles &rarr;
+            </button>
+          </div>
+        } @else {
         <div class="puzzle-title">
           <span>#{{ card.cardNumber }} — {{ card.questionText }}</span>
           @if (card.difficulty) {
@@ -170,6 +186,7 @@ interface GridSection {
             <button class="btn secondary" (click)="resetMatrix()">Reset</button>
           </div>
         }
+        }
       }
     </div>
   `,
@@ -202,6 +219,47 @@ interface GridSection {
     }
     .title-icon { width: 28px; height: 28px; }
     .cat-title { font-size: 1.3rem; flex: 1; margin: 0; }
+    .info-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: background 0.2s, color 0.2s;
+      svg { width: 18px; height: 18px; }
+      &:hover { background: var(--accent); color: white; }
+    }
+    .instructions-panel {
+      width: 100%;
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      animation: slideIn 0.3s ease-out;
+    }
+    .instructions-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+    .instructions-body {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.85;
+      text-align: left;
+      white-space: pre-line;
+      margin-bottom: 24px;
+    }
+    .start-btn {
+      width: auto;
+      padding: 14px 32px;
+    }
     .timer {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
@@ -530,6 +588,8 @@ export class MatrixComponent implements OnDestroy {
     return c.length ? c[i] : null;
   });
 
+  isInstructionCard = computed(() => !this.currentCard()?.matrixGroups?.length);
+
   groups = computed(() => this.currentCard()?.matrixGroups ?? []);
 
   gridSections = computed<GridSection[]>(() => {
@@ -655,6 +715,13 @@ export class MatrixComponent implements OnDestroy {
 
   goBack(): void {
     this.router.navigate(['/puzzles']);
+  }
+
+  showInstructions(): void {
+    if (this.currentIndex() === 0) return;
+    this.saveCurrent();
+    this.currentIndex.set(0);
+    this.loadCurrentPuzzle();
   }
 
   private expectedCheckCount(): number {

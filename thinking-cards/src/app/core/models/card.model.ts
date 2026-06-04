@@ -18,4 +18,8 @@ export interface Card {
   matrixScenario?: string;
   matrixExplanation?: string[];
   difficulty?: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
+  cryptogramPlaintext?: string;
+  cryptogramAuthor?: string;
+  nonogramSolution?: number[];
+  nonogramCols?: number;
 }

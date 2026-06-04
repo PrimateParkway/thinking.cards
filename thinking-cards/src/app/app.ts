@@ -8,7 +8,7 @@ import { AuthService } from './core/services/auth.service';
 import { ThemeService } from './core/services/theme.service';
 import { routeAnimation } from './shared/animations/route-animations';
 
-const HIDDEN_BAR_PATTERNS = ['/login', '/register', '/admin', '/category/', '/matrix/'];
+const HIDDEN_BAR_PATTERNS = ['/login', '/register', '/admin', '/category/', '/matrix/', '/cryptogram/', '/nonogram/'];
 
 @Component({
   selector: 'app-root',

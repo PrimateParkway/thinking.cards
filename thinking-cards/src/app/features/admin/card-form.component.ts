@@ -18,7 +18,7 @@ import { Card } from '../../core/models/card.model';
         </select>
         <input type="number" placeholder="Card Number (1-10)" [(ngModel)]="cardNumber" name="cardNumber" required min="1" />
         <textarea placeholder="Question text" [(ngModel)]="questionText" name="questionText" rows="3" required></textarea>
-        @if (!isQuiz() && !isMatrix()) {
+        @if (!isQuiz() && !isMatrix() && !isCryptogram() && !isNonogram()) {
           <p class="hint">Line breaks = title + body | use • for bullets | Name: for quotes</p>
         }
         @if (isQuiz()) {
@@ -36,6 +36,20 @@ import { Card } from '../../core/models/card.model';
               </select>
             </div>
             <textarea placeholder="Explanation (shown after answering)" [(ngModel)]="explanation" name="explanation" rows="3"></textarea>
+          </div>
+        }
+        @if (isCryptogram()) {
+          <div class="quiz-fields">
+            <p class="quiz-label">Cryptogram Fields</p>
+            <textarea placeholder="Plaintext quote" [(ngModel)]="cryptogramPlaintext" name="cryptogramPlaintext" rows="3"></textarea>
+            <input placeholder="Author / attribution" [(ngModel)]="cryptogramAuthor" name="cryptogramAuthor" />
+          </div>
+        }
+        @if (isNonogram()) {
+          <div class="quiz-fields">
+            <p class="quiz-label">Nonogram Fields</p>
+            <textarea placeholder="Solution JSON: [[1,0,1],[0,1,0],...]" [(ngModel)]="nonogramSolutionText" name="nonogramSolution" rows="4"></textarea>
+            <textarea placeholder="Explanation (shown after solving)" [(ngModel)]="explanation" name="nonogramExplanation" rows="3"></textarea>
           </div>
         }
         @if (isMatrix()) {
@@ -143,6 +157,11 @@ export class CardFormComponent {
   correctIndex = 0;
   explanation = '';
 
+  cryptogramPlaintext = '';
+  cryptogramAuthor = '';
+
+  nonogramSolutionText = '';
+
   matrixScenario = '';
   matrixGroupNames = ['', '', ''];
   matrixGroupItems = ['', '', ''];
@@ -163,6 +182,18 @@ export class CardFormComponent {
     return selected?.type === 'matrix';
   });
 
+  isCryptogram = computed(() => {
+    const cats = this.categories();
+    const selected = cats.find(c => c.id === this.categoryId);
+    return selected?.type === 'cryptogram';
+  });
+
+  isNonogram = computed(() => {
+    const cats = this.categories();
+    const selected = cats.find(c => c.id === this.categoryId);
+    return selected?.type === 'nonogram';
+  });
+
   onCategoryChange(categoryId: string) {
     const count = this.cardCountMap()[categoryId] || 0;
     this.cardNumber = count + 1;
@@ -179,6 +210,20 @@ export class CardFormComponent {
       card.options = [...this.options];
       card.correctIndex = this.correctIndex;
       card.explanation = this.explanation;
+    }
+
+    if (this.isCryptogram()) {
+      card.cryptogramPlaintext = this.cryptogramPlaintext;
+      card.cryptogramAuthor = this.cryptogramAuthor;
+    }
+
+    if (this.isNonogram()) {
+      card.explanation = this.explanation;
+      try {
+        const grid: number[][] = JSON.parse(this.nonogramSolutionText);
+        card.nonogramSolution = grid.flat();
+        card.nonogramCols = grid[0]?.length ?? 0;
+      } catch {}
     }
 
     if (this.isMatrix()) {
@@ -200,6 +245,9 @@ export class CardFormComponent {
       this.options = ['', '', '', ''];
       this.correctIndex = 0;
       this.explanation = '';
+      this.cryptogramPlaintext = '';
+      this.cryptogramAuthor = '';
+      this.nonogramSolutionText = '';
       this.matrixScenario = '';
       this.matrixGroupNames = ['', '', ''];
       this.matrixGroupItems = ['', '', ''];

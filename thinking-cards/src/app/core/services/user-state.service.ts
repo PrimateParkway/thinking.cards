@@ -25,6 +25,18 @@ export interface MatrixProgress {
   solvedPuzzles: number[];
 }
 
+export interface CryptogramProgress {
+  index: number;
+  guessStates: Record<number, Record<string, string>>;
+  solvedPuzzles: number[];
+}
+
+export interface NonogramProgress {
+  index: number;
+  gridStates: Record<number, Record<string, number>>;
+  solvedPuzzles: number[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class UserStateService {
   private auth = inject(AuthService);
@@ -32,9 +44,13 @@ export class UserStateService {
   private db = getFirestore();
   private quizUnsub: Unsubscribe | null = null;
   private matrixUnsub: Unsubscribe | null = null;
+  private cryptogramUnsub: Unsubscribe | null = null;
+  private nonogramUnsub: Unsubscribe | null = null;
 
   readonly allQuizProgress = signal<Map<string, QuizProgress>>(new Map());
   readonly allMatrixProgress = signal<Map<string, MatrixProgress>>(new Map());
+  readonly allCryptogramProgress = signal<Map<string, CryptogramProgress>>(new Map());
+  readonly allNonogramProgress = signal<Map<string, NonogramProgress>>(new Map());
 
   constructor() {
     effect(() => {
@@ -43,6 +59,8 @@ export class UserStateService {
       if (!user) {
         this.allQuizProgress.set(new Map());
         this.allMatrixProgress.set(new Map());
+        this.allCryptogramProgress.set(new Map());
+        this.allNonogramProgress.set(new Map());
         return;
       }
 
@@ -61,6 +79,24 @@ export class UserStateService {
           const m = new Map<string, MatrixProgress>();
           for (const d of snap.docs) m.set(d.id, d.data() as MatrixProgress);
           this.allMatrixProgress.set(m);
+        });
+      });
+
+      const cryptogramCol = collection(this.db, `users/${user.uid}/cryptogramState`);
+      this.cryptogramUnsub = onSnapshot(cryptogramCol, (snap) => {
+        this.zone.run(() => {
+          const m = new Map<string, CryptogramProgress>();
+          for (const d of snap.docs) m.set(d.id, d.data() as CryptogramProgress);
+          this.allCryptogramProgress.set(m);
+        });
+      });
+
+      const nonogramCol = collection(this.db, `users/${user.uid}/nonogramState`);
+      this.nonogramUnsub = onSnapshot(nonogramCol, (snap) => {
+        this.zone.run(() => {
+          const m = new Map<string, NonogramProgress>();
+          for (const d of snap.docs) m.set(d.id, d.data() as NonogramProgress);
+          this.allNonogramProgress.set(m);
         });
       });
     });
@@ -117,10 +153,48 @@ export class UserStateService {
     return snap.exists() ? (snap.data() as MatrixProgress) : null;
   }
 
+  // ── Cryptogram Progress ──────────────────────────────────────────
+
+  saveCryptogramProgress(categoryId: string, data: CryptogramProgress): void {
+    const user = this.auth.currentUser();
+    if (!user) return;
+    const ref = doc(this.db, `users/${user.uid}/cryptogramState`, categoryId);
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+  }
+
+  async loadCryptogramProgress(categoryId: string): Promise<CryptogramProgress | null> {
+    const user = this.auth.currentUser();
+    if (!user) return null;
+    const ref = doc(this.db, `users/${user.uid}/cryptogramState`, categoryId);
+    const snap = await getDoc(ref);
+    return snap.exists() ? (snap.data() as CryptogramProgress) : null;
+  }
+
+  // ── Nonogram Progress ──────────────────────────────────────────
+
+  saveNonogramProgress(categoryId: string, data: NonogramProgress): void {
+    const user = this.auth.currentUser();
+    if (!user) return;
+    const ref = doc(this.db, `users/${user.uid}/nonogramState`, categoryId);
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+  }
+
+  async loadNonogramProgress(categoryId: string): Promise<NonogramProgress | null> {
+    const user = this.auth.currentUser();
+    if (!user) return null;
+    const ref = doc(this.db, `users/${user.uid}/nonogramState`, categoryId);
+    const snap = await getDoc(ref);
+    return snap.exists() ? (snap.data() as NonogramProgress) : null;
+  }
+
   private cleanup(): void {
     this.quizUnsub?.();
     this.quizUnsub = null;
     this.matrixUnsub?.();
     this.matrixUnsub = null;
+    this.cryptogramUnsub?.();
+    this.cryptogramUnsub = null;
+    this.nonogramUnsub?.();
+    this.nonogramUnsub = null;
   }
 }

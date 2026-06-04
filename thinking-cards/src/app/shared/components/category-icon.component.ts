@@ -60,6 +60,34 @@ function hashCode(str: string): number {
           <text x="24" y="23" text-anchor="middle" font-size="16" font-weight="bold" fill="currentColor" font-family="Poppins, sans-serif">?</text>
         }
 
+        @case ('cryptograms') {
+          <!-- Lock/key cipher icon -->
+          <rect x="14" y="22" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+          <path d="M18 22v-5a6 6 0 0 1 12 0v5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="24" cy="30" r="2.5" fill="currentColor"/>
+          <line x1="24" y1="32" x2="24" y2="35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        }
+
+        @case ('nonograms') {
+          <!-- Small grid with some cells filled -->
+          <rect x="10" y="10" width="7" height="7" fill="currentColor"/>
+          <rect x="17" y="10" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="24" y="10" width="7" height="7" fill="currentColor"/>
+          <rect x="31" y="10" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="10" y="17" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="17" y="17" width="7" height="7" fill="currentColor"/>
+          <rect x="24" y="17" width="7" height="7" fill="currentColor"/>
+          <rect x="31" y="17" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="10" y="24" width="7" height="7" fill="currentColor"/>
+          <rect x="17" y="24" width="7" height="7" fill="currentColor"/>
+          <rect x="24" y="24" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="31" y="24" width="7" height="7" fill="currentColor"/>
+          <rect x="10" y="31" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="17" y="31" width="7" height="7" fill="currentColor"/>
+          <rect x="24" y="31" width="7" height="7" fill="currentColor" opacity="0.3"/>
+          <rect x="31" y="31" width="7" height="7" fill="currentColor"/>
+        }
+
         @case ('logic-matrix') {
           <!-- 3x3 grid pattern -->
           <rect x="8" y="8" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="2" fill="none"/>

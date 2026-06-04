@@ -152,6 +152,8 @@ export class BottomBarComponent {
     if (url === '' || url === '/') return '/';
     if (url.startsWith('/quiz/')) return '/quizzes';
     if (url.startsWith('/matrix/')) return '/puzzles';
+    if (url.startsWith('/cryptogram/')) return '/puzzles';
+    if (url.startsWith('/nonogram/')) return '/puzzles';
     if (url.startsWith('/category/')) return '/';
 
     return url;
