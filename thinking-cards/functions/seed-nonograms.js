@@ -42,7 +42,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 2,
     difficulty: 'Easy',
-    questionText: 'Heart',
+    questionText: 'Achy Breaky',
     nonogramSolution: [
       [0, 1, 0, 1, 0],
       [1, 1, 1, 1, 1],
@@ -55,7 +55,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 3,
     difficulty: 'Easy',
-    questionText: 'Cross',
+    questionText: 'The Intersection',
     nonogramSolution: [
       [0, 0, 1, 0, 0],
       [0, 0, 1, 0, 0],
@@ -68,7 +68,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 4,
     difficulty: 'Easy',
-    questionText: 'Arrow',
+    questionText: 'This Way',
     nonogramSolution: [
       [0, 0, 1, 0, 0],
       [0, 1, 1, 0, 0],
@@ -81,7 +81,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 5,
     difficulty: 'Easy',
-    questionText: 'Diamond',
+    questionText: 'Under Pressure',
     nonogramSolution: [
       [0, 0, 1, 0, 0],
       [0, 1, 1, 1, 0],
@@ -94,7 +94,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 6,
     difficulty: 'Easy',
-    questionText: 'Smiley',
+    questionText: 'Say Cheese',
     nonogramSolution: [
       [0, 1, 1, 1, 0],
       [1, 0, 1, 0, 1],
@@ -109,7 +109,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 7,
     difficulty: 'Medium',
-    questionText: 'House',
+    questionText: 'No Place Like It',
     nonogramSolution: [
       [0, 0, 0, 1, 1, 0, 0, 0],
       [0, 0, 1, 1, 1, 1, 0, 0],
@@ -125,7 +125,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 8,
     difficulty: 'Medium',
-    questionText: 'Tree',
+    questionText: 'Deeply Rooted',
     nonogramSolution: [
       [0, 0, 0, 1, 1, 0, 0, 0],
       [0, 0, 1, 1, 1, 1, 0, 0],
@@ -141,7 +141,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 9,
     difficulty: 'Medium',
-    questionText: 'Anchor',
+    questionText: 'Holding Steady',
     nonogramSolution: [
       [0, 0, 0, 1, 1, 0, 0, 0],
       [0, 0, 1, 1, 1, 1, 0, 0],
@@ -157,7 +157,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 10,
     difficulty: 'Medium',
-    questionText: 'Cat',
+    questionText: 'Nine Lives',
     nonogramSolution: [
       [1, 0, 0, 0, 0, 0, 0, 1],
       [1, 1, 0, 0, 0, 0, 1, 1],
@@ -173,7 +173,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 11,
     difficulty: 'Medium',
-    questionText: 'Rocket',
+    questionText: '3... 2... 1...',
     nonogramSolution: [
       [0, 0, 0, 1, 1, 0, 0, 0],
       [0, 0, 1, 1, 1, 1, 0, 0],
@@ -191,7 +191,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 12,
     difficulty: 'Hard',
-    questionText: 'Skull',
+    questionText: 'Memento Mori',
     nonogramSolution: [
       [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
       [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
@@ -209,7 +209,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 13,
     difficulty: 'Hard',
-    questionText: 'Lighthouse',
+    questionText: 'The Beacon',
     nonogramSolution: [
       [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
       [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
@@ -227,7 +227,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 14,
     difficulty: 'Hard',
-    questionText: 'Sailboat',
+    questionText: 'Windward',
     nonogramSolution: [
       [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
@@ -245,7 +245,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 15,
     difficulty: 'Hard',
-    questionText: 'Crown',
+    questionText: 'Heavy Is the Head',
     nonogramSolution: [
       [1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
       [1, 1, 0, 1, 0, 0, 1, 0, 1, 1],
@@ -263,7 +263,7 @@ Start with the Easy 5×5 puzzles and work up to 10×10!`,
   {
     cardNumber: 16,
     difficulty: 'Hard',
-    questionText: 'Chess Knight',
+    questionText: 'The Gambit',
     nonogramSolution: [
       [0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
       [0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
