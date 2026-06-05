@@ -34,8 +34,8 @@ import { Category } from '../../core/models/category.model';
           <div class="instructions-panel">
             <h2 class="instructions-title">{{ card.questionText }}</h2>
             <div class="instructions-body">{{ card.explanation }}</div>
-            <button class="btn primary start-btn" (click)="nextPuzzle()">
-              Start puzzles &rarr;
+            <button class="btn primary start-btn" (click)="closeInstructions()">
+              {{ returnIndex() !== null ? 'Back to puzzle' : 'Start puzzles' }} &rarr;
             </button>
           </div>
         } @else {
@@ -382,6 +382,7 @@ export class NonogramComponent implements OnDestroy {
   currentIndex = signal(0);
   gridState = signal<Record<string, number>>({});
   solved = signal(false);
+  returnIndex = signal<number | null>(null);
 
   private solvedPuzzles = signal<number[]>([]);
   private allGridStates: Record<number, Record<string, number>> = {};
@@ -493,9 +494,21 @@ export class NonogramComponent implements OnDestroy {
 
   showInstructions(): void {
     if (this.currentIndex() === 0) return;
+    this.returnIndex.set(this.currentIndex());
     this.saveCurrent();
     this.currentIndex.set(0);
     this.loadCurrentPuzzle();
+  }
+
+  closeInstructions(): void {
+    const ret = this.returnIndex();
+    this.returnIndex.set(null);
+    if (ret !== null) {
+      this.currentIndex.set(ret);
+      this.loadCurrentPuzzle();
+    } else {
+      this.nextPuzzle();
+    }
   }
 
   revealPuzzle(): void {

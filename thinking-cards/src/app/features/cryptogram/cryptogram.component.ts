@@ -34,8 +34,8 @@ import { Category } from '../../core/models/category.model';
           <div class="instructions-panel">
             <h2 class="instructions-title">{{ card.questionText }}</h2>
             <div class="instructions-body">{{ card.explanation }}</div>
-            <button class="btn primary start-btn" (click)="nextPuzzle()">
-              Start puzzles &rarr;
+            <button class="btn primary start-btn" (click)="closeInstructions()">
+              {{ returnIndex() !== null ? 'Back to puzzle' : 'Start puzzles' }} &rarr;
             </button>
           </div>
         } @else {
@@ -48,6 +48,10 @@ import { Category } from '../../core/models/category.model';
           }
         </div>
 
+        @if (cipherTypeLabel(); as label) {
+          <div class="cipher-type-label">{{ label }}</div>
+        }
+
         <div class="cipher-display">
           @for (word of cipherWords(); track $index) {
             <span class="cipher-word">
@@ -55,13 +59,13 @@ import { Category } from '../../core/models/category.model';
                 @if (cell.isLetter) {
                   <span
                     class="cipher-cell"
-                    [class.selected]="selectedCipher() === cell.cipher"
+                    [class.selected]="selectedCipher() === cell.key"
                     [class.correct]="solved()"
-                    (click)="selectCipher(cell.cipher)"
+                    (click)="selectCipher(cell.key)"
                   >
                     <span class="cipher-char">{{ cell.cipher }}</span>
-                    <span class="guess-char" [class.filled]="guessFor(cell.cipher)">
-                      {{ guessFor(cell.cipher) || '\u00A0' }}
+                    <span class="guess-char" [class.filled]="guessFor(cell.key)">
+                      {{ guessFor(cell.key) || '\u00A0' }}
                     </span>
                   </span>
                 } @else {
@@ -227,6 +231,15 @@ import { Category } from '../../core/models/category.model';
       color: #a25eff;
     }
 
+    .cipher-type-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
     /* Cipher display */
     .cipher-display {
       width: 100%;
@@ -433,6 +446,7 @@ export class CryptogramComponent implements OnDestroy {
   selectedCipher = signal<string | null>(null);
   solved = signal(false);
   hintsUsed = signal(0);
+  returnIndex = signal<number | null>(null);
 
   private solvedPuzzles = signal<number[]>([]);
   private allGuessStates: Record<number, Record<string, string>> = {};
@@ -485,14 +499,43 @@ export class CryptogramComponent implements OnDestroy {
 
   isInstructionCard = computed(() => !this.currentCard()?.cryptogramPlaintext);
 
+  isVigenere = computed(() => this.currentCard()?.difficulty === 'Extreme');
+
+  cipherTypeLabel = computed(() => {
+    switch (this.currentCard()?.difficulty) {
+      case 'Easy': return 'Caesar Shift';
+      case 'Medium': return 'Keyword Cipher';
+      case 'Hard': return 'Random Substitution';
+      case 'Extreme': return 'Vigenère Cipher';
+      default: return '';
+    }
+  });
+
   private cipherMap = computed(() => {
     const card = this.currentCard();
     if (!card) return new Map<string, string>();
-    return buildCipherMap(card.id);
+    switch (card.difficulty) {
+      case 'Easy': return buildCaesarMap(card.id);
+      case 'Medium': return buildKeywordMap(card.id);
+      default: return buildRandomMap(card.id);
+    }
   });
 
   private reverseCipherMap = computed(() => {
     const m = new Map<string, string>();
+    if (this.isVigenere()) {
+      const card = this.currentCard();
+      if (!card?.cryptogramPlaintext) return m;
+      const text = card.cryptogramPlaintext.toUpperCase();
+      let idx = 0;
+      for (const ch of text) {
+        if (/[A-Z]/.test(ch)) {
+          m.set(String(idx), ch);
+          idx++;
+        }
+      }
+      return m;
+    }
     for (const [plain, cipher] of this.cipherMap()) {
       m.set(cipher, plain);
     }
@@ -502,17 +545,37 @@ export class CryptogramComponent implements OnDestroy {
   cipherWords = computed(() => {
     const card = this.currentCard();
     if (!card?.cryptogramPlaintext) return [];
-    const cmap = this.cipherMap();
     const text = card.cryptogramPlaintext.toUpperCase();
     const words = text.split(/\s+/);
 
+    if (this.isVigenere()) {
+      const keyword = getVigenereKeyword(card.id);
+      let letterIdx = 0;
+      return words.map(word => {
+        const cells: { cipher: string; isLetter: boolean; key: string }[] = [];
+        for (const ch of word) {
+          if (/[A-Z]/.test(ch)) {
+            const shift = keyword.charCodeAt(letterIdx % keyword.length) - 65;
+            const cipher = String.fromCharCode(((ch.charCodeAt(0) - 65 + shift) % 26) + 65);
+            cells.push({ cipher, isLetter: true, key: String(letterIdx) });
+            letterIdx++;
+          } else {
+            cells.push({ cipher: ch, isLetter: false, key: '' });
+          }
+        }
+        return cells;
+      });
+    }
+
+    const cmap = this.cipherMap();
     return words.map(word => {
-      const cells: { cipher: string; isLetter: boolean }[] = [];
+      const cells: { cipher: string; isLetter: boolean; key: string }[] = [];
       for (const ch of word) {
         if (/[A-Z]/.test(ch)) {
-          cells.push({ cipher: cmap.get(ch) ?? ch, isLetter: true });
+          const cipher = cmap.get(ch) ?? ch;
+          cells.push({ cipher, isLetter: true, key: cipher });
         } else {
-          cells.push({ cipher: ch, isLetter: false });
+          cells.push({ cipher: ch, isLetter: false, key: '' });
         }
       }
       return cells;
@@ -528,6 +591,7 @@ export class CryptogramComponent implements OnDestroy {
   }
 
   isLetterUsed(letter: string): boolean {
+    if (this.isVigenere()) return false;
     return Object.values(this.guesses()).includes(letter);
   }
 
@@ -544,9 +608,11 @@ export class CryptogramComponent implements OnDestroy {
 
     this.guesses.update(g => {
       const updated = { ...g };
-      // Remove this letter if already assigned elsewhere
-      for (const [k, v] of Object.entries(updated)) {
-        if (v === letter) delete updated[k];
+      if (!this.isVigenere()) {
+        // For substitution ciphers, remove this letter if assigned elsewhere
+        for (const [k, v] of Object.entries(updated)) {
+          if (v === letter) delete updated[k];
+        }
       }
       updated[sel] = letter;
       return updated;
@@ -575,20 +641,22 @@ export class CryptogramComponent implements OnDestroy {
     const reverse = this.reverseCipherMap();
     const current = this.guesses();
 
-    // Find an unguessed or incorrectly guessed cipher letter
+    // Find an unguessed or incorrectly guessed key
     const unresolved = [...reverse.entries()].find(
-      ([cipher, plain]) => current[cipher] !== plain
+      ([key, plain]) => current[key] !== plain
     );
     if (!unresolved) return;
 
-    const [cipher, plain] = unresolved;
+    const [key, plain] = unresolved;
     this.guesses.update(g => {
       const updated = { ...g };
-      // Remove plain if used elsewhere
-      for (const [k, v] of Object.entries(updated)) {
-        if (v === plain) delete updated[k];
+      if (!this.isVigenere()) {
+        // For substitution ciphers, remove plain if used elsewhere
+        for (const [k, v] of Object.entries(updated)) {
+          if (v === plain) delete updated[k];
+        }
       }
-      updated[cipher] = plain;
+      updated[key] = plain;
       return updated;
     });
 
@@ -644,9 +712,21 @@ export class CryptogramComponent implements OnDestroy {
 
   showInstructions(): void {
     if (this.currentIndex() === 0) return;
+    this.returnIndex.set(this.currentIndex());
     this.saveCurrent();
     this.currentIndex.set(0);
     this.loadCurrentPuzzle();
+  }
+
+  closeInstructions(): void {
+    const ri = this.returnIndex();
+    this.returnIndex.set(null);
+    if (ri !== null) {
+      this.currentIndex.set(ri);
+      this.loadCurrentPuzzle();
+    } else {
+      this.nextPuzzle();
+    }
   }
 
   private advanceSelection(current: string): void {
@@ -672,9 +752,9 @@ export class CryptogramComponent implements OnDestroy {
     const ordered: string[] = [];
     for (const word of words) {
       for (const cell of word) {
-        if (cell.isLetter && !seen.has(cell.cipher)) {
-          seen.add(cell.cipher);
-          ordered.push(cell.cipher);
+        if (cell.isLetter && !seen.has(cell.key)) {
+          seen.add(cell.key);
+          ordered.push(cell.key);
         }
       }
     }
@@ -742,11 +822,43 @@ function hashString(str: string): number {
   return Math.abs(hash);
 }
 
-function buildCipherMap(cardId: string): Map<string, string> {
+// Easy: every letter shifts by the same amount
+function buildCaesarMap(cardId: string): Map<string, string> {
+  const rand = seededRandom(hashString(cardId));
+  const shift = 3 + Math.floor(rand() * 20);
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const m = new Map<string, string>();
+  for (let i = 0; i < 26; i++) {
+    m.set(alpha[i], alpha[(i + shift) % 26]);
+  }
+  return m;
+}
+
+// Medium: keyword determines the cipher alphabet
+function buildKeywordMap(cardId: string): Map<string, string> {
+  const keywords = ['PHILOSOPHY', 'KNOWLEDGE', 'THINKING', 'DISCOVERY', 'SOCRATES'];
+  const rand = seededRandom(hashString(cardId));
+  const keyword = keywords[Math.floor(rand() * keywords.length)];
+  const seen = new Set<string>();
+  const cipher: string[] = [];
+  for (const ch of keyword) {
+    if (!seen.has(ch)) { seen.add(ch); cipher.push(ch); }
+  }
+  for (const ch of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+    if (!seen.has(ch)) cipher.push(ch);
+  }
+  const m = new Map<string, string>();
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let i = 0; i < 26; i++) {
+    m.set(alpha[i], cipher[i]);
+  }
+  return m;
+}
+
+// Hard: random derangement (no letter maps to itself)
+function buildRandomMap(cardId: string): Map<string, string> {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const rand = seededRandom(hashString(cardId));
-
-  // Fisher-Yates shuffle to create derangement
   let shuffled: string[];
   let attempts = 0;
   do {
@@ -756,16 +868,13 @@ function buildCipherMap(cardId: string): Map<string, string> {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     attempts++;
-  } while (hasFixedPoint(letters, shuffled) && attempts < 100);
-
-  // If still has fixed points after 100 tries, force-fix them
+  } while (letters.some((ch, i) => ch === shuffled[i]) && attempts < 100);
   for (let i = 0; i < letters.length; i++) {
     if (shuffled[i] === letters[i]) {
       const swap = (i + 1) % letters.length;
       [shuffled[i], shuffled[swap]] = [shuffled[swap], shuffled[i]];
     }
   }
-
   const m = new Map<string, string>();
   for (let i = 0; i < letters.length; i++) {
     m.set(letters[i], shuffled[i]);
@@ -773,6 +882,9 @@ function buildCipherMap(cardId: string): Map<string, string> {
   return m;
 }
 
-function hasFixedPoint(original: string[], shuffled: string[]): boolean {
-  return original.some((ch, i) => ch === shuffled[i]);
+// Extreme: Vigenere keyword (each position uses a different shift)
+function getVigenereKeyword(cardId: string): string {
+  const keywords = ['THINK', 'REASON', 'WISDOM', 'TRUTH', 'CIPHER'];
+  const rand = seededRandom(hashString(cardId));
+  return keywords[Math.floor(rand() * keywords.length)];
 }

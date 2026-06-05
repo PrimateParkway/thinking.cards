@@ -44,8 +44,8 @@ interface GridSection {
           <div class="instructions-panel">
             <h2 class="instructions-title">{{ card.questionText }}</h2>
             <div class="instructions-body">{{ card.explanation }}</div>
-            <button class="btn primary start-btn" (click)="nextPuzzle()">
-              Start puzzles &rarr;
+            <button class="btn primary start-btn" (click)="closeInstructions()">
+              {{ returnIndex() !== null ? 'Back to puzzle' : 'Start puzzles' }} &rarr;
             </button>
           </div>
         } @else {
@@ -537,6 +537,7 @@ export class MatrixComponent implements OnDestroy {
   feedbackMsg = signal('');
   feedbackType = signal<'success' | 'error'>('success');
   clueStruck = signal<Record<number, boolean>>({});
+  returnIndex = signal<number | null>(null);
 
   private timerRef: ReturnType<typeof setInterval> | null = null;
   private solvedPuzzles = signal<number[]>([]);
@@ -719,9 +720,22 @@ export class MatrixComponent implements OnDestroy {
 
   showInstructions(): void {
     if (this.currentIndex() === 0) return;
+    this.returnIndex.set(this.currentIndex());
     this.saveCurrent();
+    this.stopTimer();
     this.currentIndex.set(0);
     this.loadCurrentPuzzle();
+  }
+
+  closeInstructions(): void {
+    const ri = this.returnIndex();
+    this.returnIndex.set(null);
+    if (ri !== null) {
+      this.currentIndex.set(ri);
+      this.loadCurrentPuzzle();
+    } else {
+      this.nextPuzzle();
+    }
   }
 
   private expectedCheckCount(): number {
@@ -831,7 +845,8 @@ export class MatrixComponent implements OnDestroy {
     this.clueStruck.set({});
     this.clearFeedback();
     this.elapsedSeconds.set(0);
-    if (!this.solved()) this.startTimer();
+    if (this.isInstructionCard()) this.stopTimer();
+    else if (!this.solved()) this.startTimer();
     else this.stopTimer();
     this.persistProgress();
   }
