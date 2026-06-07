@@ -1,4 +1,4 @@
-import { Component, inject, computed, effect } from '@angular/core';
+import { Component, inject, computed, effect , ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CardService } from '../../core/services/card.service';
 import { FavoritesService } from '../../core/services/favorites.service';
@@ -7,6 +7,7 @@ import { StreakService } from '../../core/services/streak.service';
 import { QuestionCardComponent } from '../../shared/components/question-card.component';
 import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
+import { filterStandardCards, categoryColorFor, categoryNameFor } from '../../shared/utils/category-helpers';
 
 function hashCode(str: string): number {
   let hash = 0;
@@ -25,6 +26,7 @@ function todayKey(): string {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-daily-card',
   imports: [QuestionCardComponent],
   template: `
@@ -140,14 +142,9 @@ export class DailyCardComponent {
 
   streak = this.streakService.streak;
 
-  private standardCards = computed(() => {
-    const excludedIds = new Set(
-      this.categories()
-        .filter((c) => c.type === 'quiz' || c.type === 'matrix')
-        .map((c) => c.id)
-    );
-    return this.allCards().filter((card) => !excludedIds.has(card.categoryId));
-  });
+  private standardCards = computed(() =>
+    filterStandardCards(this.allCards(), this.categories()),
+  );
 
   dailyCard = computed(() => {
     const cards = this.standardCards();
@@ -156,29 +153,26 @@ export class DailyCardComponent {
     return cards[index];
   });
 
-  categoryColor = computed(() => {
-    const card = this.dailyCard();
-    if (!card) return '#e94560';
-    const cat = this.categories().find((c) => c.id === card.categoryId);
-    return cat?.color ?? '#e94560';
-  });
+  categoryColor = computed(() =>
+    categoryColorFor(this.dailyCard(), this.categories()),
+  );
 
-  categoryName = computed(() => {
-    const card = this.dailyCard();
-    if (!card) return '';
-    const cat = this.categories().find((c) => c.id === card.categoryId);
-    return cat?.name ?? '';
-  });
+  categoryName = computed(() =>
+    categoryNameFor(this.dailyCard(), this.categories()),
+  );
 
   isFavorited = computed(() => {
     const card = this.dailyCard();
     return card ? this.favoritesService.favoriteIds().has(card.id) : false;
   });
 
+  private lastSeenId = '';
+
   constructor() {
     effect(() => {
       const card = this.dailyCard();
-      if (!card) return;
+      if (!card || card.id === this.lastSeenId) return;
+      this.lastSeenId = card.id;
       this.progressService.markSeen(card.id);
       this.streakService.recordActivity();
     });

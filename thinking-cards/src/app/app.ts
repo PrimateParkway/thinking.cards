@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed, signal , ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd, ChildrenOutletContexts } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { filter } from 'rxjs';
@@ -10,9 +10,10 @@ import { AuthService } from './core/services/auth.service';
 import { ThemeService } from './core/services/theme.service';
 import { routeAnimation } from './shared/animations/route-animations';
 
-const HIDDEN_BAR_PATTERNS = ['/login', '/register', '/admin', '/category/', '/matrix/', '/cryptogram/', '/nonogram/'];
+const HIDDEN_BAR_PATTERNS = ['/landing', '/login', '/register', '/admin', '/category/', '/matrix/', '/cryptogram/', '/nonogram/'];
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   imports: [RouterOutlet, TopBarComponent, BottomBarComponent, ToastComponent, ConfettiComponent],
   animations: [routeAnimation],

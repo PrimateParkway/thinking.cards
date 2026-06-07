@@ -47,7 +47,7 @@ export class ProgressService {
     const user = this.auth.currentUser();
     if (!user || this.seenIds().has(cardId)) return;
     const ref = doc(this.db, `users/${user.uid}/progress`, cardId);
-    setDoc(ref, { seenAt: serverTimestamp() });
+    setDoc(ref, { seenAt: serverTimestamp() }).catch(() => {});
   }
 
   countByCategory(cards: Card[]): Map<string, CategoryProgress> {

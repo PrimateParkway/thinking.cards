@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component , ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BrandLogoComponent } from './brand-logo.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-top-bar',
   imports: [RouterLink, BrandLogoComponent],
   template: `

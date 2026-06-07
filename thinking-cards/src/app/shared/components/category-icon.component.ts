@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input , ChangeDetectionStrategy } from '@angular/core';
 
 function hashCode(str: string): number {
   let hash = 0;
@@ -9,6 +9,7 @@ function hashCode(str: string): number {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-category-icon',
   template: `
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="icon-svg">

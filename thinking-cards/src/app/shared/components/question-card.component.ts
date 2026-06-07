@@ -1,21 +1,22 @@
-import { Component, input, output, computed, inject, signal } from '@angular/core';
+import { Component, input, output, computed, inject, signal , ChangeDetectionStrategy } from '@angular/core';
 import { Card } from '../../core/models/card.model';
 import { CardImageService } from '../../core/services/card-image.service';
 import { ShareService } from '../../core/services/share.service';
 import { parseCardBlocks } from '../utils/card-parser';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-question-card',
   template: `
     <div class="card" [style.border-color]="color()">
-      <button class="share-btn" (click)="onShare($event)">
+      <button class="share-btn" (click)="onShare($event)" aria-label="Share card">
         @if (showCheck()) {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
         } @else {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         }
       </button>
-      <button class="heart-btn" (click)="onHeart($event)" [class.favorited]="favorited()">
+      <button class="heart-btn" (click)="onHeart($event)" [class.favorited]="favorited()" [attr.aria-label]="favorited() ? 'Remove from favorites' : 'Add to favorites'">
         @if (favorited()) {
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         } @else {

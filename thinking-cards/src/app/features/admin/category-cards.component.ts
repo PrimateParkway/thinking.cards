@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal , ChangeDetectionStrategy } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { switchMap } from 'rxjs';
@@ -7,6 +7,7 @@ import { AdminService } from '../../core/services/admin.service';
 import { Card } from '../../core/models/card.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-category-cards',
   imports: [FormsModule],
   template: `

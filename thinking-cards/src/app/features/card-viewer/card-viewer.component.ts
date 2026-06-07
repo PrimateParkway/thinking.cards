@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect, HostListener } from '@angular/core';
+import { Component, inject, signal, computed, effect, HostListener , ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { switchMap, map, tap, from } from 'rxjs';
@@ -14,6 +14,7 @@ import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-card-viewer',
   imports: [QuestionCardComponent, CategoryIconComponent, SwipeDirective],
   template: `

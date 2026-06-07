@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed , ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../core/services/auth.service';
@@ -10,6 +10,7 @@ import { BadgeService } from '../../core/services/badge.service';
 import { Card } from '../../core/models/card.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-profile',
   template: `
     <div class="profile container">

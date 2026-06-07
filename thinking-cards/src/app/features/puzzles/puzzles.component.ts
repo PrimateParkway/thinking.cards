@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed , ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, of } from 'rxjs';
@@ -9,6 +9,7 @@ import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-puzzles',
   imports: [CategoryCardComponent],
   template: `

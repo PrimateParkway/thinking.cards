@@ -42,9 +42,9 @@ export class FavoritesService {
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/favorites`, cardId);
     if (this.favoriteIds().has(cardId)) {
-      deleteDoc(ref);
+      deleteDoc(ref).catch(() => {});
     } else {
-      setDoc(ref, { addedAt: serverTimestamp() });
+      setDoc(ref, { addedAt: serverTimestamp() }).catch(() => {});
     }
   }
 

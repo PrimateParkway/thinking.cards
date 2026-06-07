@@ -114,7 +114,7 @@ export class UserStateService {
     const user = this.auth.currentUser();
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/cardState`, categoryId);
-    setDoc(ref, { index, updatedAt: serverTimestamp() });
+    setDoc(ref, { index, updatedAt: serverTimestamp() }).catch(() => {});
   }
 
   async loadCardPosition(categoryId: string): Promise<number> {
@@ -131,7 +131,7 @@ export class UserStateService {
     const user = this.auth.currentUser();
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/quizState`, categoryId);
-    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
   }
 
   async loadQuizProgress(categoryId: string): Promise<QuizProgress | null> {
@@ -148,7 +148,7 @@ export class UserStateService {
     const user = this.auth.currentUser();
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/matrixState`, categoryId);
-    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
   }
 
   async loadMatrixProgress(categoryId: string): Promise<MatrixProgress | null> {
@@ -165,7 +165,7 @@ export class UserStateService {
     const user = this.auth.currentUser();
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/cryptogramState`, categoryId);
-    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
   }
 
   async loadCryptogramProgress(categoryId: string): Promise<CryptogramProgress | null> {
@@ -182,7 +182,7 @@ export class UserStateService {
     const user = this.auth.currentUser();
     if (!user) return;
     const ref = doc(this.db, `users/${user.uid}/nonogramState`, categoryId);
-    setDoc(ref, { ...data, updatedAt: serverTimestamp() });
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
   }
 
   async loadNonogramProgress(categoryId: string): Promise<NonogramProgress | null> {

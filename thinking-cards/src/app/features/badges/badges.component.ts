@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { BadgeService } from '../../core/services/badge.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-badges',
   template: `
     <div class="badges container">

@@ -1,7 +1,8 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, computed , ChangeDetectionStrategy } from '@angular/core';
 import { Card } from '../../core/models/card.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-puzzle-stats',
   template: `
     <div class="stats-backdrop" (click)="close.emit()">
@@ -183,33 +184,45 @@ export class PuzzleStatsComponent {
   selectPuzzle = output<number>();
   close = output<void>();
 
-  puzzleCards(): Card[] {
-    return this.cards().filter(c => c.cardNumber > 0);
-  }
+  puzzleCards = computed(() =>
+    this.cards().filter(c => c.cardNumber > 0),
+  );
+
+  private cardNumToIndex = computed(() => {
+    const map = new Map<number, number>();
+    this.cards().forEach((c, i) => map.set(c.cardNumber, i));
+    return map;
+  });
+
+  private solvedSet = computed(() => new Set(this.solvedPuzzles()));
+  private gaveUpSet = computed(() => new Set(this.gaveUpPuzzles()));
+  private startedSet = computed(() => new Set(this.startedPuzzles()));
 
   indexOf(card: Card): number {
-    return this.cards().indexOf(card);
+    return this.cardNumToIndex().get(card.cardNumber) ?? 0;
   }
 
   isSolved(cardNumber: number): boolean {
-    const idx = this.cards().findIndex(c => c.cardNumber === cardNumber);
-    return this.solvedPuzzles().includes(idx);
+    const idx = this.cardNumToIndex().get(cardNumber);
+    return idx !== undefined && this.solvedSet().has(idx);
   }
 
   isGaveUp(cardNumber: number): boolean {
-    const idx = this.cards().findIndex(c => c.cardNumber === cardNumber);
-    return !this.solvedPuzzles().includes(idx) && this.gaveUpPuzzles().includes(idx);
+    const idx = this.cardNumToIndex().get(cardNumber);
+    return idx !== undefined && !this.solvedSet().has(idx) && this.gaveUpSet().has(idx);
   }
 
   isStarted(cardNumber: number): boolean {
-    const idx = this.cards().findIndex(c => c.cardNumber === cardNumber);
-    return !this.solvedPuzzles().includes(idx)
-      && !this.gaveUpPuzzles().includes(idx)
-      && this.startedPuzzles().includes(idx);
+    const idx = this.cardNumToIndex().get(cardNumber);
+    return idx !== undefined
+      && !this.solvedSet().has(idx)
+      && !this.gaveUpSet().has(idx)
+      && this.startedSet().has(idx);
   }
 
   timeFor(cardNumber: number): string {
-    const idx = this.cards().findIndex(c => c.cardNumber === cardNumber);
+    const idx = this.cardNumToIndex().get(cardNumber);
+    if (idx === undefined) return '';
     const secs = this.completionTimes()[idx];
     if (!secs) return '';
     const m = Math.floor(secs / 60);

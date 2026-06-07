@@ -1,10 +1,11 @@
-import { Component, inject, input, computed } from '@angular/core';
+import { Component, inject, input, computed , ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../core/services/admin.service';
 import { Category } from '../../core/models/category.model';
 import { Card } from '../../core/models/card.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-card-form',
   imports: [FormsModule],
   template: `

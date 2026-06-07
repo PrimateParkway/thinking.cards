@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, HostListener } from '@angular/core';
+import { Component, inject, signal, computed, HostListener , ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CardService } from '../../core/services/card.service';
 import { FavoritesService } from '../../core/services/favorites.service';
@@ -6,8 +6,10 @@ import { QuestionCardComponent } from '../../shared/components/question-card.com
 import { SwipeDirective } from '../../shared/directives/swipe.directive';
 import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
+import { filterStandardCards, categoryColorFor, categoryNameFor } from '../../shared/utils/category-helpers';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-favorites',
   imports: [QuestionCardComponent, SwipeDirective],
   template: `
@@ -118,16 +120,10 @@ export class FavoritesComponent {
     initialValue: [] as Category[],
   });
 
-  private excludedCategoryIds = computed(() => new Set(
-    this.categories()
-      .filter((c) => c.type === 'quiz' || c.type === 'matrix')
-      .map((c) => c.id)
-  ));
-
   favoriteCards = computed(() => {
     const ids = this.favoritesService.favoriteIds();
-    const excluded = this.excludedCategoryIds();
-    return this.allCards().filter((c) => ids.has(c.id) && !excluded.has(c.categoryId));
+    const standard = filterStandardCards(this.allCards(), this.categories());
+    return standard.filter((c) => ids.has(c.id));
   });
 
   currentCard = computed(() => {
@@ -136,19 +132,13 @@ export class FavoritesComponent {
     return cards.length ? cards[Math.max(0, i)] : null;
   });
 
-  currentCardColor = computed(() => {
-    const card = this.currentCard();
-    if (!card) return '#e94560';
-    const cat = this.categories().find((c) => c.id === card.categoryId);
-    return cat?.color ?? '#e94560';
-  });
+  currentCardColor = computed(() =>
+    categoryColorFor(this.currentCard(), this.categories()),
+  );
 
-  currentCategoryName = computed(() => {
-    const card = this.currentCard();
-    if (!card) return '';
-    const cat = this.categories().find((c) => c.id === card.categoryId);
-    return cat?.name ?? '';
-  });
+  currentCategoryName = computed(() =>
+    categoryNameFor(this.currentCard(), this.categories()),
+  );
 
   @HostListener('window:keydown', ['$event'])
   onKeydown(e: KeyboardEvent) {

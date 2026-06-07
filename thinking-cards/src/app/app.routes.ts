@@ -11,6 +11,14 @@ export const routes: Routes = [
     data: { animation: 'home' },
   },
   {
+    path: 'landing',
+    loadComponent: () =>
+      import('./features/landing/landing.component').then(
+        (m) => m.LandingComponent
+      ),
+    data: { animation: 'landing' },
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./features/auth/login.component').then((m) => m.LoginComponent),

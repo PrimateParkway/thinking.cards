@@ -1,12 +1,13 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed , ChangeDetectionStrategy } from '@angular/core';
 import { Category } from '../../core/models/category.model';
 import { CategoryIconComponent } from './category-icon.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-category-card',
   imports: [CategoryIconComponent],
   template: `
-    <div class="tile" [style]="tileStyles()">
+    <div class="tile" [style]="tileStyles()" role="button" tabindex="0" (keydown.enter)="$any($event.target).click()" (keydown.space)="$event.preventDefault(); $any($event.target).click()">
       <div class="glow" [style.background]="category().color"></div>
       <app-category-icon [name]="category().name" class="icon" />
       <h3 class="name">{{ category().name }}</h3>

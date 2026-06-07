@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , ChangeDetectionStrategy } from '@angular/core';
 import { CelebrationService } from '../../core/services/celebration.service';
 
 interface Particle {
@@ -28,6 +28,7 @@ function buildParticles(): Particle[] {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-confetti',
   template: `
     @if (celebration.active()) {

@@ -1,8 +1,9 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output , ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AppUser } from '../../core/models/app-user.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-user-list',
   imports: [DatePipe],
   template: `

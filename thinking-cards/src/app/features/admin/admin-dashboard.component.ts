@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal , ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CardService } from '../../core/services/card.service';
@@ -13,6 +13,7 @@ import { Card } from '../../core/models/card.model';
 import { AppUser } from '../../core/models/app-user.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-admin-dashboard',
   imports: [FormsModule, CategoryFormComponent, CardFormComponent, CategoryCardsComponent, UserListComponent, CategoryIconComponent],
   template: `

@@ -103,7 +103,9 @@ export class StreakService {
     const today = toDateKey(new Date());
     this.todayRecorded = true;
     const ref = doc(this.db, `users/${user.uid}/activity`, today);
-    setDoc(ref, { lastActiveAt: serverTimestamp() }, { merge: true });
+    setDoc(ref, { lastActiveAt: serverTimestamp() }, { merge: true }).catch(() => {
+      this.todayRecorded = false;
+    });
   }
 
   private cleanup(): void {

@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal , ChangeDetectionStrategy } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -16,6 +17,7 @@ const TABS: Tab[] = [
 ];
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-bottom-bar',
   imports: [RouterLink],
   template: `
@@ -26,7 +28,7 @@ const TABS: Tab[] = [
           class="tab"
           [class.active]="activeRoute() === tab.route"
         >
-          <span class="tab-icon">
+          <span class="tab-icon" aria-hidden="true">
             @switch (tab.route) {
               @case ('/daily') {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -141,7 +143,10 @@ export class BottomBarComponent {
 
   constructor() {
     this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
       .subscribe((e) => this.activeRoute.set(this.matchTab(e.urlAfterRedirects)));
   }
 

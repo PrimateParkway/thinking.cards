@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService, DARK_THEMES, LIGHT_THEMES } from '../../core/services/theme.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-themes',
   template: `
     <div class="themes container">

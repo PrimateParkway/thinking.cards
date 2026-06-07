@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, output , ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../core/services/admin.service';
 import { CategoryIconComponent } from '../../shared/components/category-icon.component';
@@ -10,6 +10,7 @@ function randomPaletteColor(): string {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-category-form',
   imports: [FormsModule, CategoryIconComponent],
   template: `

@@ -8,7 +8,7 @@ import {
   onSnapshot,
   Query,
 } from 'firebase/firestore';
-import { Observable, map } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
 import { Category } from '../models/category.model';
 import { Card } from '../models/card.model';
 
@@ -28,14 +28,20 @@ function fromSnapshot<T>(q: Query): Observable<T[]> {
 export class CardService {
   private db = getFirestore();
 
+  private categories$ = fromSnapshot<Category>(
+    query(collection(this.db, 'categories'), orderBy('order')),
+  ).pipe(shareReplay(1));
+
+  private allCards$ = fromSnapshot<Card>(
+    query(collection(this.db, 'cards')),
+  ).pipe(shareReplay(1));
+
   getCategories(): Observable<Category[]> {
-    return fromSnapshot<Category>(
-      query(collection(this.db, 'categories'), orderBy('order'))
-    );
+    return this.categories$;
   }
 
   getAllCards(): Observable<Card[]> {
-    return fromSnapshot<Card>(query(collection(this.db, 'cards')));
+    return this.allCards$;
   }
 
   getCardsByCategory(categoryId: string): Observable<Card[]> {

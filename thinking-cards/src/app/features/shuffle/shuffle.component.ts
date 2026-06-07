@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, effect, untracked } from '@angular/core';
+import { Component, inject, signal, computed, effect, untracked , ChangeDetectionStrategy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CardService } from '../../core/services/card.service';
 import { FavoritesService } from '../../core/services/favorites.service';
@@ -8,8 +8,10 @@ import { QuestionCardComponent } from '../../shared/components/question-card.com
 import { SwipeDirective } from '../../shared/directives/swipe.directive';
 import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
+import { filterStandardCards, categoryColorFor, categoryNameFor } from '../../shared/utils/category-helpers';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-shuffle',
   imports: [QuestionCardComponent, SwipeDirective],
   template: `
@@ -109,14 +111,9 @@ export class ShuffleComponent {
   private categories = toSignal(this.cardService.getCategories(), {
     initialValue: [] as Category[],
   });
-  private standardCards = computed(() => {
-    const excludedIds = new Set(
-      this.categories()
-        .filter((c) => c.type === 'quiz' || c.type === 'matrix')
-        .map((c) => c.id)
-    );
-    return this.allCards().filter((card) => !excludedIds.has(card.categoryId));
-  });
+  private standardCards = computed(() =>
+    filterStandardCards(this.allCards(), this.categories()),
+  );
 
   private currentIndex = signal(0);
   private shuffled = signal<Card[]>([]);
@@ -160,19 +157,13 @@ export class ShuffleComponent {
     return cards.length ? cards[idx] : null;
   });
 
-  categoryColor = computed(() => {
-    const card = this.currentCard();
-    if (!card) return '#e94560';
-    const cat = this.categories().find(c => c.id === card.categoryId);
-    return cat?.color ?? '#e94560';
-  });
+  categoryColor = computed(() =>
+    categoryColorFor(this.currentCard(), this.categories()),
+  );
 
-  categoryName = computed(() => {
-    const card = this.currentCard();
-    if (!card) return '';
-    const cat = this.categories().find(c => c.id === card.categoryId);
-    return cat?.name ?? '';
-  });
+  categoryName = computed(() =>
+    categoryNameFor(this.currentCard(), this.categories()),
+  );
 
   isFavorited = computed(() => {
     const card = this.currentCard();

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed , ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, of } from 'rxjs';
@@ -9,6 +9,7 @@ import { Card } from '../../core/models/card.model';
 import { Category } from '../../core/models/category.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-home',
   imports: [CategoryCardComponent],
   template: `
@@ -27,7 +28,7 @@ import { Category } from '../../core/models/category.model';
       </button>
 
       <div class="grid">
-        <div class="tile favorites-tile" (click)="goFavorites()">
+        <div class="tile favorites-tile" role="button" tabindex="0" (click)="goFavorites()" (keydown.enter)="goFavorites()" (keydown.space)="$event.preventDefault(); goFavorites()">
           <div class="glow"></div>
           <span class="fav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
