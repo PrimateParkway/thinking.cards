@@ -3,16 +3,18 @@ import { Category } from '../../core/models/category.model';
 
 const DEFAULT_ACCENT = '#e94560';
 
-const EXCLUDED_TYPES = new Set(['quiz', 'matrix', 'cryptogram', 'nonogram']);
+function isStandardCategory(category: Category): boolean {
+  return !category.type || category.type === 'standard';
+}
 
 export function filterStandardCards(
   cards: Card[],
   categories: Category[],
 ): Card[] {
-  const excludedIds = new Set(
-    categories.filter((c) => EXCLUDED_TYPES.has(c.type ?? '')).map((c) => c.id),
+  const standardIds = new Set(
+    categories.filter(isStandardCategory).map((c) => c.id),
   );
-  return cards.filter((card) => !excludedIds.has(card.categoryId));
+  return cards.filter((card) => standardIds.has(card.categoryId));
 }
 
 export function categoryColorFor(
