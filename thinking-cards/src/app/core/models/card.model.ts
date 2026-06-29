@@ -10,6 +10,11 @@ export interface CodebreakerClue {
   misplaced: number;
 }
 
+export interface KnightsCharacter {
+  name: string;
+  statements: string[];
+}
+
 export interface Card {
   id: string;
   questionText: string;
@@ -30,4 +35,8 @@ export interface Card {
   nonogramCols?: number;
   codebreakerAnswer?: string;
   codebreakerClues?: CodebreakerClue[];
+  knightsScenario?: string;
+  knightsCharacters?: KnightsCharacter[];
+  knightsSolution?: Record<string, 'Knight' | 'Knave'>;
+  knightsExplanation?: string[];
 }

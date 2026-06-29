@@ -1,0 +1,962 @@
+[
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram and I are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Bram and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Aria is a knave” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight."
+    ],
+    "questionText": "Two Islanders"
+  },
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram and I are different kinds."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram and I are different kinds” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria is a knave” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave."
+    ],
+    "questionText": "A Simple Pair"
+  },
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram and I are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are different kinds."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Bram and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Aria and I are different kinds” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight."
+    ],
+    "questionText": "First Encounter"
+  },
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram and I are different kinds."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram and I are different kinds” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria and I are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave."
+    ],
+    "questionText": "Crossroads"
+  },
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria and I are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave."
+    ],
+    "questionText": "The Fork"
+  },
+  {
+    "difficulty": "Easy",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are different kinds."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Bram is a knave” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Aria and I are different kinds” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight."
+    ],
+    "questionText": "Plain Speaking"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Cleo and I are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are different kinds."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Bram and I are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight",
+      "Cleo": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Cleo and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Aria and I are different kinds” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “Bram and I are the same kind” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight, Cleo = Knight."
+    ],
+    "questionText": "Three Voices"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "At least one of Aria and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Either Bram is a knight or Aria is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight",
+      "Cleo": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Bram is a knave” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “At least one of Aria and Cleo is a knave” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “Either Bram is a knight or Aria is a knave” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight, Cleo = Knight."
+    ],
+    "questionText": "The Tavern"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Cleo is a knight."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria and Bram is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight",
+      "Cleo": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “At least one of Bram and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Cleo is a knight” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “At least one of Aria and Bram is a knave” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight, Cleo = Knight."
+    ],
+    "questionText": "Market Day"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Either Cleo is a knight or Bram and I are different kinds."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Aria is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Either Cleo is a knight or Bram and I are different kinds” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria is a knave” works out false — exactly what a knave would lie about.",
+      "Cleo is a knave, and the claim “Aria is a knave” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knave."
+    ],
+    "questionText": "A Small Crowd"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Aria is a knight."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “At least one of Bram and Cleo is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria is a knave” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “Aria is a knight” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knight."
+    ],
+    "questionText": "Word of Mouth"
+  },
+  {
+    "difficulty": "Medium",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Either Cleo is a knight or Aria and Cleo are the same kind."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria and Bram is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knight",
+      "Cleo": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “At least one of Bram and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "Bram is a knight, and the claim “Either Cleo is a knight or Aria and Cleo are the same kind” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “At least one of Aria and Bram is a knave” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knight, Cleo = Knight."
+    ],
+    "questionText": "The Trio"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knight and Dorian is a knight."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria, Bram, and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "At least one of Aria and Cleo is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knight",
+      "Dorian": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria is a knight and Dorian is a knight” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “At least one of Aria, Bram, and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “At least one of Aria and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knight, Dorian = Knave."
+    ],
+    "questionText": "Four Strangers"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram and I are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria, Bram, and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "At least one of Aria, Bram, and Cleo is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knight",
+      "Cleo": "Knight",
+      "Dorian": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram and I are the same kind” works out true — exactly what a knight would say.",
+      "Bram is a knight, and the claim “Dorian is a knave” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “At least one of Aria, Bram, and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “At least one of Aria, Bram, and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knight, Cleo = Knight, Dorian = Knave."
+    ],
+    "questionText": "The Council"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Either Cleo is a knight or Cleo and Dorian are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and I are the same kind and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Bram and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Either Bram is a knight or Aria and Bram are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knight",
+      "Dorian": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Either Cleo is a knight or Cleo and Dorian are the same kind” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria and I are the same kind and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “At least one of Bram and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “Either Bram is a knight or Aria and Bram are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knight, Dorian = Knave."
+    ],
+    "questionText": "Tangled Tongues"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Either Cleo is a knave or Bram is a knight."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria is a knave and Aria and Dorian are different kinds."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Aria is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Bram and Aria are the same kind and Bram and I are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knave",
+      "Dorian": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Either Cleo is a knave or Bram is a knight” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria is a knave and Aria and Dorian are different kinds” works out false — exactly what a knave would lie about.",
+      "Cleo is a knave, and the claim “Aria is a knave” works out false — exactly what a knave would lie about.",
+      "Dorian is a knave, and the claim “Bram and Aria are the same kind and Bram and I are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knave, Dorian = Knave."
+    ],
+    "questionText": "The Quartet"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram, Cleo, and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Either Cleo is a knight or Cleo and I are different kinds."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Bram is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Bram is a knight."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knight",
+      "Cleo": "Knave",
+      "Dorian": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “At least one of Bram, Cleo, and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knight, and the claim “Either Cleo is a knight or Cleo and I are different kinds” works out true — exactly what a knight would say.",
+      "Cleo is a knave, and the claim “Bram is a knave” works out false — exactly what a knave would lie about.",
+      "Dorian is a knight, and the claim “Bram is a knight” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knight, Cleo = Knave, Dorian = Knight."
+    ],
+    "questionText": "Cross Purposes"
+  },
+  {
+    "difficulty": "Hard",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Dorian is a knight and Cleo and Dorian are different kinds."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria and Cleo are different kinds and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Aria and Bram are the same kind."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Cleo and Bram are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knave",
+      "Cleo": "Knight",
+      "Dorian": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Dorian is a knight and Cleo and Dorian are different kinds” works out false — exactly what a knave would lie about.",
+      "Bram is a knave, and the claim “Aria and Cleo are different kinds and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “Aria and Bram are the same kind” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “Cleo and Bram are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knave, Cleo = Knight, Dorian = Knave."
+    ],
+    "questionText": "The Inquiry"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Cleo, Dorian, and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "At least one of Dorian and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Bram is a knight and Bram and Aria are different kinds."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "At least one of Bram and Cleo is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knight",
+      "Cleo": "Knight",
+      "Dorian": "Knave",
+      "Esme": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “At least one of Cleo, Dorian, and Esme is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knight, and the claim “At least one of Dorian and Esme is a knave” works out true — exactly what a knight would say.",
+      "Cleo is a knight, and the claim “At least one of Aria and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “Bram is a knight and Bram and Aria are different kinds” works out false — exactly what a knave would lie about.",
+      "Esme is a knave, and the claim “At least one of Bram and Cleo is a knave” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knight, Cleo = Knight, Dorian = Knave, Esme = Knave."
+    ],
+    "questionText": "Five Riddlers"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram, Cleo, and Dorian is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "At least one of Cleo and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Esme and Aria are different kinds and Esme is a knight."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Either Cleo is a knight or Esme is a knave."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "Either Cleo and I are different kinds or Aria is a knight."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knight",
+      "Cleo": "Knave",
+      "Dorian": "Knave",
+      "Esme": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “At least one of Bram, Cleo, and Dorian is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knight, and the claim “At least one of Cleo and Esme is a knave” works out true — exactly what a knight would say.",
+      "Cleo is a knave, and the claim “Esme and Aria are different kinds and Esme is a knight” works out false — exactly what a knave would lie about.",
+      "Dorian is a knave, and the claim “Either Cleo is a knight or Esme is a knave” works out false — exactly what a knave would lie about.",
+      "Esme is a knight, and the claim “Either Cleo and I are different kinds or Aria is a knight” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knight, Cleo = Knave, Dorian = Knave, Esme = Knight."
+    ],
+    "questionText": "Hall of Mirrors"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Dorian would tell you that Cleo is a knight."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Aria would tell you that Esme and Cleo are the same kind."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Either Dorian is a knave or Esme and Dorian are different kinds."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "At least one of Bram, Cleo, and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "Dorian and Bram are different kinds and Bram and I are different kinds."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knight",
+      "Dorian": "Knight",
+      "Esme": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Dorian would tell you that Cleo is a knight” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Aria would tell you that Esme and Cleo are the same kind” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “Either Dorian is a knave or Esme and Dorian are different kinds” works out true — exactly what a knight would say.",
+      "Dorian is a knight, and the claim “At least one of Bram, Cleo, and Esme is a knave” works out true — exactly what a knight would say.",
+      "Esme is a knave, and the claim “Dorian and Bram are different kinds and Bram and I are different kinds” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knight, Dorian = Knight, Esme = Knave."
+    ],
+    "questionText": "The Whole Court"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Cleo is a knight and Dorian is a knight."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Cleo would tell you that Aria and I are the same kind."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Either Aria and Dorian are the same kind or Dorian and I are the same kind."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "At least one of Aria, Bram, and Cleo is a knave."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "Either Cleo is a knight or Bram is a knight."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knave",
+      "Bram": "Knave",
+      "Cleo": "Knave",
+      "Dorian": "Knight",
+      "Esme": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knave, and the claim “Cleo is a knight and Dorian is a knight” works out false — exactly what a knave would lie about.",
+      "Bram is a knave, and the claim “Cleo would tell you that Aria and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Cleo is a knave, and the claim “Either Aria and Dorian are the same kind or Dorian and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Dorian is a knight, and the claim “At least one of Aria, Bram, and Cleo is a knave” works out true — exactly what a knight would say.",
+      "Esme is a knave, and the claim “Either Cleo is a knight or Bram is a knight” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knave, Bram = Knave, Cleo = Knave, Dorian = Knight, Esme = Knave."
+    ],
+    "questionText": "Hearsay"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "At least one of Bram, Dorian, and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Dorian and I are different kinds and Esme and I are the same kind."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "At least one of Aria, Bram, and Esme is a knave."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Esme would tell you that Aria is a knight."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "Bram would tell you that Cleo and Aria are the same kind."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knave",
+      "Cleo": "Knight",
+      "Dorian": "Knave",
+      "Esme": "Knave"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “At least one of Bram, Dorian, and Esme is a knave” works out true — exactly what a knight would say.",
+      "Bram is a knave, and the claim “Dorian and I are different kinds and Esme and I are the same kind” works out false — exactly what a knave would lie about.",
+      "Cleo is a knight, and the claim “At least one of Aria, Bram, and Esme is a knave” works out true — exactly what a knight would say.",
+      "Dorian is a knave, and the claim “Esme would tell you that Aria is a knight” works out false — exactly what a knave would lie about.",
+      "Esme is a knave, and the claim “Bram would tell you that Cleo and Aria are the same kind” works out false — exactly what a knave would lie about.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knave, Cleo = Knight, Dorian = Knave, Esme = Knave."
+    ],
+    "questionText": "A Web of Words"
+  },
+  {
+    "difficulty": "Extreme",
+    "characters": [
+      {
+        "name": "Aria",
+        "statements": [
+          "Bram would tell you that Esme and I are the same kind."
+        ]
+      },
+      {
+        "name": "Bram",
+        "statements": [
+          "Cleo would tell you that Esme is a knave."
+        ]
+      },
+      {
+        "name": "Cleo",
+        "statements": [
+          "Bram would tell you that Cleo and Esme are the same kind."
+        ]
+      },
+      {
+        "name": "Dorian",
+        "statements": [
+          "Either Esme and Aria are the same kind or Bram is a knave."
+        ]
+      },
+      {
+        "name": "Esme",
+        "statements": [
+          "At least one of Cleo and Dorian is a knave."
+        ]
+      }
+    ],
+    "solution": {
+      "Aria": "Knight",
+      "Bram": "Knight",
+      "Cleo": "Knave",
+      "Dorian": "Knight",
+      "Esme": "Knight"
+    },
+    "explanation": [
+      "A knight’s statements are always true and a knave’s are always false. Only one line-up keeps every statement consistent — here is the check.",
+      "Aria is a knight, and the claim “Bram would tell you that Esme and I are the same kind” works out true — exactly what a knight would say.",
+      "Bram is a knight, and the claim “Cleo would tell you that Esme is a knave” works out true — exactly what a knight would say.",
+      "Cleo is a knave, and the claim “Bram would tell you that Cleo and Esme are the same kind” works out false — exactly what a knave would lie about.",
+      "Dorian is a knight, and the claim “Either Esme and Aria are the same kind or Bram is a knave” works out true — exactly what a knight would say.",
+      "Esme is a knight, and the claim “At least one of Cleo and Dorian is a knave” works out true — exactly what a knight would say.",
+      "No other assignment avoids a contradiction, so the answer is: Aria = Knight, Bram = Knight, Cleo = Knave, Dorian = Knight, Esme = Knight."
+    ],
+    "questionText": "The Reckoning"
+  }
+]

@@ -51,6 +51,14 @@ export interface CodebreakerProgress {
   bestTimes?: Record<number, number>;
 }
 
+export interface KnightsProgress {
+  index: number;
+  answerStates: Record<number, Record<string, string>>;
+  solvedPuzzles: number[];
+  gaveUpPuzzles?: number[];
+  bestTimes?: Record<number, number>;
+}
+
 @Injectable({ providedIn: 'root' })
 export class UserStateService {
   private auth = inject(AuthService);
@@ -61,12 +69,14 @@ export class UserStateService {
   private cryptogramUnsub: Unsubscribe | null = null;
   private nonogramUnsub: Unsubscribe | null = null;
   private codebreakerUnsub: Unsubscribe | null = null;
+  private knightsUnsub: Unsubscribe | null = null;
 
   readonly allQuizProgress = signal<Map<string, QuizProgress>>(new Map());
   readonly allMatrixProgress = signal<Map<string, MatrixProgress>>(new Map());
   readonly allCryptogramProgress = signal<Map<string, CryptogramProgress>>(new Map());
   readonly allNonogramProgress = signal<Map<string, NonogramProgress>>(new Map());
   readonly allCodebreakerProgress = signal<Map<string, CodebreakerProgress>>(new Map());
+  readonly allKnightsProgress = signal<Map<string, KnightsProgress>>(new Map());
 
   constructor() {
     effect(() => {
@@ -78,6 +88,7 @@ export class UserStateService {
         this.allCryptogramProgress.set(new Map());
         this.allNonogramProgress.set(new Map());
         this.allCodebreakerProgress.set(new Map());
+        this.allKnightsProgress.set(new Map());
         return;
       }
 
@@ -123,6 +134,15 @@ export class UserStateService {
           const m = new Map<string, CodebreakerProgress>();
           for (const d of snap.docs) m.set(d.id, d.data() as CodebreakerProgress);
           this.allCodebreakerProgress.set(m);
+        });
+      });
+
+      const knightsCol = collection(this.db, `users/${user.uid}/knightsState`);
+      this.knightsUnsub = onSnapshot(knightsCol, (snap) => {
+        this.zone.run(() => {
+          const m = new Map<string, KnightsProgress>();
+          for (const d of snap.docs) m.set(d.id, d.data() as KnightsProgress);
+          this.allKnightsProgress.set(m);
         });
       });
     });
@@ -230,6 +250,23 @@ export class UserStateService {
     return snap.exists() ? (snap.data() as CodebreakerProgress) : null;
   }
 
+  // ── Knights & Knaves Progress ───────────────────────────────────
+
+  saveKnightsProgress(categoryId: string, data: KnightsProgress): void {
+    const user = this.auth.currentUser();
+    if (!user) return;
+    const ref = doc(this.db, `users/${user.uid}/knightsState`, categoryId);
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
+  }
+
+  async loadKnightsProgress(categoryId: string): Promise<KnightsProgress | null> {
+    const user = this.auth.currentUser();
+    if (!user) return null;
+    const ref = doc(this.db, `users/${user.uid}/knightsState`, categoryId);
+    const snap = await getDoc(ref);
+    return snap.exists() ? (snap.data() as KnightsProgress) : null;
+  }
+
   private cleanup(): void {
     this.quizUnsub?.();
     this.quizUnsub = null;
@@ -241,5 +278,7 @@ export class UserStateService {
     this.nonogramUnsub = null;
     this.codebreakerUnsub?.();
     this.codebreakerUnsub = null;
+    this.knightsUnsub?.();
+    this.knightsUnsub = null;
   }
 }

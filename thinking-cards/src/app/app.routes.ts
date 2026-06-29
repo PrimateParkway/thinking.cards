@@ -132,6 +132,15 @@ export const routes: Routes = [
     data: { animation: 'codebreaker' },
   },
   {
+    path: 'knights/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/knights/knights.component').then(
+        (m) => m.KnightsComponent
+      ),
+    data: { animation: 'knights' },
+  },
+  {
     path: 'badges',
     canActivate: [authGuard],
     loadComponent: () =>

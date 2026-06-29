@@ -117,6 +117,14 @@ function hashCode(str: string): number {
           <path d="M33 23 L35 25.5 L38 21" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
         }
 
+        @case ('knights-&-knaves') {
+          <!-- Shield split in two: the truth-teller and the liar -->
+          <path d="M24 6 L40 12 V25 C40 34 33 39.5 24 42.5 C15 39.5 8 34 8 25 V12 Z"
+                stroke="currentColor" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+          <path d="M24 6 L24 42.5 C15 39.5 8 34 8 25 V12 Z" fill="currentColor" opacity="0.18"/>
+          <line x1="24" y1="6" x2="24" y2="42.5" stroke="currentColor" stroke-width="2" opacity="0.55"/>
+        }
+
         @case ('favorites') {
           <!-- Heart icon -->
           <path d="M24 39.7l-2.1-1.9C12.3 29.2 6 23.5 6 16.5 6 10.7 10.7 6 16.5 6c3.2 0 6.3 1.5 8.3 3.9L24 9l-.8-.9C25.2 7.5 28.3 6 31.5 6 37.3 6 42 10.7 42 16.5c0 7-6.3 12.7-15.9 21.3L24 39.7z"
