@@ -39,4 +39,6 @@ export interface Card {
   knightsCharacters?: KnightsCharacter[];
   knightsSolution?: Record<string, 'Knight' | 'Knave'>;
   knightsExplanation?: string[];
+  knightsTagLabel?: string;
+  knightsTagSolution?: Record<string, string>;
 }

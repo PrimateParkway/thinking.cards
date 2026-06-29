@@ -61,7 +61,7 @@ service cloud.firestore {
 
       allow create: if isAdmin()
         && hasAll(['questionText', 'categoryId', 'cardNumber'])
-        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation'])
+        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution'])
         && request.resource.data.questionText is string
         && request.resource.data.questionText.size() > 0
         && request.resource.data.questionText.size() <= 2000
@@ -74,7 +74,7 @@ service cloud.firestore {
         && (!('explanation' in request.resource.data) || request.resource.data.explanation is string);
 
       allow update: if isAdmin()
-        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation'])
+        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution'])
         && request.resource.data.questionText is string
         && request.resource.data.questionText.size() > 0
         && request.resource.data.questionText.size() <= 2000

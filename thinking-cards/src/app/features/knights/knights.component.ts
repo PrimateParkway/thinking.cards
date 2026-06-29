@@ -135,11 +135,19 @@ type Verdict = 'Knight' | 'Knave' | '';
             <div class="solution-panel">
               <h3 class="section-label">Solution</h3>
               <table class="solution-table">
+                @if (hasTag()) {
+                  <thead>
+                    <tr><th>Islander</th><th>Type</th><th>{{ tagLabel() }}</th></tr>
+                  </thead>
+                }
                 <tbody>
                   @for (ch of currentCard()?.knightsCharacters ?? []; track ch.name) {
                     <tr>
                       <td class="solution-primary">{{ ch.name }}</td>
                       <td><span class="verdict-badge" [attr.data-type]="solutionFor(ch.name)">{{ solutionFor(ch.name) }}</span></td>
+                      @if (hasTag()) {
+                        <td class="tag-cell" [class.tag-guilty]="tagFor(ch.name) === 'Guilty'">{{ tagFor(ch.name) }}</td>
+                      }
                     </tr>
                   }
                 </tbody>
@@ -444,16 +452,34 @@ type Verdict = 'Knight' | 'Knave' | '';
     .solution-table {
       width: 100%;
       border-collapse: collapse;
+      th {
+        text-align: left;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        padding: 4px 4px 8px;
+      }
+      th:last-child { text-align: right; }
       td {
         padding: 8px 4px;
         border-bottom: 1px solid var(--grid-border);
       }
-      tr:last-child td { border-bottom: none; }
+      tbody tr:last-child td { border-bottom: none; }
       td.solution-primary {
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
       }
-      td:last-child { text-align: right; }
+      td:last-child:not(.solution-primary) { text-align: right; }
+      .tag-cell {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      .tag-guilty {
+        color: #e94560;
+        font-weight: 700;
+      }
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -561,6 +587,12 @@ export class KnightsComponent implements OnDestroy {
 
   solutionFor(name: string): string {
     return this.currentCard()?.knightsSolution?.[name] ?? '';
+  }
+
+  hasTag = computed(() => !!this.currentCard()?.knightsTagSolution);
+  tagLabel = computed(() => this.currentCard()?.knightsTagLabel ?? '');
+  tagFor(name: string): string {
+    return this.currentCard()?.knightsTagSolution?.[name] ?? '';
   }
 
   isComplete(): boolean {
