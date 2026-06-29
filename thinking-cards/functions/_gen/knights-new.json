@@ -1,7 +1,7 @@
 [
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -30,7 +30,7 @@
   },
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -59,7 +59,7 @@
   },
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -88,7 +88,7 @@
   },
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -117,7 +117,7 @@
   },
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -146,7 +146,7 @@
   },
   {
     "difficulty": "Easy",
-    "knightsScenario": "Each of Aria and Bram is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -175,7 +175,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Someone ate the Duchess’s cherry tart, and it was one of Aria, Bram, and Cleo. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who ate the tart.",
+    "knightsScenario": "Someone ate the Duchess’s cherry tart — and it was one of Aria, Bram, and Cleo.",
     "characters": [
       {
         "name": "Aria",
@@ -218,7 +218,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Aria, Bram, and Cleo are the piper, the dancer, and the juggler, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, and Cleo are the piper, the dancer, and the juggler, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -261,7 +261,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Someone stole the gold medallion, and it was one of Aria, Bram, and Cleo. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who stole the medallion.",
+    "knightsScenario": "Someone stole the gold medallion — and it was one of Aria, Bram, and Cleo.",
     "characters": [
       {
         "name": "Aria",
@@ -304,7 +304,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Someone broke the chapel window, and it was one of Aria, Bram, and Cleo. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who broke the window.",
+    "knightsScenario": "Someone broke the chapel window — and it was one of Aria, Bram, and Cleo.",
     "characters": [
       {
         "name": "Aria",
@@ -347,7 +347,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Each of Aria, Bram, and Cleo is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -384,7 +384,7 @@
   },
   {
     "difficulty": "Medium",
-    "knightsScenario": "Aria, Bram, and Cleo are the blacksmith, the baker, and the tailor, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, and Cleo are the blacksmith, the baker, and the tailor, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -427,7 +427,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Aria, Bram, Cleo, and Dorian are the blacksmith, the baker, the tailor, and the cooper, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, Cleo, and Dorian are the blacksmith, the baker, the tailor, and the cooper, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -479,7 +479,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Someone stole the gold medallion, and it was one of Aria, Bram, Cleo, and Dorian. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who stole the medallion.",
+    "knightsScenario": "Someone stole the gold medallion — and it was one of Aria, Bram, Cleo, and Dorian.",
     "characters": [
       {
         "name": "Aria",
@@ -531,7 +531,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Aria, Bram, Cleo, and Dorian are the captain, the cook, the surgeon, and the navigator, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, Cleo, and Dorian are the captain, the cook, the surgeon, and the navigator, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -583,7 +583,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Someone ate the Duchess’s cherry tart, and it was one of Aria, Bram, Cleo, and Dorian. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who ate the tart.",
+    "knightsScenario": "Someone ate the Duchess’s cherry tart — and it was one of Aria, Bram, Cleo, and Dorian.",
     "characters": [
       {
         "name": "Aria",
@@ -635,7 +635,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Someone forged the royal letter, and it was one of Aria, Bram, Cleo, and Dorian. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who forged the letter.",
+    "knightsScenario": "Someone forged the royal letter — and it was one of Aria, Bram, Cleo, and Dorian.",
     "characters": [
       {
         "name": "Aria",
@@ -687,7 +687,7 @@
   },
   {
     "difficulty": "Hard",
-    "knightsScenario": "Each of Aria, Bram, Cleo, and Dorian is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -732,7 +732,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Aria, Bram, Cleo, Dorian, and Esme are the piper, the dancer, the juggler, the herald, and the weaver, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, Cleo, Dorian, and Esme are the piper, the dancer, the juggler, the herald, and the weaver, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -793,7 +793,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Someone ate the Duchess’s cherry tart, and it was one of Aria, Bram, Cleo, Dorian, and Esme. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who ate the tart.",
+    "knightsScenario": "Someone ate the Duchess’s cherry tart — and it was one of Aria, Bram, Cleo, Dorian, and Esme.",
     "characters": [
       {
         "name": "Aria",
@@ -854,7 +854,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Each of Aria, Bram, Cleo, Dorian, and Esme is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.",
+    "knightsScenario": "",
     "characters": [
       {
         "name": "Aria",
@@ -907,7 +907,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Someone stole the gold medallion, and it was one of Aria, Bram, Cleo, Dorian, and Esme. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who stole the medallion.",
+    "knightsScenario": "Someone stole the gold medallion — and it was one of Aria, Bram, Cleo, Dorian, and Esme.",
     "characters": [
       {
         "name": "Aria",
@@ -968,7 +968,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Aria, Bram, Cleo, Dorian, and Esme are the blacksmith, the baker, the tailor, the cooper, and the mason, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.",
+    "knightsScenario": "Aria, Bram, Cleo, Dorian, and Esme are the blacksmith, the baker, the tailor, the cooper, and the mason, in some order.",
     "characters": [
       {
         "name": "Aria",
@@ -1029,7 +1029,7 @@
   },
   {
     "difficulty": "Extreme",
-    "knightsScenario": "Someone broke the chapel window, and it was one of Aria, Bram, Cleo, Dorian, and Esme. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who broke the window.",
+    "knightsScenario": "Someone broke the chapel window — and it was one of Aria, Bram, Cleo, Dorian, and Esme.",
     "characters": [
       {
         "name": "Aria",

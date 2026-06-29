@@ -249,15 +249,15 @@ function buildExplanation(names, stmts, st, theme) {
 
 // ── Scenario text ───────────────────────────────────────────────
 function scenario(theme, names) {
-  const who = `the ${names.length} islanders`;
+  // Just set up the story — the knight/knave rules live in the instructions.
   if (theme.kind === 'culprit') {
-    return `Someone ${theme.deed}, and it was one of ${oxford(names)}. Each is a knight (who always tells the truth) or a knave (who always lies). Mark who is a knight and who is a knave — and you’ll uncover who ${theme.act}.`;
+    return `Someone ${theme.deed} — and it was one of ${oxford(names)}.`;
   }
   if (theme.kind === 'role') {
     const used = theme.roles.slice(0, names.length);
-    return `${oxford(names)} are ${oxford(used)}, in some order. Each is also a knight (who always tells the truth) or a knave (who always lies). Work out who is a knight and who is a knave.`;
+    return `${oxford(names)} are ${oxford(used)}, in some order.`;
   }
-  return `Each of ${oxford(names)} is either a knight, who always tells the truth, or a knave, who always lies. Decide what each one is.`;
+  return ''; // classic puzzles need no setup
 }
 
 // ── Generate one puzzle ─────────────────────────────────────────

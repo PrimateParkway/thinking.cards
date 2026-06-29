@@ -67,9 +67,9 @@ type Verdict = 'Knight' | 'Knave' | '';
           }
         </div>
 
-        <div class="scenario-strip">
-          {{ card.knightsScenario || 'Knights always tell the truth. Knaves always lie. Decide what each islander is.' }}
-        </div>
+        @if (card.knightsScenario) {
+          <div class="scenario-strip">{{ card.knightsScenario }}</div>
+        }
 
         <div class="char-list">
           @for (ch of card.knightsCharacters ?? []; track ch.name) {
@@ -749,7 +749,7 @@ export class KnightsComponent implements OnDestroy {
 
   private startTimer(): void {
     this.stopTimer();
-    if (this.solved() || this.isInstructionCard()) return;
+    if (this.solved()) return;
     this.timerRef = setInterval(() => this.elapsedSeconds.update(s => s + 1), 1000);
   }
 
