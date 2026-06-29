@@ -696,8 +696,9 @@ export class CryptogramComponent implements OnDestroy {
   }
 
   clearSelected(): void {
+    if (this.solved()) return;
     const sel = this.selectedCipher();
-    if (!sel || this.solved()) return;
+    if (!sel) return;
 
     this.guesses.update(g => {
       const updated = { ...g };
@@ -705,6 +706,7 @@ export class CryptogramComponent implements OnDestroy {
       return updated;
     });
 
+    this.retreatSelection(sel);
     this.persistProgress();
   }
 
@@ -835,6 +837,16 @@ export class CryptogramComponent implements OnDestroy {
       }
     }
     this.selectedCipher.set(null);
+  }
+
+  private retreatSelection(current: string): void {
+    const cipherLetters = this.orderedCipherLetters();
+    const idx = cipherLetters.indexOf(current);
+    if (idx <= 0) {
+      this.selectedCipher.set(null);
+      return;
+    }
+    this.selectedCipher.set(cipherLetters[idx - 1]);
   }
 
   private orderedCipherLetters(): string[] {

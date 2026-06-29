@@ -623,8 +623,11 @@ export class CodebreakerComponent implements OnDestroy {
   }
 
   enterDigit(digit: string): void {
-    const sel = this.selectedDigitIndex();
-    if (sel === null || this.solved()) return;
+    if (this.solved()) return;
+
+    // Default to the next empty slot so the player can just start typing.
+    const sel = this.selectedDigitIndex() ?? this.firstEmptyIndex();
+    if (sel === null) return;
 
     this.answer.update(a => {
       const updated = [...a];
@@ -634,6 +637,11 @@ export class CodebreakerComponent implements OnDestroy {
 
     this.advanceSelection(sel);
     this.persistProgress();
+  }
+
+  private firstEmptyIndex(): number | null {
+    const idx = this.answer().findIndex(d => d === '');
+    return idx === -1 ? null : idx;
   }
 
   clearDigit(): void {
