@@ -190,14 +190,40 @@ interface GridSection {
         }
 
         @if (solved()) {
-          @if (currentCard()?.matrixExplanation?.length) {
-            <div class="explanation-panel">
-              <h3 class="section-label">How to solve it</h3>
-              <ol class="explanation-list">
-                @for (step of currentCard()!.matrixExplanation!; track $index) {
-                  <li>{{ step }}</li>
-                }
-              </ol>
+          @if (isGaveUp()) {
+            @if (currentCard()?.matrixExplanation?.length) {
+              <div class="explanation-panel">
+                <h3 class="section-label">How to solve it</h3>
+                <ol class="explanation-list">
+                  @for (step of currentCard()!.matrixExplanation!; track $index) {
+                    <li>{{ step }}</li>
+                  }
+                </ol>
+              </div>
+            }
+          } @else if (solutionRows().length) {
+            <div class="solution-panel">
+              <h3 class="section-label">Solution</h3>
+              <div class="solution-scroll">
+                <table class="solution-table">
+                  <thead>
+                    <tr>
+                      @for (col of solutionColumns(); track $index) {
+                        <th>{{ col }}</th>
+                      }
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (row of solutionRows(); track $index) {
+                      <tr>
+                        @for (cell of row; track $index) {
+                          <td [class.solution-primary]="$index === 0">{{ cell }}</td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
             </div>
           }
           <div class="action-buttons">
@@ -532,6 +558,43 @@ interface GridSection {
         margin-bottom: 4px;
       }
     }
+    .solution-panel {
+      width: 100%;
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      animation: slideIn 0.3s ease-out;
+    }
+    .solution-scroll {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+    .solution-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.88rem;
+      th, td {
+        padding: 8px 12px;
+        text-align: left;
+        white-space: nowrap;
+        border-bottom: 1px solid var(--grid-border);
+      }
+      th {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+      }
+      tbody tr:last-child td { border-bottom: none; }
+      td.solution-primary {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        color: #00b894;
+      }
+    }
     .nav-row {
       display: flex;
       align-items: center;
@@ -637,7 +700,24 @@ export class MatrixComponent implements OnDestroy {
 
   isInstructionCard = computed(() => !this.currentCard()?.matrixGroups?.length);
 
+  isGaveUp = computed(() => this.gaveUpPuzzles().includes(this.currentIndex()));
+
   groups = computed(() => this.currentCard()?.matrixGroups ?? []);
+
+  // Column headers for the post-solve results table: every group name.
+  solutionColumns = computed(() => this.groups().map(g => g.name));
+
+  // One row per primary-group item, listing its matched value in each group.
+  solutionRows = computed<string[][]>(() => {
+    const g = this.groups();
+    const sol = this.currentCard()?.matrixSolution;
+    if (!g.length || !sol) return [];
+    const [primary, ...rest] = g;
+    return primary.items.map(item => {
+      const pairings = sol[item] ?? {};
+      return [item, ...rest.map(grp => pairings[grp.name] ?? '')];
+    });
+  });
 
   gridSections = computed<GridSection[]>(() => {
     const g = this.groups();
