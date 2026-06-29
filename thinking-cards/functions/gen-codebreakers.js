@@ -256,6 +256,11 @@ const SPEC = [
   { difficulty: 'Extreme', L: 6, min: 7, max: 8, K: 4, nums: [16, 17, 18, 19, 20] },
 ];
 
+module.exports = { generatePuzzle, validate, score, candidates };
+
+if (require.main === module) main();
+
+function main() {
 const groups = {};
 let allValid = true;
 
@@ -309,3 +314,4 @@ out += fmtGroup('EXTREME', groups.Extreme);
 process.stdout.write(out);
 
 if (!allValid) process.exit(1);
+}

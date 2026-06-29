@@ -1,0 +1,201 @@
+[
+  {
+    "difficulty": "Hard",
+    "questionText": "The Research Symposium",
+    "matrixScenario": "Four researchers each presented a talk in a different field, at a different time, and each comes from a different country. Work out who studies what, when they spoke, and where they are from.",
+    "matrixGroups": [
+      {
+        "name": "Researcher",
+        "items": [
+          "Dr. Adler",
+          "Dr. Boyd",
+          "Dr. Chen",
+          "Dr. Eaton"
+        ],
+        "labels": [
+          "Dr. Adler",
+          "Dr. Boyd",
+          "Dr. Chen",
+          "Dr. Eaton"
+        ]
+      },
+      {
+        "name": "Field",
+        "items": [
+          "Astronomy",
+          "Biology",
+          "Chemistry",
+          "Physics"
+        ],
+        "labels": [
+          "Astronomy",
+          "Biology",
+          "Chemistry",
+          "Physics"
+        ]
+      },
+      {
+        "name": "Time",
+        "items": [
+          "9 AM",
+          "10 AM",
+          "11 AM",
+          "1 PM"
+        ],
+        "labels": [
+          "9 AM",
+          "10 AM",
+          "11 AM",
+          "1 PM"
+        ]
+      },
+      {
+        "name": "Country",
+        "items": [
+          "Canada",
+          "Japan",
+          "Kenya",
+          "Norway"
+        ],
+        "labels": [
+          "Canada",
+          "Japan",
+          "Kenya",
+          "Norway"
+        ]
+      }
+    ],
+    "matrixClues": [
+      "The astronomer gave the earliest talk, at 9 AM.",
+      "The biologist presented at 11 AM.",
+      "The chemist gave the final talk of the day, at 1 PM.",
+      "Dr. Adler presented at 10 AM.",
+      "Dr. Boyd gave the last talk of the day.",
+      "Dr. Chen is from Japan.",
+      "The researcher from Canada studies chemistry.",
+      "The biologist is from Kenya."
+    ],
+    "matrixSolution": {
+      "Dr. Adler": {
+        "Field": "Physics",
+        "Time": "10 AM",
+        "Country": "Norway"
+      },
+      "Dr. Boyd": {
+        "Field": "Chemistry",
+        "Time": "1 PM",
+        "Country": "Canada"
+      },
+      "Dr. Chen": {
+        "Field": "Astronomy",
+        "Time": "9 AM",
+        "Country": "Japan"
+      },
+      "Dr. Eaton": {
+        "Field": "Biology",
+        "Time": "11 AM",
+        "Country": "Kenya"
+      }
+    }
+  },
+  {
+    "difficulty": "Extreme",
+    "questionText": "The Summit Expedition",
+    "matrixScenario": "Four climbers each summited a different peak in a different year, each wearing a different color of gear. The clues are indirect — work from what they rule out. Deduce each climber's peak, year, and gear color.",
+    "matrixGroups": [
+      {
+        "name": "Climber",
+        "items": [
+          "Ama",
+          "Bruno",
+          "Lena",
+          "Tariq"
+        ],
+        "labels": [
+          "Ama",
+          "Bruno",
+          "Lena",
+          "Tariq"
+        ]
+      },
+      {
+        "name": "Peak",
+        "items": [
+          "Denali",
+          "Elbrus",
+          "Kilimanjaro",
+          "Vinson"
+        ],
+        "labels": [
+          "Denali",
+          "Elbrus",
+          "Kilimanjaro",
+          "Vinson"
+        ]
+      },
+      {
+        "name": "Year",
+        "items": [
+          "2018",
+          "2019",
+          "2020",
+          "2021"
+        ],
+        "labels": [
+          "2018",
+          "2019",
+          "2020",
+          "2021"
+        ]
+      },
+      {
+        "name": "Color",
+        "items": [
+          "Amber",
+          "Crimson",
+          "Teal",
+          "Violet"
+        ],
+        "labels": [
+          "Amber",
+          "Crimson",
+          "Teal",
+          "Violet"
+        ]
+      }
+    ],
+    "matrixClues": [
+      "The climber wearing teal summited Kilimanjaro.",
+      "Whoever summited Vinson did so in 2021.",
+      "The climber in crimson made the earliest expedition, in 2018.",
+      "Tariq summited the year immediately before Ama did.",
+      "Bruno made the earliest expedition of the four.",
+      "Lena summited Vinson.",
+      "Neither Bruno nor Tariq summited Kilimanjaro.",
+      "The climber who summited Elbrus went the year immediately after Bruno.",
+      "Neither Ama nor Tariq wore amber."
+    ],
+    "matrixSolution": {
+      "Ama": {
+        "Peak": "Kilimanjaro",
+        "Year": "2020",
+        "Color": "Teal"
+      },
+      "Bruno": {
+        "Peak": "Denali",
+        "Year": "2018",
+        "Color": "Crimson"
+      },
+      "Lena": {
+        "Peak": "Vinson",
+        "Year": "2021",
+        "Color": "Amber"
+      },
+      "Tariq": {
+        "Peak": "Elbrus",
+        "Year": "2019",
+        "Color": "Violet"
+      }
+    }
+  }
+]

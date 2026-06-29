@@ -1,0 +1,155 @@
+[
+  {
+    "difficulty": "Easy",
+    "questionText": "Cold Open",
+    "codebreakerAnswer": "839",
+    "codebreakerClues": [
+      {
+        "guess": "481",
+        "correct": 0,
+        "misplaced": 1
+      },
+      {
+        "guess": "594",
+        "correct": 0,
+        "misplaced": 1
+      },
+      {
+        "guess": "340",
+        "correct": 0,
+        "misplaced": 1
+      },
+      {
+        "guess": "419",
+        "correct": 1,
+        "misplaced": 0
+      },
+      {
+        "guess": "870",
+        "correct": 1,
+        "misplaced": 0
+      }
+    ]
+  },
+  {
+    "difficulty": "Medium",
+    "questionText": "Tumblers",
+    "codebreakerAnswer": "0534",
+    "codebreakerClues": [
+      {
+        "guess": "3678",
+        "correct": 0,
+        "misplaced": 1
+      },
+      {
+        "guess": "0751",
+        "correct": 1,
+        "misplaced": 1
+      },
+      {
+        "guess": "6518",
+        "correct": 1,
+        "misplaced": 0
+      },
+      {
+        "guess": "9837",
+        "correct": 1,
+        "misplaced": 0
+      },
+      {
+        "guess": "6584",
+        "correct": 2,
+        "misplaced": 0
+      }
+    ]
+  },
+  {
+    "difficulty": "Hard",
+    "questionText": "Sealed Vault",
+    "codebreakerAnswer": "30694",
+    "codebreakerClues": [
+      {
+        "guess": "72450",
+        "correct": 0,
+        "misplaced": 2
+      },
+      {
+        "guess": "29836",
+        "correct": 0,
+        "misplaced": 3
+      },
+      {
+        "guess": "27096",
+        "correct": 1,
+        "misplaced": 2
+      },
+      {
+        "guess": "20413",
+        "correct": 1,
+        "misplaced": 2
+      },
+      {
+        "guess": "84621",
+        "correct": 1,
+        "misplaced": 1
+      },
+      {
+        "guess": "95812",
+        "correct": 0,
+        "misplaced": 1
+      },
+      {
+        "guess": "09431",
+        "correct": 0,
+        "misplaced": 4
+      }
+    ]
+  },
+  {
+    "difficulty": "Extreme",
+    "questionText": "Cipher's End",
+    "codebreakerAnswer": "532987",
+    "codebreakerClues": [
+      {
+        "guess": "680179",
+        "correct": 0,
+        "misplaced": 3
+      },
+      {
+        "guess": "097158",
+        "correct": 0,
+        "misplaced": 4
+      },
+      {
+        "guess": "691782",
+        "correct": 1,
+        "misplaced": 3
+      },
+      {
+        "guess": "243960",
+        "correct": 1,
+        "misplaced": 2
+      },
+      {
+        "guess": "538624",
+        "correct": 2,
+        "misplaced": 2
+      },
+      {
+        "guess": "914065",
+        "correct": 0,
+        "misplaced": 2
+      },
+      {
+        "guess": "263597",
+        "correct": 1,
+        "misplaced": 4
+      },
+      {
+        "guess": "163947",
+        "correct": 2,
+        "misplaced": 1
+      }
+    ]
+  }
+]
