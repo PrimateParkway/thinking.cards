@@ -1,0 +1,226 @@
+[
+  {
+    "cardNumber": 2,
+    "difficulty": "Easy",
+    "questionText": "The Philosopher's Study",
+    "escapeIntro": "Socrates has locked his study and left four challenges. Take the first letter of each answer and spell what every philosopher hopes to become.",
+    "escapeStations": [
+      {
+        "title": "The Unshaken School",
+        "prompt": "A school of ancient philosophy that taught calm acceptance of fate and mastery over the passions; its name now means coolly enduring hardship.",
+        "answer": "STOIC",
+        "takeChar": "S",
+        "hint": "Marcus Aurelius was one.",
+        "reveal": "The school is STOIC (Stoicism)."
+      },
+      {
+        "title": "The Cradle of Thought",
+        "prompt": "Rearrange HASTEN to the Greek city where Socrates questioned everyone he met.",
+        "answer": "ATHENS",
+        "takeChar": "A",
+        "hint": "The home of the Academy.",
+        "reveal": "HASTEN is an anagram of ATHENS."
+      },
+      {
+        "title": "The Stinging Insect",
+        "prompt": "Socrates called himself this insect, sent to sting a sluggish Athens awake with awkward questions.",
+        "answer": "GADFLY",
+        "takeChar": "G",
+        "hint": "A biting fly that pesters cattle.",
+        "reveal": "He called himself a GADFLY."
+      },
+      {
+        "title": "The Study of Conduct",
+        "prompt": "Shift each letter back 3 to read the branch of philosophy about right and wrong: H W K L F V",
+        "answer": "ETHICS",
+        "takeChar": "E",
+        "hint": "Aristotle wrote one 'to Nicomachus'.",
+        "reveal": "H W K L F V shifted back 3 spells ETHICS."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Take the first letter of each answer, top to bottom.",
+      "prompt": "Spell the word for a wise thinker that unlocks the study.",
+      "answer": "SAGE",
+      "hint": "A wise one — also a herb."
+    }
+  },
+  {
+    "cardNumber": 3,
+    "difficulty": "Medium",
+    "questionText": "The Cartographer's Study",
+    "escapeIntro": "The map-maker's study locks tight at nightfall. Five charts each yield a letter — but the lock won't take them in order. Gather them, then set them straight.",
+    "escapeStations": [
+      {
+        "title": "Narrow Waters",
+        "prompt": "Rearrange TRAITS to a narrow channel of water between two seas.",
+        "answer": "STRAIT",
+        "takeChar": "S",
+        "hint": "A narrow sea passage.",
+        "reveal": "TRAITS is an anagram of STRAIT."
+      },
+      {
+        "title": "The Equator Lines",
+        "prompt": "The angular distance of a place north or south of the equator.",
+        "answer": "LATITUDE",
+        "takeChar": "L",
+        "hint": "Lines that run east–west.",
+        "reveal": "It is LATITUDE."
+      },
+      {
+        "title": "The Coral Ring",
+        "prompt": "Shift each letter back 1 to read a ring-shaped coral island: B U P M M",
+        "answer": "ATOLL",
+        "takeChar": "A",
+        "hint": "A ring of coral.",
+        "reveal": "B U P M M shifted back 1 spells ATOLL."
+      },
+      {
+        "title": "The Hot Zone",
+        "prompt": "I am a line of latitude that names a sweltering zone; the Tropic of Cancer is one of me.",
+        "answer": "TROPIC",
+        "takeChar": "T",
+        "hint": "Tropic of Cancer / Capricorn.",
+        "reveal": "The line is a TROPIC."
+      },
+      {
+        "title": "The Compass Bearing",
+        "prompt": "A horizontal bearing measured clockwise from due north, in degrees.",
+        "answer": "AZIMUTH",
+        "takeChar": "A",
+        "hint": "Begins with A; a surveyor’s term.",
+        "reveal": "The bearing is the AZIMUTH."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Each answer gives its first letter — but jumbled. Unscramble the five letters.",
+      "prompt": "Unscramble them to name the book every map-maker binds together — and the Titan who holds up the sky.",
+      "answer": "ATLAS",
+      "hint": "A book of maps."
+    }
+  },
+  {
+    "cardNumber": 4,
+    "difficulty": "Hard",
+    "questionText": "The Logician's Workshop",
+    "escapeIntro": "You're sealed inside the logician's workshop. Six puzzles each conceal a letter, scattered out of order — and not all of them give up their secret plainly.",
+    "escapeStations": [
+      {
+        "title": "A Question of Character",
+        "prompt": "Rearrange MOLAR to a word meaning ethical — concerning right conduct.",
+        "answer": "MORAL",
+        "takeChar": "M",
+        "hint": "The opposite of immoral.",
+        "reveal": "MOLAR is an anagram of MORAL."
+      },
+      {
+        "title": "The Bath-time Cry",
+        "prompt": "Archimedes is said to have leapt from his bath shouting this word — Greek for \"I have found it!\" — on grasping how to measure volume.",
+        "answer": "EUREKA",
+        "takeChar": "E",
+        "hint": "A cry of sudden discovery.",
+        "reveal": "He cried EUREKA."
+      },
+      {
+        "title": "The Tapped Direction",
+        "prompt": "Decode the Morse to find the direction a compass needle seeks: -. / --- / .-. / - / ....",
+        "answer": "NORTH",
+        "takeChar": "N",
+        "hint": "A cardinal direction.",
+        "reveal": "The Morse spells NORTH."
+      },
+      {
+        "title": "Socrates’ Weapon",
+        "prompt": "A fixed shift through the alphabet hides Socrates’ favourite tactic — feigning ignorance to expose another’s. Crack it: N W T S D",
+        "answer": "IRONY",
+        "takeChar": "I",
+        "hint": "A figure of speech; he pretended to know nothing.",
+        "reveal": "N W T S D shifted back 5 spells IRONY."
+      },
+      {
+        "title": "The Spinning Sphere",
+        "prompt": "A spherical model of the Earth that sits on a desk and turns on its axis.",
+        "answer": "GLOBE",
+        "takeChar": "G",
+        "hint": "It spins on a stand.",
+        "reveal": "It is a GLOBE."
+      },
+      {
+        "title": "Reason’s Starting Point",
+        "prompt": "A statement accepted as self-evidently true, taken without proof as the foundation of a logical system.",
+        "answer": "AXIOM",
+        "takeChar": "A",
+        "hint": "Euclid began his geometry with these.",
+        "reveal": "It is an AXIOM."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Collect the six first letters — they arrive scrambled. Rearrange them.",
+      "prompt": "Unscramble them to name a baffling riddle (and a famous WWII cipher machine).",
+      "answer": "ENIGMA",
+      "hint": "A puzzle; also a code device."
+    }
+  },
+  {
+    "cardNumber": 5,
+    "difficulty": "Extreme",
+    "questionText": "The Oracle's Antechamber",
+    "escapeIntro": "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
+    "escapeStations": [
+      {
+        "title": "The Art of Argument",
+        "prompt": "The branch of philosophy concerned with valid reasoning — distinguishing sound arguments from fallacies.",
+        "answer": "LOGIC",
+        "takeChar": "L",
+        "hint": "Aristotle is its father.",
+        "reveal": "It is LOGIC."
+      },
+      {
+        "title": "The Perfect Form",
+        "prompt": "Decode the Morse to find what Plato called the perfect, eternal Forms behind all things: .. / -.. / . / .-",
+        "answer": "IDEA",
+        "takeChar": "I",
+        "hint": "A thought; Plato’s Forms.",
+        "reveal": "The Morse spells IDEA."
+      },
+      {
+        "title": "The Paradox-Maker",
+        "prompt": "The philosopher of Elea famous for paradoxes of motion — Achilles can never catch the tortoise.",
+        "answer": "ZENO",
+        "takeChar": "Z",
+        "hint": "Four letters; a Greek of Elea.",
+        "reveal": "It is ZENO of Elea."
+      },
+      {
+        "title": "The Loyal Student",
+        "prompt": "A soldier and historian, a devoted follower of Socrates, who recorded his teacher’s words in the Memorabilia.",
+        "answer": "XENOPHON",
+        "takeChar": "X",
+        "hint": "Begins with X; a pupil of Socrates.",
+        "reveal": "It is XENOPHON."
+      },
+      {
+        "title": "Mere Belief",
+        "prompt": "In Plato, mere belief or appearance (doxa), as opposed to true and certain knowledge.",
+        "answer": "OPINION",
+        "takeChar": "O",
+        "hint": "Everyone has one; few have knowledge.",
+        "reveal": "It is OPINION."
+      },
+      {
+        "title": "Aristotle’s Excellence",
+        "prompt": "A fixed shift through the alphabet hides the excellence of character Aristotle placed at the golden mean. Crack it: E R A C D N",
+        "answer": "VIRTUE",
+        "takeChar": "V",
+        "hint": "Courage and temperance are examples; find the shift.",
+        "reveal": "E R A C D N shifted back 9 spells VIRTUE."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Hold the alphabet up to a mirror — the first letter wears the mask of the last (A↔Z, B↔Y) — and reflect the six letters.",
+      "prompt": "Reflect them to name the Delphic seer who called Socrates the wisest of men.",
+      "answer": "ORACLE",
+      "hint": "A prophet who answers questions; mirror A↔Z."
+    }
+  }
+]
