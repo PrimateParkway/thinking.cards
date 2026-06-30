@@ -59,6 +59,19 @@ export interface KnightsProgress {
   bestTimes?: Record<number, number>;
 }
 
+export interface EscapeRoomState {
+  stations: Record<number, string>;
+  final: string;
+}
+
+export interface EscapeProgress {
+  index: number;
+  roomStates: Record<number, EscapeRoomState>;
+  solvedPuzzles: number[];
+  gaveUpPuzzles?: number[];
+  bestTimes?: Record<number, number>;
+}
+
 @Injectable({ providedIn: 'root' })
 export class UserStateService {
   private auth = inject(AuthService);
@@ -70,6 +83,7 @@ export class UserStateService {
   private nonogramUnsub: Unsubscribe | null = null;
   private codebreakerUnsub: Unsubscribe | null = null;
   private knightsUnsub: Unsubscribe | null = null;
+  private escapeUnsub: Unsubscribe | null = null;
 
   readonly allQuizProgress = signal<Map<string, QuizProgress>>(new Map());
   readonly allMatrixProgress = signal<Map<string, MatrixProgress>>(new Map());
@@ -77,6 +91,7 @@ export class UserStateService {
   readonly allNonogramProgress = signal<Map<string, NonogramProgress>>(new Map());
   readonly allCodebreakerProgress = signal<Map<string, CodebreakerProgress>>(new Map());
   readonly allKnightsProgress = signal<Map<string, KnightsProgress>>(new Map());
+  readonly allEscapeProgress = signal<Map<string, EscapeProgress>>(new Map());
 
   constructor() {
     effect(() => {
@@ -89,6 +104,7 @@ export class UserStateService {
         this.allNonogramProgress.set(new Map());
         this.allCodebreakerProgress.set(new Map());
         this.allKnightsProgress.set(new Map());
+        this.allEscapeProgress.set(new Map());
         return;
       }
 
@@ -143,6 +159,15 @@ export class UserStateService {
           const m = new Map<string, KnightsProgress>();
           for (const d of snap.docs) m.set(d.id, d.data() as KnightsProgress);
           this.allKnightsProgress.set(m);
+        });
+      });
+
+      const escapeCol = collection(this.db, `users/${user.uid}/escapeState`);
+      this.escapeUnsub = onSnapshot(escapeCol, (snap) => {
+        this.zone.run(() => {
+          const m = new Map<string, EscapeProgress>();
+          for (const d of snap.docs) m.set(d.id, d.data() as EscapeProgress);
+          this.allEscapeProgress.set(m);
         });
       });
     });
@@ -267,6 +292,23 @@ export class UserStateService {
     return snap.exists() ? (snap.data() as KnightsProgress) : null;
   }
 
+  // ── Escape Room Progress ────────────────────────────────────────
+
+  saveEscapeProgress(categoryId: string, data: EscapeProgress): void {
+    const user = this.auth.currentUser();
+    if (!user) return;
+    const ref = doc(this.db, `users/${user.uid}/escapeState`, categoryId);
+    setDoc(ref, { ...data, updatedAt: serverTimestamp() }).catch(() => {});
+  }
+
+  async loadEscapeProgress(categoryId: string): Promise<EscapeProgress | null> {
+    const user = this.auth.currentUser();
+    if (!user) return null;
+    const ref = doc(this.db, `users/${user.uid}/escapeState`, categoryId);
+    const snap = await getDoc(ref);
+    return snap.exists() ? (snap.data() as EscapeProgress) : null;
+  }
+
   private cleanup(): void {
     this.quizUnsub?.();
     this.quizUnsub = null;
@@ -280,5 +322,7 @@ export class UserStateService {
     this.codebreakerUnsub = null;
     this.knightsUnsub?.();
     this.knightsUnsub = null;
+    this.escapeUnsub?.();
+    this.escapeUnsub = null;
   }
 }

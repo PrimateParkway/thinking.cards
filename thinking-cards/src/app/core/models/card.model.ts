@@ -15,6 +15,22 @@ export interface KnightsCharacter {
   statements: string[];
 }
 
+export interface EscapeStation {
+  title: string;
+  prompt: string;
+  answer: string;
+  takeChar: string;
+  hint?: string;
+  reveal?: string;
+}
+
+export interface EscapeFinal {
+  prompt: string;
+  rule: string;
+  answer: string;
+  hint?: string;
+}
+
 export interface Card {
   id: string;
   questionText: string;
@@ -41,4 +57,7 @@ export interface Card {
   knightsExplanation?: string[];
   knightsTagLabel?: string;
   knightsTagSolution?: Record<string, string>;
+  escapeIntro?: string;
+  escapeStations?: EscapeStation[];
+  escapeFinal?: EscapeFinal;
 }

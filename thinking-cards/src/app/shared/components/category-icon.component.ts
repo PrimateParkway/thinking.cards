@@ -125,6 +125,13 @@ function hashCode(str: string): number {
           <line x1="24" y1="6" x2="24" y2="42.5" stroke="currentColor" stroke-width="2" opacity="0.55"/>
         }
 
+        @case ('escape-rooms') {
+          <!-- Door with a keyhole -->
+          <rect x="12" y="6" width="24" height="36" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+          <circle cx="29" cy="23" r="2.4" fill="currentColor"/>
+          <path d="M27.8 24.5 L27 30 L31 30 L30.2 24.5 Z" fill="currentColor"/>
+        }
+
         @case ('favorites') {
           <!-- Heart icon -->
           <path d="M24 39.7l-2.1-1.9C12.3 29.2 6 23.5 6 16.5 6 10.7 10.7 6 16.5 6c3.2 0 6.3 1.5 8.3 3.9L24 9l-.8-.9C25.2 7.5 28.3 6 31.5 6 37.3 6 42 10.7 42 16.5c0 7-6.3 12.7-15.9 21.3L24 39.7z"

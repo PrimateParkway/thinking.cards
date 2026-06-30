@@ -141,6 +141,15 @@ export const routes: Routes = [
     data: { animation: 'knights' },
   },
   {
+    path: 'escape/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/escape/escape.component').then(
+        (m) => m.EscapeComponent
+      ),
+    data: { animation: 'escape' },
+  },
+  {
     path: 'badges',
     canActivate: [authGuard],
     loadComponent: () =>

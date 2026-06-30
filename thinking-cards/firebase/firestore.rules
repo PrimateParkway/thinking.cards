@@ -38,7 +38,7 @@ service cloud.firestore {
         && request.resource.data.color is string
         && request.resource.data.color.matches('^#[0-9A-Fa-f]{6}$')
         && request.resource.data.order is int
-        && (!('type' in request.resource.data) || request.resource.data.type in ['standard', 'quiz', 'matrix', 'cryptogram', 'nonogram', 'codebreaker', 'knights']);
+        && (!('type' in request.resource.data) || request.resource.data.type in ['standard', 'quiz', 'matrix', 'cryptogram', 'nonogram', 'codebreaker', 'knights', 'escape']);
 
       allow update: if isAdmin()
         && hasOnly(['name', 'description', 'color', 'order', 'type'])
@@ -50,7 +50,7 @@ service cloud.firestore {
         && request.resource.data.color is string
         && request.resource.data.color.matches('^#[0-9A-Fa-f]{6}$')
         && request.resource.data.order is int
-        && (!('type' in request.resource.data) || request.resource.data.type in ['standard', 'quiz', 'matrix', 'cryptogram', 'nonogram', 'codebreaker', 'knights']);
+        && (!('type' in request.resource.data) || request.resource.data.type in ['standard', 'quiz', 'matrix', 'cryptogram', 'nonogram', 'codebreaker', 'knights', 'escape']);
 
       allow delete: if isAdmin();
     }
@@ -61,7 +61,7 @@ service cloud.firestore {
 
       allow create: if isAdmin()
         && hasAll(['questionText', 'categoryId', 'cardNumber'])
-        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution'])
+        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution', 'escapeIntro', 'escapeStations', 'escapeFinal'])
         && request.resource.data.questionText is string
         && request.resource.data.questionText.size() > 0
         && request.resource.data.questionText.size() <= 2000
@@ -74,7 +74,7 @@ service cloud.firestore {
         && (!('explanation' in request.resource.data) || request.resource.data.explanation is string);
 
       allow update: if isAdmin()
-        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution'])
+        && hasOnly(['questionText', 'categoryId', 'cardNumber', 'options', 'correctIndex', 'explanation', 'matrixGroups', 'matrixClues', 'matrixSolution', 'matrixScenario', 'matrixExplanation', 'cryptogramPlaintext', 'cryptogramAuthor', 'difficulty', 'nonogramSolution', 'nonogramCols', 'codebreakerAnswer', 'codebreakerClues', 'knightsScenario', 'knightsCharacters', 'knightsSolution', 'knightsExplanation', 'knightsTagLabel', 'knightsTagSolution', 'escapeIntro', 'escapeStations', 'escapeFinal'])
         && request.resource.data.questionText is string
         && request.resource.data.questionText.size() > 0
         && request.resource.data.questionText.size() <= 2000
@@ -196,6 +196,11 @@ service cloud.firestore {
 
     // ── Knights & Knaves State (knights progress) ─────────────────
     match /users/{userId}/knightsState/{categoryId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // ── Escape Room State (escape progress) ───────────────────────
+    match /users/{userId}/escapeState/{categoryId} {
       allow read, write: if isOwner(userId);
     }
 

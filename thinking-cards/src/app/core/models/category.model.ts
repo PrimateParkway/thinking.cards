@@ -5,5 +5,5 @@ export interface Category {
   icon?: string;
   color: string;
   order: number;
-  type?: 'standard' | 'quiz' | 'matrix' | 'cryptogram' | 'nonogram' | 'codebreaker' | 'knights';
+  type?: 'standard' | 'quiz' | 'matrix' | 'cryptogram' | 'nonogram' | 'codebreaker' | 'knights' | 'escape';
 }

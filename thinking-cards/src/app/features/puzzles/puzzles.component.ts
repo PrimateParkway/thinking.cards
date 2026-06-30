@@ -81,7 +81,7 @@ export class PuzzlesComponent {
   puzzleCategories = computed(() =>
     this.allCategories().filter(c =>
       c.type === 'matrix' || c.type === 'cryptogram' || c.type === 'nonogram'
-      || c.type === 'codebreaker' || c.type === 'knights'
+      || c.type === 'codebreaker' || c.type === 'knights' || c.type === 'escape'
     )
   );
 
@@ -114,6 +114,13 @@ export class PuzzlesComponent {
       const total = this.puzzleCardCountFor(cat.id);
       return total ? Math.round((solved / total) * 100) : 0;
     }
+    if (cat.type === 'escape') {
+      const data = this.userState.allEscapeProgress().get(cat.id);
+      if (!data) return 0;
+      const solved = data.solvedPuzzles?.length ?? 0;
+      const total = this.puzzleCardCountFor(cat.id);
+      return total ? Math.round((solved / total) * 100) : 0;
+    }
     const data = this.userState.allMatrixProgress().get(cat.id);
     if (!data) return 0;
     const solved = data.solvedPuzzles?.length ?? 0;
@@ -140,6 +147,10 @@ export class PuzzlesComponent {
     }
     if (cat.type === 'knights') {
       this.router.navigate(['/knights', cat.id]);
+      return;
+    }
+    if (cat.type === 'escape') {
+      this.router.navigate(['/escape', cat.id]);
       return;
     }
     this.router.navigate(['/matrix', cat.id]);
