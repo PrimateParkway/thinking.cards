@@ -46,7 +46,7 @@
     }
   },
   {
-    "cardNumber": 3,
+    "cardNumber": 4,
     "difficulty": "Medium",
     "questionText": "The Cartographer's Study",
     "escapeIntro": "The map-maker's study locks tight at nightfall. Five charts each yield a letter — but the lock won't take them in order. Gather them, then set them straight.",
@@ -100,7 +100,7 @@
     }
   },
   {
-    "cardNumber": 4,
+    "cardNumber": 6,
     "difficulty": "Hard",
     "questionText": "The Logician's Workshop",
     "escapeIntro": "You're sealed inside the logician's workshop. Six puzzles each conceal a letter, scattered out of order — and not all of them give up their secret plainly.",
@@ -162,7 +162,7 @@
     }
   },
   {
-    "cardNumber": 5,
+    "cardNumber": 8,
     "difficulty": "Extreme",
     "questionText": "The Oracle's Antechamber",
     "escapeIntro": "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
@@ -221,6 +221,230 @@
       "prompt": "Reflect them to name the Delphic seer who called Socrates the wisest of men.",
       "answer": "ORACLE",
       "hint": "A prophet who answers questions; mirror A↔Z."
+    }
+  },
+  {
+    "cardNumber": 3,
+    "difficulty": "Easy",
+    "questionText": "The Numbered Safe",
+    "escapeIntro": "A small iron safe sits on the desk, its four dials waiting. Solve each clue for a single digit, then read them top to bottom.",
+    "escapeStations": [
+      {
+        "title": "The Chiselled Numeral",
+        "prompt": "What digit is the Roman numeral III, carved above the door?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Three strokes.",
+        "reveal": "III is 3."
+      },
+      {
+        "title": "The Nine Sisters",
+        "prompt": "How many Muses did the ancient Greeks say inspired the arts and sciences?",
+        "answer": "9",
+        "takeChar": "9",
+        "hint": "One more than eight.",
+        "reveal": "There were 9 Muses."
+      },
+      {
+        "title": "The Ledger Sum",
+        "prompt": "What is 5 + 4 - 7?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "Work left to right.",
+        "reveal": "5 + 4 - 7 = 2."
+      },
+      {
+        "title": "Four Corners",
+        "prompt": "How many sides does a square have?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "Count the corners.",
+        "reveal": "A square has 4 sides."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Read the four digits from top to bottom.",
+      "prompt": "Enter the four-digit combination.",
+      "answer": "3924",
+      "hint": "Just the digits, in order."
+    }
+  },
+  {
+    "cardNumber": 5,
+    "difficulty": "Medium",
+    "questionText": "The Sorting Vault",
+    "escapeIntro": "Five tumblers each hide a digit — but this vault only opens when the digits are set in order. Find all five, then line them up from smallest to largest.",
+    "escapeStations": [
+      {
+        "title": "The Binary Plate",
+        "prompt": "Convert the binary number 1000 to a decimal digit, etched on a brass plate.",
+        "answer": "8",
+        "takeChar": "8",
+        "hint": "Powers of two: 8, 4, 2, 1.",
+        "reveal": "Binary 1000 is 8."
+      },
+      {
+        "title": "The Three Graces",
+        "prompt": "How many Graces (Charites) attended Aphrodite in Greek myth?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "A famous trio.",
+        "reveal": "There were 3 Graces."
+      },
+      {
+        "title": "The Cube",
+        "prompt": "How many faces does a cube have?",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "Like a die.",
+        "reveal": "A cube has 6 faces."
+      },
+      {
+        "title": "The Idle Number",
+        "prompt": "Multiplying any number by this leaves it completely unchanged.",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "The multiplicative identity.",
+        "reveal": "It is 1."
+      },
+      {
+        "title": "The Classical Elements",
+        "prompt": "Empedocles taught that all things are made from this many elements: earth, water, air and fire.",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "Earth, water, air, fire.",
+        "reveal": "There are 4 elements."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The five digits come out jumbled — arrange them from smallest to largest.",
+      "prompt": "Enter the five digits in ascending order.",
+      "answer": "13468",
+      "hint": "Smallest digit first."
+    }
+  },
+  {
+    "cardNumber": 7,
+    "difficulty": "Hard",
+    "questionText": "The Cryptic Dial",
+    "escapeIntro": "Six dials, and a note: 'I have turned every digit forward by two.' Solve each clue, then wind the whole code back to where it began.",
+    "escapeStations": [
+      {
+        "title": "The Binary Cog",
+        "prompt": "Convert the binary number 101 to a decimal digit, stamped inside the case.",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "Powers of two: 4 + 1.",
+        "reveal": "Binary 101 is 5."
+      },
+      {
+        "title": "The Three Fates",
+        "prompt": "How many Fates (Moirai) spun, measured and cut the thread of life in Greek myth?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Clotho, Lachesis, Atropos.",
+        "reveal": "There were 3 Fates."
+      },
+      {
+        "title": "Six Walls",
+        "prompt": "How many sides does a hexagon have?",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "Like a honeycomb cell.",
+        "reveal": "A hexagon has 6 sides."
+      },
+      {
+        "title": "The Trivium",
+        "prompt": "The Trivium of the classical liberal arts — grammar, logic and rhetoric — comprises how many subjects?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Grammar, logic, rhetoric.",
+        "reveal": "The Trivium has 3 arts."
+      },
+      {
+        "title": "The Week",
+        "prompt": "How many days are there in a week?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "Monday through Sunday.",
+        "reveal": "There are 7 days."
+      },
+      {
+        "title": "The Lone Star",
+        "prompt": "How many stars sit at the centre of our solar system?",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "Look up by day.",
+        "reveal": "Just 1 — the Sun."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Every digit was turned forward by 2 (past 9 rolls back to 0). Wind each digit back by 2.",
+      "prompt": "Enter the six-digit code once you've wound it back.",
+      "answer": "314159",
+      "hint": "The code is a famous circle constant — 3.14159…"
+    }
+  },
+  {
+    "cardNumber": 9,
+    "difficulty": "Extreme",
+    "questionText": "The Golden Lock",
+    "escapeIntro": "The final lock bears no instructions — only a note: 'Every digit has stepped forward by the same secret amount.' Solve the six clues, discover the step, and wind them all back.",
+    "escapeStations": [
+      {
+        "title": "Aristotle's Causes",
+        "prompt": "Aristotle held that a full explanation of anything needs how many kinds of cause — material, formal, efficient and final?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "Material, formal, efficient, final.",
+        "reveal": "There are 4 causes."
+      },
+      {
+        "title": "The Binary Seal",
+        "prompt": "Convert the binary number 1001 to a decimal digit, pressed into the wax.",
+        "answer": "9",
+        "takeChar": "9",
+        "hint": "Powers of two: 8 + 1.",
+        "reveal": "Binary 1001 is 9."
+      },
+      {
+        "title": "The Square",
+        "prompt": "What is 2 × 2?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "A number times itself.",
+        "reveal": "2 × 2 = 4."
+      },
+      {
+        "title": "The Single Stroke",
+        "prompt": "What digit is the Roman numeral I, the smallest numeral?",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "One line.",
+        "reveal": "I is 1."
+      },
+      {
+        "title": "Three Angles",
+        "prompt": "How many sides does a triangle have?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Count the corners.",
+        "reveal": "A triangle has 3 sides."
+      },
+      {
+        "title": "The Perfect Number",
+        "prompt": "The Pythagoreans prized this smallest \"perfect number\", whose divisors 1, 2 and 3 add up to itself.",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "1 + 2 + 3 = it.",
+        "reveal": "It is 6."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Every digit has stepped forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.",
+      "prompt": "Enter the six-digit code once you've found the step and reversed it.",
+      "answer": "161803",
+      "hint": "The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…"
     }
   }
 ]

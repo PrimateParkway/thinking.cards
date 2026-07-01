@@ -34,7 +34,7 @@ async function run() {
     console.log(`  + #${r.cardNumber} ${r.difficulty.padEnd(7)} "${r.questionText}" → ${r.escapeFinal.answer}`);
   }
   await batch.commit();
-  console.log('\n✅  Escape Rooms updated to 4 rooms.');
+  console.log(`\n✅  Escape Rooms updated to ${ROOMS.length} rooms.`);
   process.exit(0);
 }
 

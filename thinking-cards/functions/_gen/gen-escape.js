@@ -61,10 +61,41 @@ function morseS(title, plain, clue, hint) {
     answer: plain, takeChar: take(plain), hint, reveal: `The Morse spells ${plain.toUpperCase()}.` };
 }
 
+// ── Number-station builders (each yields one digit) ─────────────
+function calc(expr) {
+  if (!/^[-0-9+*/() ]+$/.test(expr)) throw new Error('bad expr ' + expr);
+  // eslint-disable-next-line no-new-func
+  return Function('return (' + expr + ')')();
+}
+function toBinary(n) { return n.toString(2); }
+function toRoman(n) {
+  const map = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+  let r = ''; for (const [v, s] of map) while (n >= v) { r += s; n -= v; } return r;
+}
+function numStation(title, kind, prompt, digit, hint, reveal) {
+  if (digit < 0 || digit > 9) throw new Error(`digit out of range: ${digit}`);
+  return { title, kind, prompt, answer: String(digit), takeChar: String(digit), hint, reveal };
+}
+const numRiddle = (title, prompt, digit, hint, reveal) => numStation(title, 'number', prompt, digit, hint, reveal);
+function binaryS(title, value, clue, hint) {
+  return numStation(title, 'binary', `Convert the binary number ${toBinary(value)} to a decimal digit${clue ? ', ' + clue : ''}.`, value, hint, `Binary ${toBinary(value)} is ${value}.`);
+}
+function romanS(title, value, clue, hint) {
+  return numStation(title, 'roman', `What digit is the Roman numeral ${toRoman(value)}${clue ? ', ' + clue : ''}?`, value, hint, `${toRoman(value)} is ${value}.`);
+}
+function arithS(title, expr, hint) {
+  const v = calc(expr);
+  return numStation(title, 'arithmetic', `What is ${expr.replace(/\*/g, '×')}?`, v, hint, `${expr.replace(/\*/g, '×')} = ${v}.`);
+}
+const sortDigits = s => norm(s).split('').sort().join('');
+const shiftDigits = (s, k) => norm(s).split('').map(c => String((Number(c) + k + 10) % 10)).join('');
+
 // ── Final transforms ────────────────────────────────────────────
 function finalDirect(answer, rule, hint) { return { kind: 'direct', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 function finalAnagram(answer, rule, hint) { return { kind: 'anagram', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 function finalAtbash(answer, rule, hint) { return { kind: 'atbash', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
+function finalSort(answer, rule, hint) { return { kind: 'sortAsc', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
+function finalDigitShift(answer, shift, told, rule, hint) { return { kind: 'digitShift', shift, told, rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 
 // ── Rooms ───────────────────────────────────────────────────────
 const ROOMS = [
@@ -81,7 +112,7 @@ const ROOMS = [
       { prompt: 'Spell the word for a wise thinker that unlocks the study.', hint: 'A wise one — also a herb.' }),
   },
   {
-    cardNumber: 3, difficulty: 'Medium', questionText: "The Cartographer's Study",
+    cardNumber: 4, difficulty: 'Medium', questionText: "The Cartographer's Study",
     intro: "The map-maker's study locks tight at nightfall. Five charts each yield a letter — but the lock won't take them in order. Gather them, then set them straight.",
     stations: [
       anagramS('Narrow Waters', 'TRAITS', 'STRAIT', 'to a narrow channel of water between two seas.', 'A narrow sea passage.'),
@@ -94,7 +125,7 @@ const ROOMS = [
       { prompt: 'Unscramble them to name the book every map-maker binds together — and the Titan who holds up the sky.', hint: 'A book of maps.' }),
   },
   {
-    cardNumber: 4, difficulty: 'Hard', questionText: "The Logician's Workshop",
+    cardNumber: 6, difficulty: 'Hard', questionText: "The Logician's Workshop",
     intro: "You're sealed inside the logician's workshop. Six puzzles each conceal a letter, scattered out of order — and not all of them give up their secret plainly.",
     stations: [
       anagramS('A Question of Character', 'MOLAR', 'MORAL', 'to a word meaning ethical — concerning right conduct.', 'The opposite of immoral.'),
@@ -108,7 +139,7 @@ const ROOMS = [
       { prompt: 'Unscramble them to name a baffling riddle (and a famous WWII cipher machine).', hint: 'A puzzle; also a code device.' }),
   },
   {
-    cardNumber: 5, difficulty: 'Extreme', questionText: "The Oracle's Antechamber",
+    cardNumber: 8, difficulty: 'Extreme', questionText: "The Oracle's Antechamber",
     intro: "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
     stations: [
       definition('The Art of Argument', 'The branch of philosophy concerned with valid reasoning — distinguishing sound arguments from fallacies.', 'LOGIC', 'Aristotle is its father.', 'It is LOGIC.'),
@@ -120,6 +151,61 @@ const ROOMS = [
     ],
     final: finalAtbash('ORACLE', 'Hold the alphabet up to a mirror — the first letter wears the mask of the last (A↔Z, B↔Y) — and reflect the six letters.',
       { prompt: 'Reflect them to name the Delphic seer who called Socrates the wisest of men.', hint: 'A prophet who answers questions; mirror A↔Z.' }),
+  },
+
+  // ── Number-lock rooms (one per level) ─────────────────────────
+  {
+    cardNumber: 3, difficulty: 'Easy', questionText: 'The Numbered Safe',
+    intro: "A small iron safe sits on the desk, its four dials waiting. Solve each clue for a single digit, then read them top to bottom.",
+    stations: [
+      romanS("The Chiselled Numeral", 3, 'carved above the door', 'Three strokes.'),
+      numRiddle('The Nine Sisters', 'How many Muses did the ancient Greeks say inspired the arts and sciences?', 9, 'One more than eight.', 'There were 9 Muses.'),
+      arithS('The Ledger Sum', '5 + 4 - 7', 'Work left to right.'),
+      numRiddle('Four Corners', 'How many sides does a square have?', 4, 'Count the corners.', 'A square has 4 sides.'),
+    ],
+    final: finalDirect('3924', 'Read the four digits from top to bottom.',
+      { prompt: 'Enter the four-digit combination.', hint: 'Just the digits, in order.' }),
+  },
+  {
+    cardNumber: 5, difficulty: 'Medium', questionText: 'The Sorting Vault',
+    intro: "Five tumblers each hide a digit — but this vault only opens when the digits are set in order. Find all five, then line them up from smallest to largest.",
+    stations: [
+      binaryS('The Binary Plate', 8, 'etched on a brass plate', 'Powers of two: 8, 4, 2, 1.'),
+      numRiddle('The Three Graces', 'How many Graces (Charites) attended Aphrodite in Greek myth?', 3, 'A famous trio.', 'There were 3 Graces.'),
+      numRiddle('The Cube', 'How many faces does a cube have?', 6, 'Like a die.', 'A cube has 6 faces.'),
+      numRiddle('The Idle Number', 'Multiplying any number by this leaves it completely unchanged.', 1, 'The multiplicative identity.', 'It is 1.'),
+      numRiddle('The Classical Elements', 'Empedocles taught that all things are made from this many elements: earth, water, air and fire.', 4, 'Earth, water, air, fire.', 'There are 4 elements.'),
+    ],
+    final: finalSort('13468', 'The five digits come out jumbled — arrange them from smallest to largest.',
+      { prompt: 'Enter the five digits in ascending order.', hint: 'Smallest digit first.' }),
+  },
+  {
+    cardNumber: 7, difficulty: 'Hard', questionText: 'The Cryptic Dial',
+    intro: "Six dials, and a note: 'I have turned every digit forward by two.' Solve each clue, then wind the whole code back to where it began.",
+    stations: [
+      binaryS('The Binary Cog', 5, 'stamped inside the case', 'Powers of two: 4 + 1.'),
+      numRiddle('The Three Fates', 'How many Fates (Moirai) spun, measured and cut the thread of life in Greek myth?', 3, 'Clotho, Lachesis, Atropos.', 'There were 3 Fates.'),
+      numRiddle('Six Walls', 'How many sides does a hexagon have?', 6, 'Like a honeycomb cell.', 'A hexagon has 6 sides.'),
+      numRiddle('The Trivium', 'The Trivium of the classical liberal arts — grammar, logic and rhetoric — comprises how many subjects?', 3, 'Grammar, logic, rhetoric.', 'The Trivium has 3 arts.'),
+      numRiddle('The Week', 'How many days are there in a week?', 7, 'Monday through Sunday.', 'There are 7 days.'),
+      numRiddle('The Lone Star', 'How many stars sit at the centre of our solar system?', 1, 'Look up by day.', 'Just 1 — the Sun.'),
+    ],
+    final: finalDigitShift('314159', 2, true, 'Every digit was turned forward by 2 (past 9 rolls back to 0). Wind each digit back by 2.',
+      { prompt: "Enter the six-digit code once you've wound it back.", hint: 'The code is a famous circle constant — 3.14159…' }),
+  },
+  {
+    cardNumber: 9, difficulty: 'Extreme', questionText: 'The Golden Lock',
+    intro: "The final lock bears no instructions — only a note: 'Every digit has stepped forward by the same secret amount.' Solve the six clues, discover the step, and wind them all back.",
+    stations: [
+      numRiddle("Aristotle's Causes", 'Aristotle held that a full explanation of anything needs how many kinds of cause — material, formal, efficient and final?', 4, 'Material, formal, efficient, final.', 'There are 4 causes.'),
+      binaryS('The Binary Seal', 9, 'pressed into the wax', 'Powers of two: 8 + 1.'),
+      arithS('The Square', '2 * 2', 'A number times itself.'),
+      romanS('The Single Stroke', 1, 'the smallest numeral', 'One line.'),
+      numRiddle('Three Angles', 'How many sides does a triangle have?', 3, 'Count the corners.', 'A triangle has 3 sides.'),
+      numRiddle('The Perfect Number', 'The Pythagoreans prized this smallest "perfect number", whose divisors 1, 2 and 3 add up to itself.', 6, '1 + 2 + 3 = it.', 'It is 6.'),
+    ],
+    final: finalDigitShift('161803', 3, false, 'Every digit has stepped forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.',
+      { prompt: "Enter the six-digit code once you've found the step and reversed it.", hint: 'The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…' }),
   },
 ];
 
@@ -134,6 +220,8 @@ function check(room) {
     case 'anagram': ok = multiset(asm) === multiset(want); detail = `${asm} ~ ${want} (anagram)`; break;
     case 'atbash': ok = atbash(asm) === want; detail = `atbash(${asm}) = ${atbash(asm)} == ${want}`; break;
     case 'caesar': ok = asm === caesar(want, room.final.shift); detail = `${asm} decodes to ${want}`; break;
+    case 'sortAsc': ok = sortDigits(asm) === want; detail = `sort(${asm}) = ${sortDigits(asm)} == ${want}`; break;
+    case 'digitShift': ok = shiftDigits(want, room.final.shift) === asm; detail = `shift(${want}, +${room.final.shift}) = ${shiftDigits(want, room.final.shift)} == assembled ${asm}`; break;
     default: ok = false; detail = 'unknown final kind';
   }
   return { ok, asm, detail };
