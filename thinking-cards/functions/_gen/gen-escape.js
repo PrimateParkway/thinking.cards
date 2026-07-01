@@ -2,7 +2,7 @@
  * Escape-room authoring + verifier.
  *
  * A library of station "types" (anagram, Caesar known/unknown shift, Atbash,
- * Morse, riddle, trivia, definition) is mixed differently across rooms so they
+ * A1Z26 letter-numbers, riddle, trivia, definition) is mixed differently across rooms so they
  * don't feel repetitive. Each room's stations each contribute one letter; those
  * letters combine via the room's FINAL transform (direct / anagram-scramble /
  * cipher) into the password. This script computes every cipher from plaintext
@@ -21,16 +21,14 @@ function caesar(text, shift) {
 function atbash(text) {
   return text.toUpperCase().replace(/[A-Z]/g, c => A[25 - A.indexOf(c)]);
 }
-const MORSE = { A: '.-', B: '-...', C: '-.-.', D: '-..', E: '.', F: '..-.', G: '--.', H: '....', I: '..', J: '.---', K: '-.-', L: '.-..', M: '--', N: '-.', O: '---', P: '.--.', Q: '--.-', R: '.-.', S: '...', T: '-', U: '..-', V: '...-', W: '.--', X: '-..-', Y: '-.--', Z: '--..' };
-function morse(text) { return text.toUpperCase().split('').map(c => MORSE[c] || '?').join(' / '); }
+function a1z26(text) { return text.toUpperCase().split('').filter(c => /[A-Z]/.test(c)).map(c => A.indexOf(c) + 1).join(' '); }
 const spaced = s => s.toUpperCase().split('').join(' ');
 const norm = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 const multiset = s => norm(s).split('').sort().join('');
 
 // ── "How it works" primers (added to hints so a player who doesn't
 //    know the notation isn't simply stuck) ───────────────────────
-const MORSE_KEY = Object.entries(MORSE).map(([l, c]) => `${l}=${c}`).join('  ');
-const MORSE_PRIMER = `How Morse works: each letter is a short group of dots and dashes, and here the groups are split by " / ". Decode each group with this key, then read the letters in order.  ${MORSE_KEY}`;
+const A1Z26_PRIMER = 'How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order.';
 const BINARY_PRIMER = 'How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13.';
 const ROMAN_PRIMER = 'How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6).';
 const CAESAR_CRACK_PRIMER = 'How to crack it: every letter has moved the same number of steps along the alphabet. Try shifting each letter back by 1, then 2, then 3… until the letters read as a real word.';
@@ -67,9 +65,10 @@ function atbashS(title, plain, told, clue, hint) {
   return { title, kind: 'atbash', prompt, answer: plain, takeChar: take(plain), hint,
     reveal: `Mirroring ${spaced(cipher)} (A↔Z) spells ${plain.toUpperCase()}.` };
 }
-function morseS(title, plain, clue, hint) {
-  return { title, kind: 'morse', prompt: `Decode the Morse to find ${clue}: ${morse(plain)}`,
-    answer: plain, takeChar: take(plain), hint: join(MORSE_PRIMER, hint), reveal: `The Morse spells ${plain.toUpperCase()}.` };
+function a1z26S(title, plain, clue, hint) {
+  return { title, kind: 'a1z26', prompt: `A code of numbers, each the position of a letter in the alphabet — decode ${clue}: ${a1z26(plain)}`,
+    answer: plain, takeChar: take(plain), hint: join(A1Z26_PRIMER, hint),
+    reveal: `${a1z26(plain)} reads (1=A, 2=B…) as ${plain.toUpperCase()}.` };
 }
 
 // ── Number-station builders (each yields one digit) ─────────────
@@ -141,7 +140,7 @@ const ROOMS = [
     stations: [
       anagramS('A Question of Character', 'MOLAR', 'MORAL', 'to a word meaning ethical — concerning right conduct.', 'The opposite of immoral.'),
       riddle("The Bath-time Cry", 'Archimedes is said to have leapt from his bath shouting this word — Greek for "I have found it!" — on grasping how to measure volume.', 'EUREKA', 'A cry of sudden discovery.', 'He cried EUREKA.'),
-      morseS('The Tapped Direction', 'NORTH', 'the direction a compass needle seeks', 'A cardinal direction.'),
+      a1z26S('The Numbered Direction', 'NORTH', 'the direction a compass needle seeks', 'A cardinal direction.'),
       caesarS('Socrates’ Weapon', 'IRONY', 5, false, 'Socrates’ favourite tactic — feigning ignorance to expose another’s', 'A figure of speech; he pretended to know nothing.'),
       trivia('The Spinning Sphere', 'A spherical model of the Earth that sits on a desk and turns on its axis.', 'GLOBE', 'It spins on a stand.', 'It is a GLOBE.'),
       definition("Reason’s Starting Point", 'A statement accepted as self-evidently true, taken without proof as the foundation of a logical system.', 'AXIOM', 'Euclid began his geometry with these.', 'It is an AXIOM.'),
@@ -154,7 +153,7 @@ const ROOMS = [
     intro: "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
     stations: [
       definition('The Art of Argument', 'The branch of philosophy concerned with valid reasoning — distinguishing sound arguments from fallacies.', 'LOGIC', 'Aristotle is its father.', 'It is LOGIC.'),
-      morseS('The Perfect Form', 'IDEA', 'what Plato called the perfect, eternal Forms behind all things', 'A thought; Plato’s Forms.'),
+      a1z26S('The Perfect Form', 'IDEA', 'what Plato called the perfect, eternal Forms behind all things', 'A thought; Plato’s Forms.'),
       riddle('The Paradox-Maker', 'The philosopher of Elea famous for paradoxes of motion — Achilles can never catch the tortoise.', 'ZENO', 'Four letters; a Greek of Elea.', 'It is ZENO of Elea.'),
       riddle('The Loyal Student', 'A soldier and historian, a devoted follower of Socrates, who recorded his teacher’s words in the Memorabilia.', 'XENOPHON', 'Begins with X; a pupil of Socrates.', 'It is XENOPHON.'),
       definition('Mere Belief', 'In Plato, mere belief or appearance (doxa), as opposed to true and certain knowledge.', 'OPINION', 'Everyone has one; few have knowledge.', 'It is OPINION.'),

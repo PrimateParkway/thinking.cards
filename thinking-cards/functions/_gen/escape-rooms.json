@@ -122,12 +122,12 @@
         "reveal": "He cried EUREKA."
       },
       {
-        "title": "The Tapped Direction",
-        "prompt": "Decode the Morse to find the direction a compass needle seeks: -. / --- / .-. / - / ....",
+        "title": "The Numbered Direction",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode the direction a compass needle seeks: 14 15 18 20 8",
         "answer": "NORTH",
         "takeChar": "N",
-        "hint": "How Morse works: each letter is a short group of dots and dashes, and here the groups are split by \" / \". Decode each group with this key, then read the letters in order.  A=.-  B=-...  C=-.-.  D=-..  E=.  F=..-.  G=--.  H=....  I=..  J=.---  K=-.-  L=.-..  M=--  N=-.  O=---  P=.--.  Q=--.-  R=.-.  S=...  T=-  U=..-  V=...-  W=.--  X=-..-  Y=-.--  Z=--.. A cardinal direction.",
-        "reveal": "The Morse spells NORTH."
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. A cardinal direction.",
+        "reveal": "14 15 18 20 8 reads (1=A, 2=B…) as NORTH."
       },
       {
         "title": "Socrates’ Weapon",
@@ -177,11 +177,11 @@
       },
       {
         "title": "The Perfect Form",
-        "prompt": "Decode the Morse to find what Plato called the perfect, eternal Forms behind all things: .. / -.. / . / .-",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode what Plato called the perfect, eternal Forms behind all things: 9 4 5 1",
         "answer": "IDEA",
         "takeChar": "I",
-        "hint": "How Morse works: each letter is a short group of dots and dashes, and here the groups are split by \" / \". Decode each group with this key, then read the letters in order.  A=.-  B=-...  C=-.-.  D=-..  E=.  F=..-.  G=--.  H=....  I=..  J=.---  K=-.-  L=.-..  M=--  N=-.  O=---  P=.--.  Q=--.-  R=.-.  S=...  T=-  U=..-  V=...-  W=.--  X=-..-  Y=-.--  Z=--.. A thought; Plato’s Forms.",
-        "reveal": "The Morse spells IDEA."
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. A thought; Plato’s Forms.",
+        "reveal": "9 4 5 1 reads (1=A, 2=B…) as IDEA."
       },
       {
         "title": "The Paradox-Maker",
