@@ -27,6 +27,16 @@ const spaced = s => s.toUpperCase().split('').join(' ');
 const norm = s => (s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
 const multiset = s => norm(s).split('').sort().join('');
 
+// ── "How it works" primers (added to hints so a player who doesn't
+//    know the notation isn't simply stuck) ───────────────────────
+const MORSE_KEY = Object.entries(MORSE).map(([l, c]) => `${l}=${c}`).join('  ');
+const MORSE_PRIMER = `How Morse works: each letter is a short group of dots and dashes, and here the groups are split by " / ". Decode each group with this key, then read the letters in order.  ${MORSE_KEY}`;
+const BINARY_PRIMER = 'How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13.';
+const ROMAN_PRIMER = 'How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6).';
+const CAESAR_CRACK_PRIMER = 'How to crack it: every letter has moved the same number of steps along the alphabet. Try shifting each letter back by 1, then 2, then 3… until the letters read as a real word.';
+const CAESAR_BACK_PRIMER = 'To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A).';
+const join = (a, b) => (a && b) ? `${a} ${b}` : (a || b);
+
 // ── Station builders (each returns a card station object) ───────
 function take(answer, ch) { return ch || norm(answer)[0]; }
 const riddle = (title, prompt, answer, hint, reveal) =>
@@ -45,8 +55,9 @@ function caesarS(title, plain, shift, told, clue, hint) {
   const prompt = told
     ? `Shift each letter back ${shift} to read ${clue}: ${spaced(cipher)}`
     : `A fixed shift through the alphabet hides ${clue}. Crack it: ${spaced(cipher)}`;
+  const fullHint = told ? join(CAESAR_BACK_PRIMER, hint) : join(CAESAR_CRACK_PRIMER, hint);
   return { title, kind: told ? 'caesar' : 'caesar-unknown', prompt, answer: plain, takeChar: take(plain),
-    hint, reveal: `${spaced(cipher)} shifted back ${shift} spells ${plain.toUpperCase()}.` };
+    hint: fullHint, reveal: `${spaced(cipher)} shifted back ${shift} spells ${plain.toUpperCase()}.` };
 }
 function atbashS(title, plain, told, clue, hint) {
   const cipher = atbash(plain);
@@ -58,7 +69,7 @@ function atbashS(title, plain, told, clue, hint) {
 }
 function morseS(title, plain, clue, hint) {
   return { title, kind: 'morse', prompt: `Decode the Morse to find ${clue}: ${morse(plain)}`,
-    answer: plain, takeChar: take(plain), hint, reveal: `The Morse spells ${plain.toUpperCase()}.` };
+    answer: plain, takeChar: take(plain), hint: join(MORSE_PRIMER, hint), reveal: `The Morse spells ${plain.toUpperCase()}.` };
 }
 
 // ── Number-station builders (each yields one digit) ─────────────
@@ -78,10 +89,10 @@ function numStation(title, kind, prompt, digit, hint, reveal) {
 }
 const numRiddle = (title, prompt, digit, hint, reveal) => numStation(title, 'number', prompt, digit, hint, reveal);
 function binaryS(title, value, clue, hint) {
-  return numStation(title, 'binary', `Convert the binary number ${toBinary(value)} to a decimal digit${clue ? ', ' + clue : ''}.`, value, hint, `Binary ${toBinary(value)} is ${value}.`);
+  return numStation(title, 'binary', `Convert the binary number ${toBinary(value)} to a decimal digit${clue ? ', ' + clue : ''}.`, value, join(BINARY_PRIMER, hint), `Binary ${toBinary(value)} is ${value}.`);
 }
 function romanS(title, value, clue, hint) {
-  return numStation(title, 'roman', `What digit is the Roman numeral ${toRoman(value)}${clue ? ', ' + clue : ''}?`, value, hint, `${toRoman(value)} is ${value}.`);
+  return numStation(title, 'roman', `What digit is the Roman numeral ${toRoman(value)}${clue ? ', ' + clue : ''}?`, value, join(ROMAN_PRIMER, hint), `${toRoman(value)} is ${value}.`);
 }
 function arithS(title, expr, hint) {
   const v = calc(expr);

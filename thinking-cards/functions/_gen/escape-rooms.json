@@ -34,7 +34,7 @@
         "prompt": "Shift each letter back 3 to read the branch of philosophy about right and wrong: H W K L F V",
         "answer": "ETHICS",
         "takeChar": "E",
-        "hint": "Aristotle wrote one 'to Nicomachus'.",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Aristotle wrote one 'to Nicomachus'.",
         "reveal": "H W K L F V shifted back 3 spells ETHICS."
       }
     ],
@@ -72,7 +72,7 @@
         "prompt": "Shift each letter back 1 to read a ring-shaped coral island: B U P M M",
         "answer": "ATOLL",
         "takeChar": "A",
-        "hint": "A ring of coral.",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). A ring of coral.",
         "reveal": "B U P M M shifted back 1 spells ATOLL."
       },
       {
@@ -126,7 +126,7 @@
         "prompt": "Decode the Morse to find the direction a compass needle seeks: -. / --- / .-. / - / ....",
         "answer": "NORTH",
         "takeChar": "N",
-        "hint": "A cardinal direction.",
+        "hint": "How Morse works: each letter is a short group of dots and dashes, and here the groups are split by \" / \". Decode each group with this key, then read the letters in order.  A=.-  B=-...  C=-.-.  D=-..  E=.  F=..-.  G=--.  H=....  I=..  J=.---  K=-.-  L=.-..  M=--  N=-.  O=---  P=.--.  Q=--.-  R=.-.  S=...  T=-  U=..-  V=...-  W=.--  X=-..-  Y=-.--  Z=--.. A cardinal direction.",
         "reveal": "The Morse spells NORTH."
       },
       {
@@ -134,7 +134,7 @@
         "prompt": "A fixed shift through the alphabet hides Socrates’ favourite tactic — feigning ignorance to expose another’s. Crack it: N W T S D",
         "answer": "IRONY",
         "takeChar": "I",
-        "hint": "A figure of speech; he pretended to know nothing.",
+        "hint": "How to crack it: every letter has moved the same number of steps along the alphabet. Try shifting each letter back by 1, then 2, then 3… until the letters read as a real word. A figure of speech; he pretended to know nothing.",
         "reveal": "N W T S D shifted back 5 spells IRONY."
       },
       {
@@ -180,7 +180,7 @@
         "prompt": "Decode the Morse to find what Plato called the perfect, eternal Forms behind all things: .. / -.. / . / .-",
         "answer": "IDEA",
         "takeChar": "I",
-        "hint": "A thought; Plato’s Forms.",
+        "hint": "How Morse works: each letter is a short group of dots and dashes, and here the groups are split by \" / \". Decode each group with this key, then read the letters in order.  A=.-  B=-...  C=-.-.  D=-..  E=.  F=..-.  G=--.  H=....  I=..  J=.---  K=-.-  L=.-..  M=--  N=-.  O=---  P=.--.  Q=--.-  R=.-.  S=...  T=-  U=..-  V=...-  W=.--  X=-..-  Y=-.--  Z=--.. A thought; Plato’s Forms.",
         "reveal": "The Morse spells IDEA."
       },
       {
@@ -212,7 +212,7 @@
         "prompt": "A fixed shift through the alphabet hides the excellence of character Aristotle placed at the golden mean. Crack it: E R A C D N",
         "answer": "VIRTUE",
         "takeChar": "V",
-        "hint": "Courage and temperance are examples; find the shift.",
+        "hint": "How to crack it: every letter has moved the same number of steps along the alphabet. Try shifting each letter back by 1, then 2, then 3… until the letters read as a real word. Courage and temperance are examples; find the shift.",
         "reveal": "E R A C D N shifted back 9 spells VIRTUE."
       }
     ],
@@ -234,7 +234,7 @@
         "prompt": "What digit is the Roman numeral III, carved above the door?",
         "answer": "3",
         "takeChar": "3",
-        "hint": "Three strokes.",
+        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). Three strokes.",
         "reveal": "III is 3."
       },
       {
@@ -280,7 +280,7 @@
         "prompt": "Convert the binary number 1000 to a decimal digit, etched on a brass plate.",
         "answer": "8",
         "takeChar": "8",
-        "hint": "Powers of two: 8, 4, 2, 1.",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13. Powers of two: 8, 4, 2, 1.",
         "reveal": "Binary 1000 is 8."
       },
       {
@@ -334,7 +334,7 @@
         "prompt": "Convert the binary number 101 to a decimal digit, stamped inside the case.",
         "answer": "5",
         "takeChar": "5",
-        "hint": "Powers of two: 4 + 1.",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13. Powers of two: 4 + 1.",
         "reveal": "Binary 101 is 5."
       },
       {
@@ -404,7 +404,7 @@
         "prompt": "Convert the binary number 1001 to a decimal digit, pressed into the wax.",
         "answer": "9",
         "takeChar": "9",
-        "hint": "Powers of two: 8 + 1.",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13. Powers of two: 8 + 1.",
         "reveal": "Binary 1001 is 9."
       },
       {
@@ -420,7 +420,7 @@
         "prompt": "What digit is the Roman numeral I, the smallest numeral?",
         "answer": "1",
         "takeChar": "1",
-        "hint": "One line.",
+        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). One line.",
         "reveal": "I is 1."
       },
       {
