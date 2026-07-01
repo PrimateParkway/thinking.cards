@@ -446,5 +446,220 @@
       "answer": "161803",
       "hint": "The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…"
     }
+  },
+  {
+    "cardNumber": 10,
+    "difficulty": "Easy",
+    "questionText": "The Detective's Office",
+    "escapeIntro": "The office door locks behind you. Four scraps of a case file each hide a word — take the first letter of each to name what you must crack.",
+    "escapeStations": [
+      {
+        "title": "The Backwards Memo",
+        "prompt": "Written backwards — reverse it to find what every detective hunts for: E U L C",
+        "answer": "CLUE",
+        "takeChar": "C",
+        "hint": "How it works: read the letters from right to left. Four letters.",
+        "reveal": "EULC reversed spells CLUE."
+      },
+      {
+        "title": "The Numbered Alibi",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode a suspect's claim to have been elsewhere: 1 12 9 2 9",
+        "answer": "ALIBI",
+        "takeChar": "A",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. A is 1.",
+        "reveal": "1 12 9 2 9 reads (1=A, 2=B…) as ALIBI."
+      },
+      {
+        "title": "The Coded Culprit",
+        "prompt": "Shift each letter back 2 to read the person the police are watching: U W U R G E V",
+        "answer": "SUSPECT",
+        "takeChar": "S",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Under suspicion.",
+        "reveal": "U W U R G E V shifted back 2 spells SUSPECT."
+      },
+      {
+        "title": "The Trace Left Behind",
+        "prompt": "Fingerprints, fibres and footprints gathered at a crime scene are all this.",
+        "answer": "EVIDENCE",
+        "takeChar": "E",
+        "hint": "Proof of what happened.",
+        "reveal": "It is EVIDENCE."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Take the first letter of each answer, top to bottom.",
+      "prompt": "Spell what a detective works to crack.",
+      "answer": "CASE",
+      "hint": "A mystery to solve; four letters."
+    }
+  },
+  {
+    "cardNumber": 11,
+    "difficulty": "Medium",
+    "questionText": "The Starship Bridge",
+    "escapeIntro": "Alarms blare on the bridge. Five instruments each read out a digit — but the airlock only opens when they're set in order, smallest to largest.",
+    "escapeStations": [
+      {
+        "title": "The Hull Plate",
+        "prompt": "What is the square root of 81?",
+        "answer": "9",
+        "takeChar": "9",
+        "hint": "How it works: find the number that, multiplied by itself, gives this value. A plate is stamped with a square number.",
+        "reveal": "√81 = 9."
+      },
+      {
+        "title": "The Warning Lights",
+        "prompt": "What single digit continues the pattern (they fall by two): 9, 7, 5, ?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Count down.",
+        "reveal": "The pattern continues with 3."
+      },
+      {
+        "title": "The Reactor Code",
+        "prompt": "Add the digits of 88, then keep adding until a single digit remains — its digital root.",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left. Reduce it to one digit.",
+        "reveal": "The digital root of 88 is 7."
+      },
+      {
+        "title": "The Docking Clock",
+        "prompt": "A clock reads 10 o'clock. What hour will it show 4 hours later, on a 12-hour clock?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "A twelve-hour dial.",
+        "reveal": "4 hours after 10 o'clock is 2 o'clock."
+      },
+      {
+        "title": "The Ship Name",
+        "prompt": "How many letters are in the word ROCKET, painted on the hull?",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "Count the letters.",
+        "reveal": "ROCKET has 6 letters."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The five digits come through jumbled — set them smallest to largest.",
+      "prompt": "Enter the airlock code with the digits in ascending order.",
+      "answer": "23679",
+      "hint": "Smallest digit first."
+    }
+  },
+  {
+    "cardNumber": 12,
+    "difficulty": "Hard",
+    "questionText": "The Haunted Library",
+    "escapeIntro": "The library doors slam shut. Five mouldering volumes each surrender a letter, scrambled and encoded — decode them all, then rearrange the letters.",
+    "escapeStations": [
+      {
+        "title": "The Vowelless Sign",
+        "prompt": "The vowels have been stripped out — put them back to find a foreboding sign of things to come: M N",
+        "answer": "OMEN",
+        "takeChar": "O",
+        "hint": "How it works: only the consonants remain. Slot the vowels A, E, I, O, U back in until it reads as a word. A bad sign.",
+        "reveal": "Restoring the vowels of MN spells OMEN."
+      },
+      {
+        "title": "The Stone Chamber",
+        "prompt": "A stone vault where the dead are laid to rest.",
+        "answer": "TOMB",
+        "takeChar": "T",
+        "hint": "A grave or crypt.",
+        "reveal": "It is a TOMB."
+      },
+      {
+        "title": "The Zig-Zag Epitaph",
+        "prompt": "A two-row rail-fence cipher — unzip it to find a grave-robbing spirit: G O L H U",
+        "answer": "GHOUL",
+        "takeChar": "G",
+        "hint": "How a rail-fence works: the letters were written in a two-row zig-zag (1st on top, 2nd on the bottom, 3rd on top…), then read off — all of the top row, then all of the bottom row. Split the code in half and interleave the two halves back together. It haunts graveyards.",
+        "reveal": "Interleaving the two rows of GOLHU spells GHOUL."
+      },
+      {
+        "title": "The Mirror Writing",
+        "prompt": "Written backwards — reverse it to find another word for a ghost or spectre: E D A H S",
+        "answer": "SHADE",
+        "takeChar": "S",
+        "hint": "How it works: read the letters from right to left. A lingering spirit.",
+        "reveal": "EDAHS reversed spells SHADE."
+      },
+      {
+        "title": "The Keyed Curse",
+        "prompt": "A Vigenère cipher with the keyword MOON — decode what a restless ghost does to a house: T O I A F",
+        "answer": "HAUNT",
+        "takeChar": "H",
+        "hint": "How Vigenère works: write the keyword under the code, repeating it. Each key letter is a shift amount (A=0, B=1, C=2 …); shift each code letter back by its key letter to reveal the plaintext. Ghosts do this to houses.",
+        "reveal": "Decoding TOIAF with key MOON spells HAUNT."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The five first letters come out jumbled — rearrange them.",
+      "prompt": "Unscramble them to name what walks the library at night.",
+      "answer": "GHOST",
+      "hint": "A spooky spectre; five letters."
+    }
+  },
+  {
+    "cardNumber": 13,
+    "difficulty": "Extreme",
+    "questionText": "The Bank Heist",
+    "escapeIntro": "You're inside the vault with minutes to spare. Six dials, and a scrawled warning: 'Every digit has crept forward by the same secret amount.' Solve them, find the step, and wind them back.",
+    "escapeStations": [
+      {
+        "title": "The Third Tumbler",
+        "prompt": "What is the 3rd prime number?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "How it works: primes are whole numbers greater than 1 divisible only by 1 and themselves — 2, 3, 5, 7, 11…",
+        "reveal": "The 3rd prime is 5."
+      },
+      {
+        "title": "The Leftover Dial",
+        "prompt": "What is the remainder when 23 is divided by 6?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "How it works: divide and keep only what is left over (the modulo).",
+        "reveal": "23 ÷ 6 leaves a remainder of 5."
+      },
+      {
+        "title": "The Arrangement Lock",
+        "prompt": "In how many different orders can 3 distinct items be lined up (that is, 3 factorial)?",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "How it works: multiply every whole number from 1 up to n — for example 3 factorial = 1 × 2 × 3 = 6.",
+        "reveal": "3! = 6."
+      },
+      {
+        "title": "The Root Dial",
+        "prompt": "What is the square root of 49?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "How it works: find the number that, multiplied by itself, gives this value.",
+        "reveal": "√49 = 7."
+      },
+      {
+        "title": "The Reduced Code",
+        "prompt": "Add the digits of 999, then keep adding until a single digit remains — its digital root.",
+        "answer": "9",
+        "takeChar": "9",
+        "hint": "How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left.",
+        "reveal": "The digital root of 999 is 9."
+      },
+      {
+        "title": "The Countdown Timer",
+        "prompt": "A clock reads 11 o'clock. What hour will it show 3 hours later, on a 12-hour clock?",
+        "answer": "2",
+        "takeChar": "2",
+        "reveal": "3 hours after 11 o'clock is 2 o'clock."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Every digit has crept forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.",
+      "prompt": "Enter the six-digit vault code once you've reversed the step.",
+      "answer": "112358",
+      "hint": "The Fibonacci sequence begins 1, 1, 2, 3, 5, 8…"
+    }
   }
 ]

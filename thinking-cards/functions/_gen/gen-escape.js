@@ -1,15 +1,19 @@
 /**
  * Escape-room authoring + verifier.
  *
- * A library of station "types" (anagram, Caesar known/unknown shift, Atbash,
- * A1Z26 letter-numbers, riddle, trivia, definition) is mixed differently across rooms so they
- * don't feel repetitive. Each room's stations each contribute one letter; those
- * letters combine via the room's FINAL transform (direct / anagram-scramble /
- * cipher) into the password. This script computes every cipher from plaintext
- * (so they're provably correct) and asserts the assembled letters really do
- * transform into the final answer. Emits escape-rooms.json.
+ * A library of 12 word station types (riddle, trivia, definition, anagram,
+ * Caesar known/unknown, Atbash, A1Z26 letter-numbers, reversed, disemvowel,
+ * rail-fence, Vigenère) and 12 number station types (arithmetic, number-riddle,
+ * Roman, binary, sequence, digital-root, clock, word-length, square-root,
+ * remainder, nth-prime, factorial) is mixed differently across rooms so they
+ * don't feel repetitive. Each station contributes one letter or digit; those
+ * combine via the room's FINAL transform (direct / anagram / sort / cipher /
+ * digit-shift) into the code. Every cipher is computed from plaintext (so it's
+ * provably correct) and the assembled pieces are asserted to transform into the
+ * final answer. Emits escape-rooms.json.
  *
- * Run:  node gen-escape.js
+ * Run:  node gen-escape.js            (verify + emit all rooms)
+ *       node gen-escape.js --types    (list every station type)
  */
 const fs = require('fs');
 
@@ -70,6 +74,46 @@ function a1z26S(title, plain, clue, hint) {
     answer: plain, takeChar: take(plain), hint: join(A1Z26_PRIMER, hint),
     reveal: `${a1z26(plain)} reads (1=A, 2=B…) as ${plain.toUpperCase()}.` };
 }
+function reversedS(title, plain, clue, hint) {
+  const cipher = plain.toUpperCase().split('').reverse().join('');
+  return { title, kind: 'reversed', prompt: `Written backwards — reverse it to find ${clue}: ${spaced(cipher)}`,
+    answer: plain, takeChar: take(plain), hint: join('How it works: read the letters from right to left.', hint),
+    reveal: `${cipher} reversed spells ${plain.toUpperCase()}.` };
+}
+function disemvowelS(title, plain, clue, hint) {
+  const cipher = plain.toUpperCase().replace(/[AEIOU]/g, '');
+  return { title, kind: 'disemvowel', prompt: `The vowels have been stripped out — put them back to find ${clue}: ${spaced(cipher)}`,
+    answer: plain, takeChar: take(plain), hint: join('How it works: only the consonants remain. Slot the vowels A, E, I, O, U back in until it reads as a word.', hint),
+    reveal: `Restoring the vowels of ${cipher} spells ${plain.toUpperCase()}.` };
+}
+function railEncode(plain) {
+  const up = plain.toUpperCase().replace(/[^A-Z]/g, '');
+  let top = '', bot = '';
+  for (let i = 0; i < up.length; i++) (i % 2 === 0 ? top += up[i] : bot += up[i]);
+  return top + bot;
+}
+function railfenceS(title, plain, clue, hint) {
+  const cipher = railEncode(plain);
+  const primer = 'How a rail-fence works: the letters were written in a two-row zig-zag (1st on top, 2nd on the bottom, 3rd on top…), then read off — all of the top row, then all of the bottom row. Split the code in half and interleave the two halves back together.';
+  return { title, kind: 'railfence', prompt: `A two-row rail-fence cipher — unzip it to find ${clue}: ${spaced(cipher)}`,
+    answer: plain, takeChar: take(plain), hint: join(primer, hint),
+    reveal: `Interleaving the two rows of ${cipher} spells ${plain.toUpperCase()}.` };
+}
+function vigenereEncode(plain, key) {
+  const up = plain.toUpperCase(); const k = key.toUpperCase(); let out = '', ki = 0;
+  for (const c of up) {
+    if (/[A-Z]/.test(c)) { out += A[(A.indexOf(c) + A.indexOf(k[ki % k.length])) % 26]; ki++; }
+    else out += c;
+  }
+  return out;
+}
+function vigenereS(title, plain, key, clue, hint) {
+  const cipher = vigenereEncode(plain, key);
+  const primer = `How Vigenère works: write the keyword under the code, repeating it. Each key letter is a shift amount (A=0, B=1, C=2 …); shift each code letter back by its key letter to reveal the plaintext.`;
+  return { title, kind: 'vigenere', prompt: `A Vigenère cipher with the keyword ${key.toUpperCase()} — decode ${clue}: ${spaced(cipher)}`,
+    answer: plain, takeChar: take(plain), hint: join(primer, hint),
+    reveal: `Decoding ${cipher} with key ${key.toUpperCase()} spells ${plain.toUpperCase()}.` };
+}
 
 // ── Number-station builders (each yields one digit) ─────────────
 function calc(expr) {
@@ -96,6 +140,46 @@ function romanS(title, value, clue, hint) {
 function arithS(title, expr, hint) {
   const v = calc(expr);
   return numStation(title, 'arithmetic', `What is ${expr.replace(/\*/g, '×')}?`, v, hint, `${expr.replace(/\*/g, '×')} = ${v}.`);
+}
+function digitalRoot(n) { n = Math.abs(n); while (n >= 10) n = String(n).split('').reduce((a, d) => a + Number(d), 0); return n; }
+function nthPrime(n) { const ps = []; let c = 2; while (ps.length < n) { if (ps.every(p => c % p !== 0)) ps.push(c); c++; } return ps[n - 1]; }
+function factorial(n) { let f = 1; for (let i = 2; i <= n; i++) f *= i; return f; }
+function ordinal(n) { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+function sequenceS(title, seq, answer, clue, hint) {
+  return numStation(title, 'sequence', `What single digit continues the pattern${clue ? ' (' + clue + ')' : ''}: ${seq.join(', ')}, ?`, answer, hint, `The pattern continues with ${answer}.`);
+}
+function digitalRootS(title, number, hint) {
+  const dr = digitalRoot(number);
+  return numStation(title, 'digitalroot', `Add the digits of ${number}, then keep adding until a single digit remains — its digital root.`, dr,
+    join('How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left.', hint), `The digital root of ${number} is ${dr}.`);
+}
+function clockS(title, start, add, hint) {
+  const r = ((start + add - 1) % 12) + 1;
+  return numStation(title, 'clock', `A clock reads ${start} o'clock. What hour will it show ${add} hours later, on a 12-hour clock?`, r, hint,
+    `${add} hours after ${start} o'clock is ${r} o'clock.`);
+}
+function wordLengthS(title, word, clue, hint) {
+  return numStation(title, 'wordlength', `How many letters are in the word ${word.toUpperCase()}${clue ? ', ' + clue : ''}?`, word.replace(/[^A-Za-z]/g, '').length, hint,
+    `${word.toUpperCase()} has ${word.replace(/[^A-Za-z]/g, '').length} letters.`);
+}
+function sqrtS(title, square, hint) {
+  const r = Math.round(Math.sqrt(square));
+  if (r * r !== square) throw new Error(`not a perfect square: ${square}`);
+  return numStation(title, 'sqrt', `What is the square root of ${square}?`, r, join('How it works: find the number that, multiplied by itself, gives this value.', hint), `√${square} = ${r}.`);
+}
+function remainderS(title, a, b, hint) {
+  return numStation(title, 'remainder', `What is the remainder when ${a} is divided by ${b}?`, a % b,
+    join('How it works: divide and keep only what is left over (the modulo).', hint), `${a} ÷ ${b} leaves a remainder of ${a % b}.`);
+}
+function primeS(title, n, hint) {
+  const p = nthPrime(n);
+  return numStation(title, 'prime', `What is the ${ordinal(n)} prime number?`, p,
+    join('How it works: primes are whole numbers greater than 1 divisible only by 1 and themselves — 2, 3, 5, 7, 11…', hint), `The ${ordinal(n)} prime is ${p}.`);
+}
+function factorialS(title, n, hint) {
+  const f = factorial(n);
+  return numStation(title, 'factorial', `In how many different orders can ${n} distinct items be lined up (that is, ${n} factorial)?`, f,
+    join('How it works: multiply every whole number from 1 up to n — for example 3 factorial = 1 × 2 × 3 = 6.', hint), `${n}! = ${f}.`);
 }
 const sortDigits = s => norm(s).split('').sort().join('');
 const shiftDigits = (s, k) => norm(s).split('').map(c => String((Number(c) + k + 10) % 10)).join('');
@@ -217,7 +301,81 @@ const ROOMS = [
     final: finalDigitShift('161803', 3, false, 'Every digit has stepped forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.',
       { prompt: "Enter the six-digit code once you've found the step and reversed it.", hint: 'The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…' }),
   },
+
+  // ── Second set: varied themes showcasing the expanded library ──
+  {
+    cardNumber: 10, difficulty: 'Easy', questionText: "The Detective's Office",
+    intro: "The office door locks behind you. Four scraps of a case file each hide a word — take the first letter of each to name what you must crack.",
+    stations: [
+      reversedS('The Backwards Memo', 'CLUE', 'what every detective hunts for', 'Four letters.'),
+      a1z26S('The Numbered Alibi', 'ALIBI', "a suspect's claim to have been elsewhere", 'A is 1.'),
+      caesarS('The Coded Culprit', 'SUSPECT', 2, true, 'the person the police are watching', 'Under suspicion.'),
+      riddle('The Trace Left Behind', 'Fingerprints, fibres and footprints gathered at a crime scene are all this.', 'EVIDENCE', 'Proof of what happened.', 'It is EVIDENCE.'),
+    ],
+    final: finalDirect('CASE', 'Take the first letter of each answer, top to bottom.',
+      { prompt: 'Spell what a detective works to crack.', hint: 'A mystery to solve; four letters.' }),
+  },
+  {
+    cardNumber: 11, difficulty: 'Medium', questionText: 'The Starship Bridge',
+    intro: "Alarms blare on the bridge. Five instruments each read out a digit — but the airlock only opens when they're set in order, smallest to largest.",
+    stations: [
+      sqrtS('The Hull Plate', 81, 'A plate is stamped with a square number.'),
+      sequenceS('The Warning Lights', [9, 7, 5], 3, 'they fall by two', 'Count down.'),
+      digitalRootS('The Reactor Code', 88, 'Reduce it to one digit.'),
+      clockS('The Docking Clock', 10, 4, 'A twelve-hour dial.'),
+      wordLengthS('The Ship Name', 'ROCKET', 'painted on the hull', 'Count the letters.'),
+    ],
+    final: finalSort('23679', 'The five digits come through jumbled — set them smallest to largest.',
+      { prompt: 'Enter the airlock code with the digits in ascending order.', hint: 'Smallest digit first.' }),
+  },
+  {
+    cardNumber: 12, difficulty: 'Hard', questionText: 'The Haunted Library',
+    intro: "The library doors slam shut. Five mouldering volumes each surrender a letter, scrambled and encoded — decode them all, then rearrange the letters.",
+    stations: [
+      disemvowelS('The Vowelless Sign', 'OMEN', 'a foreboding sign of things to come', 'A bad sign.'),
+      riddle('The Stone Chamber', 'A stone vault where the dead are laid to rest.', 'TOMB', 'A grave or crypt.', 'It is a TOMB.'),
+      railfenceS('The Zig-Zag Epitaph', 'GHOUL', 'a grave-robbing spirit', 'It haunts graveyards.'),
+      reversedS('The Mirror Writing', 'SHADE', 'another word for a ghost or spectre', 'A lingering spirit.'),
+      vigenereS('The Keyed Curse', 'HAUNT', 'MOON', 'what a restless ghost does to a house', 'Ghosts do this to houses.'),
+    ],
+    final: finalAnagram('GHOST', 'The five first letters come out jumbled — rearrange them.',
+      { prompt: 'Unscramble them to name what walks the library at night.', hint: 'A spooky spectre; five letters.' }),
+  },
+  {
+    cardNumber: 13, difficulty: 'Extreme', questionText: 'The Bank Heist',
+    intro: "You're inside the vault with minutes to spare. Six dials, and a scrawled warning: 'Every digit has crept forward by the same secret amount.' Solve them, find the step, and wind them back.",
+    stations: [
+      primeS('The Third Tumbler', 3),
+      remainderS('The Leftover Dial', 23, 6),
+      factorialS('The Arrangement Lock', 3),
+      sqrtS('The Root Dial', 49),
+      digitalRootS('The Reduced Code', 999),
+      clockS('The Countdown Timer', 11, 3),
+    ],
+    final: finalDigitShift('112358', 4, false, 'Every digit has crept forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.',
+      { prompt: "Enter the six-digit vault code once you've reversed the step.", hint: 'The Fibonacci sequence begins 1, 1, 2, 3, 5, 8…' }),
+  },
 ];
+
+// ── Type library self-test (node gen-escape.js --types) ─────────
+if (process.argv.includes('--types')) {
+  const word = [
+    riddle('t', 'A clue…', 'RIVER'), trivia('t', 'Fact?', 'ROME'), definition('t', 'Meaning…', 'LOGIC'),
+    anagramS('t', 'LISTEN', 'SILENT', 'to quiet.'), caesarS('t', 'ARSENIC', 3, true, 'a poison'),
+    caesarS('t', 'IRONY', 5, false, 'a device'), atbashS('t', 'EMBER', true, 'a coal'),
+    a1z26S('t', 'IDEA', 'a form'), reversedS('t', 'CLUE', 'a hint'), disemvowelS('t', 'OMEN', 'a sign'),
+    railfenceS('t', 'GHOUL', 'a spirit'), vigenereS('t', 'HAUNT', 'MOON', 'to spook'),
+  ];
+  const num = [
+    arithS('t', '5 + 4 - 7'), numRiddle('t', 'Muses?', 9), romanS('t', 3, ''), binaryS('t', 8, ''),
+    sequenceS('t', [9, 7, 5], 3, 'down by 2'), digitalRootS('t', 88), clockS('t', 10, 4), wordLengthS('t', 'ROCKET', ''),
+    sqrtS('t', 81), remainderS('t', 23, 6), primeS('t', 3), factorialS('t', 3),
+  ];
+  const show = arr => arr.forEach(s => process.stdout.write(`  ${String(s.kind).padEnd(14)} ans=${String(s.answer).padEnd(9)} take=${s.takeChar}  | ${s.prompt.slice(0, 78)}\n`));
+  process.stdout.write(`WORD TYPES (${word.length}):\n`); show(word);
+  process.stdout.write(`NUMBER TYPES (${num.length}):\n`); show(num);
+  process.exit(0);
+}
 
 // ── Verify + emit ───────────────────────────────────────────────
 function assemble(room) { return room.stations.map(s => norm(s.takeChar)).join(''); }
