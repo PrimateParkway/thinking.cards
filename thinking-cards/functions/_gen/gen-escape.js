@@ -189,6 +189,9 @@ function finalDirect(answer, rule, hint) { return { kind: 'direct', rule, prompt
 function finalAnagram(answer, rule, hint) { return { kind: 'anagram', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 function finalAtbash(answer, rule, hint) { return { kind: 'atbash', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 function finalSort(answer, rule, hint) { return { kind: 'sortAsc', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
+function finalSortDesc(answer, rule, hint) { return { kind: 'sortDesc', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
+function finalReverse(answer, rule, hint) { return { kind: 'reverse', rule, prompt: hint.prompt, answer, hint: hint.hint }; }
+function finalCaesar(answer, shift, rule, hint) { return { kind: 'caesar', shift, rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 function finalDigitShift(answer, shift, told, rule, hint) { return { kind: 'digitShift', shift, told, rule, prompt: hint.prompt, answer, hint: hint.hint }; }
 
 // ── Rooms ───────────────────────────────────────────────────────
@@ -203,23 +206,23 @@ const ROOMS = [
       caesarS('The Study of Conduct', 'ETHICS', 3, true, 'the branch of philosophy about right and wrong', "Aristotle wrote one 'to Nicomachus'."),
     ],
     final: finalDirect('SAGE', 'Take the first letter of each answer, top to bottom.',
-      { prompt: 'Spell the word for a wise thinker that unlocks the study.', hint: 'A wise one — also a herb.' }),
+      { prompt: 'Spell the word for a wise thinker that unlocks the study.', hint: 'Also the name of a herb.' }),
   },
   {
-    cardNumber: 4, difficulty: 'Medium', questionText: "The Cartographer's Study",
+    cardNumber: 8, difficulty: 'Medium', questionText: "The Cartographer's Study",
     intro: "The map-maker's study locks tight at nightfall. Five charts each yield a letter — but the lock won't take them in order. Gather them, then set them straight.",
     stations: [
       anagramS('Narrow Waters', 'TRAITS', 'STRAIT', 'to a narrow channel of water between two seas.', 'A narrow sea passage.'),
       definition('The Equator Lines', 'The angular distance of a place north or south of the equator.', 'LATITUDE', 'Lines that run east–west.', 'It is LATITUDE.'),
-      caesarS('The Coral Ring', 'ATOLL', 1, true, 'a ring-shaped coral island', 'A ring of coral.'),
-      riddle('The Hot Zone', 'I am a line of latitude that names a sweltering zone; the Tropic of Cancer is one of me.', 'TROPIC', 'Tropic of Cancer / Capricorn.', 'The line is a TROPIC.'),
-      trivia('The Compass Bearing', 'A horizontal bearing measured clockwise from due north, in degrees.', 'AZIMUTH', 'Begins with A; a surveyor’s term.', 'The bearing is the AZIMUTH.'),
+      caesarS('The Coral Ring', 'ATOLL', 1, true, 'a ring-shaped coral island', 'Bikini is a famous one.'),
+      riddle('The Hot Zone', 'I am a line of latitude that names a sweltering zone; the Tropic of Cancer is one of me.', 'TROPIC', 'Cancer and Capricorn each have one.', 'The line is a TROPIC.'),
+      trivia('The Compass Bearing', 'A horizontal bearing measured clockwise from due north, in degrees.', 'AZIMUTH', 'From an Arabic word for "the directions" — a surveyor’s term.', 'The bearing is the AZIMUTH.'),
     ],
     final: finalAnagram('ATLAS', 'Each answer gives its first letter — but jumbled. Unscramble the five letters.',
-      { prompt: 'Unscramble them to name the book every map-maker binds together — and the Titan who holds up the sky.', hint: 'A book of maps.' }),
+      { prompt: 'Unscramble them to name the book every map-maker binds together.', hint: 'Also the Titan condemned to hold up the sky.' }),
   },
   {
-    cardNumber: 6, difficulty: 'Hard', questionText: "The Logician's Workshop",
+    cardNumber: 14, difficulty: 'Hard', questionText: "The Logician's Workshop",
     intro: "You're sealed inside the logician's workshop. Six puzzles each conceal a letter, scattered out of order — and not all of them give up their secret plainly.",
     stations: [
       anagramS('A Question of Character', 'MOLAR', 'MORAL', 'to a word meaning ethical — concerning right conduct.', 'The opposite of immoral.'),
@@ -230,16 +233,16 @@ const ROOMS = [
       definition("Reason’s Starting Point", 'A statement accepted as self-evidently true, taken without proof as the foundation of a logical system.', 'AXIOM', 'Euclid began his geometry with these.', 'It is an AXIOM.'),
     ],
     final: finalAnagram('ENIGMA', 'Collect the six first letters — they arrive scrambled. Rearrange them.',
-      { prompt: 'Unscramble them to name a baffling riddle (and a famous WWII cipher machine).', hint: 'A puzzle; also a code device.' }),
+      { prompt: 'Unscramble them to name a baffling mystery.', hint: 'Also the famous WWII cipher machine the Allies raced to crack.' }),
   },
   {
-    cardNumber: 8, difficulty: 'Extreme', questionText: "The Oracle's Antechamber",
+    cardNumber: 20, difficulty: 'Extreme', questionText: "The Oracle's Antechamber",
     intro: "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
     stations: [
       definition('The Art of Argument', 'The branch of philosophy concerned with valid reasoning — distinguishing sound arguments from fallacies.', 'LOGIC', 'Aristotle is its father.', 'It is LOGIC.'),
       a1z26S('The Perfect Form', 'IDEA', 'what Plato called the perfect, eternal Forms behind all things', 'A thought; Plato’s Forms.'),
       riddle('The Paradox-Maker', 'The philosopher of Elea famous for paradoxes of motion — Achilles can never catch the tortoise.', 'ZENO', 'Four letters; a Greek of Elea.', 'It is ZENO of Elea.'),
-      riddle('The Loyal Student', 'A soldier and historian, a devoted follower of Socrates, who recorded his teacher’s words in the Memorabilia.', 'XENOPHON', 'Begins with X; a pupil of Socrates.', 'It is XENOPHON.'),
+      riddle('The Loyal Student', 'A soldier and historian, a devoted follower of Socrates, who recorded his teacher’s words in the Memorabilia.', 'XENOPHON', 'He also led ten thousand Greek mercenaries home — the Anabasis.', 'It is XENOPHON.'),
       definition('Mere Belief', 'In Plato, mere belief or appearance (doxa), as opposed to true and certain knowledge.', 'OPINION', 'Everyone has one; few have knowledge.', 'It is OPINION.'),
       caesarS('Aristotle’s Excellence', 'VIRTUE', 9, false, 'the excellence of character Aristotle placed at the golden mean', 'Courage and temperance are examples; find the shift.'),
     ],
@@ -252,20 +255,20 @@ const ROOMS = [
     cardNumber: 3, difficulty: 'Easy', questionText: 'The Numbered Safe',
     intro: "A small iron safe sits on the desk, its four dials waiting. Solve each clue for a single digit, then read them top to bottom.",
     stations: [
-      romanS("The Chiselled Numeral", 3, 'carved above the door', 'Three strokes.'),
-      numRiddle('The Nine Sisters', 'How many Muses did the ancient Greeks say inspired the arts and sciences?', 9, 'One more than eight.', 'There were 9 Muses.'),
+      romanS("The Chiselled Numeral", 3, 'carved above the door', 'Count the strokes.'),
+      numRiddle('The Sisters of Song', 'How many Muses did the ancient Greeks say inspired the arts and sciences?', 9, "A cat is said to have this many lives.", 'There were 9 Muses.'),
       arithS('The Ledger Sum', '5 + 4 - 7', 'Work left to right.'),
-      numRiddle('Four Corners', 'How many sides does a square have?', 4, 'Count the corners.', 'A square has 4 sides.'),
+      numRiddle('The Square Frame', 'How many sides does a square have?', 4, 'Count the corners.', 'A square has 4 sides.'),
     ],
     final: finalDirect('3924', 'Read the four digits from top to bottom.',
       { prompt: 'Enter the four-digit combination.', hint: 'Just the digits, in order.' }),
   },
   {
-    cardNumber: 5, difficulty: 'Medium', questionText: 'The Sorting Vault',
+    cardNumber: 9, difficulty: 'Medium', questionText: 'The Sorting Vault',
     intro: "Five tumblers each hide a digit — but this vault only opens when the digits are set in order. Find all five, then line them up from smallest to largest.",
     stations: [
       binaryS('The Binary Plate', 8, 'etched on a brass plate', 'Powers of two: 8, 4, 2, 1.'),
-      numRiddle('The Three Graces', 'How many Graces (Charites) attended Aphrodite in Greek myth?', 3, 'A famous trio.', 'There were 3 Graces.'),
+      numRiddle('The Graces', 'How many Graces (Charites) attended Aphrodite in Greek myth?', 3, 'Aglaia, Euphrosyne and Thalia — count the names.', 'There were 3 Graces.'),
       numRiddle('The Cube', 'How many faces does a cube have?', 6, 'Like a die.', 'A cube has 6 faces.'),
       numRiddle('The Idle Number', 'Multiplying any number by this leaves it completely unchanged.', 1, 'The multiplicative identity.', 'It is 1.'),
       numRiddle('The Classical Elements', 'Empedocles taught that all things are made from this many elements: earth, water, air and fire.', 4, 'Earth, water, air, fire.', 'There are 4 elements.'),
@@ -274,21 +277,21 @@ const ROOMS = [
       { prompt: 'Enter the five digits in ascending order.', hint: 'Smallest digit first.' }),
   },
   {
-    cardNumber: 7, difficulty: 'Hard', questionText: 'The Cryptic Dial',
+    cardNumber: 15, difficulty: 'Hard', questionText: 'The Cryptic Dial',
     intro: "Six dials, and a note: 'I have turned every digit forward by two.' Solve each clue, then wind the whole code back to where it began.",
     stations: [
       binaryS('The Binary Cog', 5, 'stamped inside the case', 'Powers of two: 4 + 1.'),
-      numRiddle('The Three Fates', 'How many Fates (Moirai) spun, measured and cut the thread of life in Greek myth?', 3, 'Clotho, Lachesis, Atropos.', 'There were 3 Fates.'),
-      numRiddle('Six Walls', 'How many sides does a hexagon have?', 6, 'Like a honeycomb cell.', 'A hexagon has 6 sides.'),
-      numRiddle('The Trivium', 'The Trivium of the classical liberal arts — grammar, logic and rhetoric — comprises how many subjects?', 3, 'Grammar, logic, rhetoric.', 'The Trivium has 3 arts.'),
+      numRiddle('The Fates', 'How many Fates (Moirai) spun, measured and cut the thread of life in Greek myth?', 3, 'Clotho, Lachesis, Atropos — count them.', 'There were 3 Fates.'),
+      numRiddle('The Honeycomb', 'How many sides does a hexagon have?', 6, 'Like a honeycomb cell — count its walls.', 'A hexagon has 6 sides.'),
+      numRiddle('The Trivium', 'The Trivium of the classical liberal arts — grammar, logic and rhetoric — comprises how many subjects?', 3, 'Count the subjects listed.', 'The Trivium has 3 arts.'),
       numRiddle('The Week', 'How many days are there in a week?', 7, 'Monday through Sunday.', 'There are 7 days.'),
-      numRiddle('The Lone Star', 'How many stars sit at the centre of our solar system?', 1, 'Look up by day.', 'Just 1 — the Sun.'),
+      numRiddle('The Daylight Star', 'How many stars sit at the centre of our solar system?', 1, 'Look up by day.', 'Just 1 — the Sun.'),
     ],
     final: finalDigitShift('314159', 2, true, 'Every digit was turned forward by 2 (past 9 rolls back to 0). Wind each digit back by 2.',
-      { prompt: "Enter the six-digit code once you've wound it back.", hint: 'The code is a famous circle constant — 3.14159…' }),
+      { prompt: "Enter the six-digit code once you've wound it back.", hint: 'Wound back correctly, a famous circle constant appears.' }),
   },
   {
-    cardNumber: 9, difficulty: 'Extreme', questionText: 'The Golden Lock',
+    cardNumber: 21, difficulty: 'Extreme', questionText: 'The Golden Lock',
     intro: "The final lock bears no instructions — only a note: 'Every digit has stepped forward by the same secret amount.' Solve the six clues, discover the step, and wind them all back.",
     stations: [
       numRiddle("Aristotle's Causes", 'Aristotle held that a full explanation of anything needs how many kinds of cause — material, formal, efficient and final?', 4, 'Material, formal, efficient, final.', 'There are 4 causes.'),
@@ -299,12 +302,12 @@ const ROOMS = [
       numRiddle('The Perfect Number', 'The Pythagoreans prized this smallest "perfect number", whose divisors 1, 2 and 3 add up to itself.', 6, '1 + 2 + 3 = it.', 'It is 6.'),
     ],
     final: finalDigitShift('161803', 3, false, 'Every digit has stepped forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.',
-      { prompt: "Enter the six-digit code once you've found the step and reversed it.", hint: 'The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…' }),
+      { prompt: "Enter the six-digit code once you've found the step and reversed it.", hint: 'Wound back correctly, the code begins with 1 — and a famously golden number hides within.' }),
   },
 
   // ── Second set: varied themes showcasing the expanded library ──
   {
-    cardNumber: 10, difficulty: 'Easy', questionText: "The Detective's Office",
+    cardNumber: 4, difficulty: 'Easy', questionText: "The Detective's Office",
     intro: "The office door locks behind you. Four scraps of a case file each hide a word — take the first letter of each to name what you must crack.",
     stations: [
       reversedS('The Backwards Memo', 'CLUE', 'what every detective hunts for', 'Four letters.'),
@@ -316,7 +319,7 @@ const ROOMS = [
       { prompt: 'Spell what a detective works to crack.', hint: 'A mystery to solve; four letters.' }),
   },
   {
-    cardNumber: 11, difficulty: 'Medium', questionText: 'The Starship Bridge',
+    cardNumber: 10, difficulty: 'Medium', questionText: 'The Starship Bridge',
     intro: "Alarms blare on the bridge. Five instruments each read out a digit — but the airlock only opens when they're set in order, smallest to largest.",
     stations: [
       sqrtS('The Hull Plate', 81, 'A plate is stamped with a square number.'),
@@ -329,7 +332,7 @@ const ROOMS = [
       { prompt: 'Enter the airlock code with the digits in ascending order.', hint: 'Smallest digit first.' }),
   },
   {
-    cardNumber: 12, difficulty: 'Hard', questionText: 'The Haunted Library',
+    cardNumber: 16, difficulty: 'Hard', questionText: 'The Haunted Library',
     intro: "The library doors slam shut. Five mouldering volumes each surrender a letter, scrambled and encoded — decode them all, then rearrange the letters.",
     stations: [
       disemvowelS('The Vowelless Sign', 'OMEN', 'a foreboding sign of things to come', 'A bad sign.'),
@@ -342,7 +345,7 @@ const ROOMS = [
       { prompt: 'Unscramble them to name what walks the library at night.', hint: 'A spooky spectre; five letters.' }),
   },
   {
-    cardNumber: 13, difficulty: 'Extreme', questionText: 'The Bank Heist',
+    cardNumber: 22, difficulty: 'Extreme', questionText: 'The Bank Heist',
     intro: "You're inside the vault with minutes to spare. Six dials, and a scrawled warning: 'Every digit has crept forward by the same secret amount.' Solve them, find the step, and wind them back.",
     stations: [
       primeS('The Third Tumbler', 3),
@@ -353,7 +356,166 @@ const ROOMS = [
       clockS('The Countdown Timer', 11, 3),
     ],
     final: finalDigitShift('112358', 4, false, 'Every digit has crept forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.',
-      { prompt: "Enter the six-digit vault code once you've reversed the step.", hint: 'The Fibonacci sequence begins 1, 1, 2, 3, 5, 8…' }),
+      { prompt: "Enter the six-digit vault code once you've reversed the step.", hint: 'Wound back correctly, every digit from the third onward is the sum of the two before it.' }),
+  },
+
+  // ── Third set: 3 more per level → 6/6/6/6 ─────────────────────
+  {
+    cardNumber: 5, difficulty: 'Easy', questionText: 'The Lighthouse',
+    intro: "A storm rattles the lighthouse door and the latch clicks shut. Four objects of the keeper's trade each hide a word — take the first letter of each.",
+    stations: [
+      riddle('The Curved Glass', 'The great curved glass at the top of the tower that gathers the light into a single beam.', 'LENS', 'A camera has one too.', 'It is the LENS.'),
+      riddle('The Heavy Hook', 'Dropped from a ship on a chain to hold her fast against the tide.', 'ANCHOR', 'Hoisted when a ship sets sail.', 'It is the ANCHOR.'),
+      reversedS('The Backwards Log', 'MAST', 'the tall pole that carries a ship’s sails', 'Look up from the deck.'),
+      caesarS('The Harbour Word', 'PORT', 2, true, 'a safe harbour — and the left side of a ship', 'Opposite of starboard.'),
+    ],
+    final: finalDirect('LAMP', 'Take the first letter of each answer, top to bottom.',
+      { prompt: 'Spell what the keeper lights at dusk.', hint: 'It burns at the top of the tower.' }),
+  },
+  {
+    cardNumber: 6, difficulty: 'Easy', questionText: 'The Bakery Till',
+    intro: "The baker stepped out and the till locked itself. Four notes pinned to the counter each yield a digit — read them top to bottom.",
+    stations: [
+      wordLengthS('The Recipe Card', 'BISCUIT', 'written on the recipe card', 'Count every letter.'),
+      arithS('The Batch Count', '18 / 9', 'Loaves per tray.'),
+      numRiddle('The Egg Basket', 'How many eggs are in half a dozen?', 6, 'A dozen is twelve.', 'Half a dozen is 6.'),
+      sequenceS('The Cooling Racks', [16, 12, 8], 4, 'each rack holds four fewer', 'Keep subtracting the same amount.'),
+    ],
+    final: finalDirect('7264', 'Read the four digits from top to bottom.',
+      { prompt: 'Enter the four-digit code to open the till.', hint: 'Just the digits, in order.' }),
+  },
+  {
+    cardNumber: 7, difficulty: 'Easy', questionText: 'The Toy Chest',
+    intro: "An old toy chest with a four-dial lock. Four toys each carry a digit — read them top to bottom.",
+    stations: [
+      romanS('The Painted Block', 5, 'painted on a wooden block', 'One letter, one numeral.'),
+      binaryS('The Toy Robot', 6, 'stamped under the toy robot', 'Two columns light up.'),
+      numRiddle('The Tricycle', 'How many wheels does a tricycle have?', 3, 'The name says it — "tri".', 'A tricycle has 3 wheels.'),
+      digitalRootS('The Kite String', 10, 'The tag on the kite string reads 10.'),
+    ],
+    final: finalDirect('5631', 'Read the four digits from top to bottom.',
+      { prompt: 'Enter the four-digit code to open the chest.', hint: 'Just the digits, in order.' }),
+  },
+  {
+    cardNumber: 11, difficulty: 'Medium', questionText: 'The Agora at Dusk',
+    intro: "The marketplace empties and the gate bars itself behind you. Five stalls each yield a letter — but the gate reads them from the last stall back to the first.",
+    stations: [
+      riddle('The Sworn Word', 'A solemn promise, sworn before the gods, that a Greek would sooner die than break.', 'OATH', 'Witnesses swear one in court.', 'It is an OATH.'),
+      a1z26S('The Numbered Ideal', 'TRUTH', 'what every honest argument aims at', 'What the honest tongue tells.'),
+      riddle('The Open Square', 'The open marketplace where Socrates buttonholed passers-by with questions.', 'AGORA', 'The civic heart of a Greek city.', 'It is the AGORA.'),
+      trivia('The Rival School', "The school Aristotle founded in Athens, where he lectured while strolling its walks.", 'LYCEUM', 'Its students were called the Peripatetics — the walkers.', 'It is the LYCEUM.'),
+      caesarS('The Hidden Soul', 'PSYCHE', 4, true, 'the Greek word for the soul', 'It gives psychology its name.'),
+    ],
+    final: finalReverse('PLATO', 'Take the first letter of each answer — then read them from the last station up to the first.',
+      { prompt: 'Name the philosopher whose dialogues made Socrates immortal.', hint: 'Student of Socrates, teacher of Aristotle.' }),
+  },
+  {
+    cardNumber: 12, difficulty: 'Medium', questionText: 'The Observatory',
+    intro: "The dome closes for the night with you inside. Five instruments each yield a letter — but they come out jumbled. Collect them, then rearrange.",
+    stations: [
+      riddle('The Silver Disc', "Earth's only natural satellite, keeper of the tides.", 'MOON', 'Full once a month.', 'It is the MOON.'),
+      a1z26S('The Numbered Path', 'ORBIT', 'the path a planet traces around its star', 'An ellipse, said Kepler.'),
+      anagramS('The Pocked Surface', 'TRACER', 'CRATER', 'to a bowl-shaped scar left by an impact.', 'The Moon is covered in them.'),
+      definition('The Long Eye', 'An instrument of lenses and mirrors for viewing the distant sky.', 'TELESCOPE', 'Galileo turned one on Jupiter.', 'It is the TELESCOPE.'),
+      caesarS('The Shadowed Sun', 'ECLIPSE', 3, true, 'when one heavenly body hides another', 'Never look at one directly.'),
+    ],
+    final: finalAnagram('COMET', 'The five first letters come out jumbled — rearrange them.',
+      { prompt: 'Unscramble them to name the dirty snowball with the glowing tail.', hint: "Halley's is the most famous." }),
+  },
+  {
+    cardNumber: 13, difficulty: 'Medium', questionText: 'The Night Train',
+    intro: "The last train is locked until departure. Four tickets each carry a digit — but the board reads them from the last ticket back to the first.",
+    stations: [
+      numRiddle('The Empty Seat', 'How many even prime numbers are greater than two?', 0, 'Every even number above two can be split in half.', 'None — every even number above 2 is divisible by 2, so 0.'),
+      primeS('The Platform Sign', 3, 'The platform bears the third of a famous family of numbers.'),
+      remainderS('The Ticket Stub', 14, 4),
+      binaryS('The Punched Card', 1, 'punched into the card'),
+    ],
+    final: finalReverse('1250', 'Read the four digits from the last station back to the first.',
+      { prompt: 'Enter the departure time shown on the board.', hint: 'Ten to one, just after midday.' }),
+  },
+  {
+    cardNumber: 17, difficulty: 'Hard', questionText: "The Alchemist's Attic",
+    intro: "The trapdoor thuds shut above the alchemist's attic. Six curiosities each conceal a letter — encoded, disguised, and out of order.",
+    stations: [
+      disemvowelS('The Faded Bestiary', 'DRAGON', 'the fire-breathing guardian of hoarded gold', 'It sleeps on treasure in the old tales.'),
+      railfenceS('The Zig-Zag Gem', 'OPAL', 'a milky gemstone that flashes many colours', 'An October birthstone.'),
+      riddle('The Quenching Element', 'One of the four classical elements — it quenches the second of them.', 'WATER', 'Rivers and rain are made of it.', 'It is WATER.'),
+      a1z26S('The Numbered Metal', 'IRON', 'the stubborn metal the alchemists despaired of turning to gold', 'Blacksmiths forge it.'),
+      vigenereS('The Keyed Element', 'SULFUR', 'FIRE', 'the yellow, evil-smelling element of the old laboratories', 'Brimstone, by its older name.'),
+      reversedS('The Mirrored Metal', 'MERCURY', 'the silver metal that runs liquid at room temperature', 'Quicksilver — and a planet.'),
+    ],
+    final: finalAnagram('WISDOM', 'The six first letters arrive scrambled — rearrange them.',
+      { prompt: 'Unscramble them to name what the true alchemist sought to refine within.', hint: 'Not gold — the owl of Athena symbolises it.' }),
+  },
+  {
+    cardNumber: 18, difficulty: 'Hard', questionText: "The Clockmaker's Cellar",
+    intro: "The cellar door swings shut among the ticking. Six mechanisms each yield a digit — and a note: 'I wound every dial forward three.' Wind them back.",
+    stations: [
+      clockS('The Mantel Clock', 2, 3, 'Count around the dial.'),
+      sequenceS('The Odd Gears', [1, 3, 5], 7, 'the gear teeth grow by two', 'Keep adding the same amount.'),
+      digitalRootS('The Serial Plate', 81, 'The serial plate reads 81.'),
+      remainderS('The Escapement', 25, 8),
+      sqrtS('The Square Weight', 16, 'The weight is stamped 16.'),
+      primeS('The Second Spring', 2, 'The spring bears the second of a famous family of numbers.'),
+    ],
+    final: finalDigitShift('246810', 3, true, 'Every dial was wound forward 3 (past 9 rolls back to 0). Wind each digit back by 3.',
+      { prompt: 'Enter the six-digit code once every dial is wound back.', hint: 'Wound back correctly, the clockmaker counts by twos.' }),
+  },
+  {
+    cardNumber: 19, difficulty: 'Hard', questionText: "The Pirate's Hold",
+    intro: "The hold hatch slams above you. Six pieces of plunder each carry a digit — and pirates being pirates, the lock wants them greediest-first.",
+    stations: [
+      numRiddle('The Odd One Out', 'What is the only even prime number?', 2, 'Every other even number has it as a divisor.', 'The only even prime is 2.'),
+      wordLengthS('The Grog Barrel', 'RUM', 'branded on the barrel', 'Count the letters of the drink.'),
+      binaryS('The Powder Keg', 8, 'burned into the powder keg'),
+      digitalRootS('The Map Corner', 19, 'A 19 is scratched into the map corner.'),
+      romanS('The Carved Mast', 5, 'carved deep in the mast', 'One letter of the old empire.'),
+      sequenceS('The Logbook Leagues', [28, 21, 14], 7, 'the leagues fall by the same amount each day', 'Keep subtracting.'),
+    ],
+    final: finalSortDesc('875321', 'Set the six digits from largest to smallest — greediest first.',
+      { prompt: 'Enter the six-digit code to open the captain’s chest.', hint: 'Biggest digit first, smallest last.' }),
+  },
+  {
+    cardNumber: 23, difficulty: 'Extreme', questionText: 'The Cave of Shadows',
+    intro: "Chains fall away and you turn from the cave wall at last — but the way out is barred. Six carvings each yield a letter, and the lock does not read them as they are.",
+    stations: [
+      riddle('The Utter Emptiness', 'What Democritus said atoms move through — sheer nothingness.', 'VOID', 'Nature abhors a vacuum; this is one.', 'It is the VOID.'),
+      disemvowelS('The Stripped Vision', 'INSIGHT', 'a sudden flash of deep understanding', 'Seeing into the heart of a problem.'),
+      a1z26S('The Numbered Nature', 'ESSENCE', 'what a thing most truly is, beneath all appearances', 'Perfume-makers borrow the word.'),
+      riddle('The First Feeling', 'Aristotle said philosophy begins in this — the feeling that sets us questioning.', 'WONDER', 'Alice found a land of it.', 'It is WONDER.'),
+      railfenceS('The Zig-Zag Name', 'SOCRATES', 'the barefoot questioner of Athens', 'He drank the hemlock.'),
+      vigenereS('The Keyed Truth', 'REALITY', 'CAVE', 'what the prisoners in the cave never see directly', 'The shadows are only its copy.'),
+    ],
+    final: finalCaesar('REASON', 4, 'The six letters stand one fixed shift away from the true word. Find the shift and step every letter back.',
+      { prompt: 'Reveal the faculty Plato said could climb out of the cave.', hint: 'Try small shifts first — stop when the letters read as a word for clear thinking.' }),
+  },
+  {
+    cardNumber: 24, difficulty: 'Extreme', questionText: 'The Midnight Museum',
+    intro: "The gallery lights die and the doors seal. Five exhibits each surrender a letter — but the lock reads the alphabet in a mirror.",
+    stations: [
+      trivia('The Carved Tusk', 'The smooth white material of carved tusks in the antiquities case.', 'IVORY', 'Piano keys were once cut from it.', 'It is IVORY.'),
+      definition('The Sealed Chamber', 'A sealed, guarded chamber where a museum keeps its greatest treasures.', 'VAULT', 'Banks have them too.', 'It is a VAULT.'),
+      reversedS('The Mirrored Frame', 'OVAL', 'the shape of the gallery’s grandest frame', 'An egg has this shape.'),
+      caesarS('The Famous Stone', 'ROSETTA', 5, true, 'the stone that unlocked the hieroglyphs', 'Found near a delta town in 1799.'),
+      a1z26S('The Security Scan', 'XRAY', 'the scan every crate passes through at the door', 'It sees through the packaging.'),
+    ],
+    final: finalAtbash('RELIC', 'Each letter has traded places with its opposite end of the alphabet — the first with the last, the second with the second-from-last.',
+      { prompt: 'Reflect the letters to name what every museum guards: an object left over from the deep past.', hint: 'Swap A with Z, B with Y, C with X — and so on.' }),
+  },
+  {
+    cardNumber: 25, difficulty: 'Extreme', questionText: "The Grandmaster's Vault",
+    intro: "The chess club's trophy vault clicks shut. Six positions each yield a digit — and a note in the grandmaster's hand: 'Every dial has advanced by the same secret step.'",
+    stations: [
+      primeS('The Fourth Rank', 4, 'The lock wants the fourth of a famous family of numbers.'),
+      numRiddle('The Front Line', 'How many pawns does each side command at the start of a chess game?', 8, 'A full second rank of them.', 'Each side starts with 8 pawns.'),
+      numRiddle('The Faithful Bishop', 'How many squares can a bishop ever reach that are NOT its own starting colour?', 0, 'A bishop moves only on diagonals — it can never change square colour.', 'None — a bishop never leaves its colour, so 0.'),
+      wordLengthS('The Smallest Piece', 'PAWN', 'the humblest piece on the board', 'Count the letters.'),
+      sequenceS('The Odd Files', [1, 3, 5], 7, 'the files climb by two', 'Keep adding the same amount.'),
+      numRiddle('The Paired Clergy', 'How many bishops does each side start with?', 2, 'One for each square colour.', 'Each side starts with 2 bishops.'),
+    ],
+    final: finalDigitShift('124816', 6, false, 'Every dial has advanced by the same secret step (past 9 wrapping to 0). Find the step and wind them all back.',
+      { prompt: 'Enter the six-digit code once you have found and reversed the step.', hint: 'Wound back correctly, each of the first four digits is double the one before it.' }),
   },
 ];
 
@@ -389,6 +551,8 @@ function check(room) {
     case 'atbash': ok = atbash(asm) === want; detail = `atbash(${asm}) = ${atbash(asm)} == ${want}`; break;
     case 'caesar': ok = asm === caesar(want, room.final.shift); detail = `${asm} decodes to ${want}`; break;
     case 'sortAsc': ok = sortDigits(asm) === want; detail = `sort(${asm}) = ${sortDigits(asm)} == ${want}`; break;
+    case 'sortDesc': { const d = sortDigits(asm).split('').reverse().join(''); ok = d === want; detail = `sortDesc(${asm}) = ${d} == ${want}`; break; }
+    case 'reverse': { const r = asm.split('').reverse().join(''); ok = r === want; detail = `reverse(${asm}) = ${r} == ${want}`; break; }
     case 'digitShift': ok = shiftDigits(want, room.final.shift) === asm; detail = `shift(${want}, +${room.final.shift}) = ${shiftDigits(want, room.final.shift)} == assembled ${asm}`; break;
     default: ok = false; detail = 'unknown final kind';
   }

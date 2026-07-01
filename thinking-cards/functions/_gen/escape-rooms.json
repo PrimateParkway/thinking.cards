@@ -42,11 +42,11 @@
       "rule": "Take the first letter of each answer, top to bottom.",
       "prompt": "Spell the word for a wise thinker that unlocks the study.",
       "answer": "SAGE",
-      "hint": "A wise one — also a herb."
+      "hint": "Also the name of a herb."
     }
   },
   {
-    "cardNumber": 4,
+    "cardNumber": 8,
     "difficulty": "Medium",
     "questionText": "The Cartographer's Study",
     "escapeIntro": "The map-maker's study locks tight at nightfall. Five charts each yield a letter — but the lock won't take them in order. Gather them, then set them straight.",
@@ -72,7 +72,7 @@
         "prompt": "Shift each letter back 1 to read a ring-shaped coral island: B U P M M",
         "answer": "ATOLL",
         "takeChar": "A",
-        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). A ring of coral.",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Bikini is a famous one.",
         "reveal": "B U P M M shifted back 1 spells ATOLL."
       },
       {
@@ -80,7 +80,7 @@
         "prompt": "I am a line of latitude that names a sweltering zone; the Tropic of Cancer is one of me.",
         "answer": "TROPIC",
         "takeChar": "T",
-        "hint": "Tropic of Cancer / Capricorn.",
+        "hint": "Cancer and Capricorn each have one.",
         "reveal": "The line is a TROPIC."
       },
       {
@@ -88,19 +88,19 @@
         "prompt": "A horizontal bearing measured clockwise from due north, in degrees.",
         "answer": "AZIMUTH",
         "takeChar": "A",
-        "hint": "Begins with A; a surveyor’s term.",
+        "hint": "From an Arabic word for \"the directions\" — a surveyor’s term.",
         "reveal": "The bearing is the AZIMUTH."
       }
     ],
     "escapeFinal": {
       "rule": "Each answer gives its first letter — but jumbled. Unscramble the five letters.",
-      "prompt": "Unscramble them to name the book every map-maker binds together — and the Titan who holds up the sky.",
+      "prompt": "Unscramble them to name the book every map-maker binds together.",
       "answer": "ATLAS",
-      "hint": "A book of maps."
+      "hint": "Also the Titan condemned to hold up the sky."
     }
   },
   {
-    "cardNumber": 6,
+    "cardNumber": 14,
     "difficulty": "Hard",
     "questionText": "The Logician's Workshop",
     "escapeIntro": "You're sealed inside the logician's workshop. Six puzzles each conceal a letter, scattered out of order — and not all of them give up their secret plainly.",
@@ -156,13 +156,13 @@
     ],
     "escapeFinal": {
       "rule": "Collect the six first letters — they arrive scrambled. Rearrange them.",
-      "prompt": "Unscramble them to name a baffling riddle (and a famous WWII cipher machine).",
+      "prompt": "Unscramble them to name a baffling mystery.",
       "answer": "ENIGMA",
-      "hint": "A puzzle; also a code device."
+      "hint": "Also the famous WWII cipher machine the Allies raced to crack."
     }
   },
   {
-    "cardNumber": 8,
+    "cardNumber": 20,
     "difficulty": "Extreme",
     "questionText": "The Oracle's Antechamber",
     "escapeIntro": "Torchlight flickers across the Oracle of Delphi's antechamber — the same Oracle that once named Socrates the wisest of all. Six relics each surrender a letter, but the final lock does not read them as they are.",
@@ -196,7 +196,7 @@
         "prompt": "A soldier and historian, a devoted follower of Socrates, who recorded his teacher’s words in the Memorabilia.",
         "answer": "XENOPHON",
         "takeChar": "X",
-        "hint": "Begins with X; a pupil of Socrates.",
+        "hint": "He also led ten thousand Greek mercenaries home — the Anabasis.",
         "reveal": "It is XENOPHON."
       },
       {
@@ -234,15 +234,15 @@
         "prompt": "What digit is the Roman numeral III, carved above the door?",
         "answer": "3",
         "takeChar": "3",
-        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). Three strokes.",
+        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). Count the strokes.",
         "reveal": "III is 3."
       },
       {
-        "title": "The Nine Sisters",
+        "title": "The Sisters of Song",
         "prompt": "How many Muses did the ancient Greeks say inspired the arts and sciences?",
         "answer": "9",
         "takeChar": "9",
-        "hint": "One more than eight.",
+        "hint": "A cat is said to have this many lives.",
         "reveal": "There were 9 Muses."
       },
       {
@@ -254,7 +254,7 @@
         "reveal": "5 + 4 - 7 = 2."
       },
       {
-        "title": "Four Corners",
+        "title": "The Square Frame",
         "prompt": "How many sides does a square have?",
         "answer": "4",
         "takeChar": "4",
@@ -270,7 +270,7 @@
     }
   },
   {
-    "cardNumber": 5,
+    "cardNumber": 9,
     "difficulty": "Medium",
     "questionText": "The Sorting Vault",
     "escapeIntro": "Five tumblers each hide a digit — but this vault only opens when the digits are set in order. Find all five, then line them up from smallest to largest.",
@@ -284,11 +284,11 @@
         "reveal": "Binary 1000 is 8."
       },
       {
-        "title": "The Three Graces",
+        "title": "The Graces",
         "prompt": "How many Graces (Charites) attended Aphrodite in Greek myth?",
         "answer": "3",
         "takeChar": "3",
-        "hint": "A famous trio.",
+        "hint": "Aglaia, Euphrosyne and Thalia — count the names.",
         "reveal": "There were 3 Graces."
       },
       {
@@ -324,7 +324,7 @@
     }
   },
   {
-    "cardNumber": 7,
+    "cardNumber": 15,
     "difficulty": "Hard",
     "questionText": "The Cryptic Dial",
     "escapeIntro": "Six dials, and a note: 'I have turned every digit forward by two.' Solve each clue, then wind the whole code back to where it began.",
@@ -338,19 +338,19 @@
         "reveal": "Binary 101 is 5."
       },
       {
-        "title": "The Three Fates",
+        "title": "The Fates",
         "prompt": "How many Fates (Moirai) spun, measured and cut the thread of life in Greek myth?",
         "answer": "3",
         "takeChar": "3",
-        "hint": "Clotho, Lachesis, Atropos.",
+        "hint": "Clotho, Lachesis, Atropos — count them.",
         "reveal": "There were 3 Fates."
       },
       {
-        "title": "Six Walls",
+        "title": "The Honeycomb",
         "prompt": "How many sides does a hexagon have?",
         "answer": "6",
         "takeChar": "6",
-        "hint": "Like a honeycomb cell.",
+        "hint": "Like a honeycomb cell — count its walls.",
         "reveal": "A hexagon has 6 sides."
       },
       {
@@ -358,7 +358,7 @@
         "prompt": "The Trivium of the classical liberal arts — grammar, logic and rhetoric — comprises how many subjects?",
         "answer": "3",
         "takeChar": "3",
-        "hint": "Grammar, logic, rhetoric.",
+        "hint": "Count the subjects listed.",
         "reveal": "The Trivium has 3 arts."
       },
       {
@@ -370,7 +370,7 @@
         "reveal": "There are 7 days."
       },
       {
-        "title": "The Lone Star",
+        "title": "The Daylight Star",
         "prompt": "How many stars sit at the centre of our solar system?",
         "answer": "1",
         "takeChar": "1",
@@ -382,11 +382,11 @@
       "rule": "Every digit was turned forward by 2 (past 9 rolls back to 0). Wind each digit back by 2.",
       "prompt": "Enter the six-digit code once you've wound it back.",
       "answer": "314159",
-      "hint": "The code is a famous circle constant — 3.14159…"
+      "hint": "Wound back correctly, a famous circle constant appears."
     }
   },
   {
-    "cardNumber": 9,
+    "cardNumber": 21,
     "difficulty": "Extreme",
     "questionText": "The Golden Lock",
     "escapeIntro": "The final lock bears no instructions — only a note: 'Every digit has stepped forward by the same secret amount.' Solve the six clues, discover the step, and wind them all back.",
@@ -444,11 +444,11 @@
       "rule": "Every digit has stepped forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.",
       "prompt": "Enter the six-digit code once you've found the step and reversed it.",
       "answer": "161803",
-      "hint": "The golden ratio (φ) begins 1, 6, 1, 8, 0, 3…"
+      "hint": "Wound back correctly, the code begins with 1 — and a famously golden number hides within."
     }
   },
   {
-    "cardNumber": 10,
+    "cardNumber": 4,
     "difficulty": "Easy",
     "questionText": "The Detective's Office",
     "escapeIntro": "The office door locks behind you. Four scraps of a case file each hide a word — take the first letter of each to name what you must crack.",
@@ -494,7 +494,7 @@
     }
   },
   {
-    "cardNumber": 11,
+    "cardNumber": 10,
     "difficulty": "Medium",
     "questionText": "The Starship Bridge",
     "escapeIntro": "Alarms blare on the bridge. Five instruments each read out a digit — but the airlock only opens when they're set in order, smallest to largest.",
@@ -548,7 +548,7 @@
     }
   },
   {
-    "cardNumber": 12,
+    "cardNumber": 16,
     "difficulty": "Hard",
     "questionText": "The Haunted Library",
     "escapeIntro": "The library doors slam shut. Five mouldering volumes each surrender a letter, scrambled and encoded — decode them all, then rearrange the letters.",
@@ -602,7 +602,7 @@
     }
   },
   {
-    "cardNumber": 13,
+    "cardNumber": 22,
     "difficulty": "Extreme",
     "questionText": "The Bank Heist",
     "escapeIntro": "You're inside the vault with minutes to spare. Six dials, and a scrawled warning: 'Every digit has crept forward by the same secret amount.' Solve them, find the step, and wind them back.",
@@ -659,7 +659,663 @@
       "rule": "Every digit has crept forward by the same secret amount, past 9 rolling back to 0. Find the step and wind them all back.",
       "prompt": "Enter the six-digit vault code once you've reversed the step.",
       "answer": "112358",
-      "hint": "The Fibonacci sequence begins 1, 1, 2, 3, 5, 8…"
+      "hint": "Wound back correctly, every digit from the third onward is the sum of the two before it."
+    }
+  },
+  {
+    "cardNumber": 5,
+    "difficulty": "Easy",
+    "questionText": "The Lighthouse",
+    "escapeIntro": "A storm rattles the lighthouse door and the latch clicks shut. Four objects of the keeper's trade each hide a word — take the first letter of each.",
+    "escapeStations": [
+      {
+        "title": "The Curved Glass",
+        "prompt": "The great curved glass at the top of the tower that gathers the light into a single beam.",
+        "answer": "LENS",
+        "takeChar": "L",
+        "hint": "A camera has one too.",
+        "reveal": "It is the LENS."
+      },
+      {
+        "title": "The Heavy Hook",
+        "prompt": "Dropped from a ship on a chain to hold her fast against the tide.",
+        "answer": "ANCHOR",
+        "takeChar": "A",
+        "hint": "Hoisted when a ship sets sail.",
+        "reveal": "It is the ANCHOR."
+      },
+      {
+        "title": "The Backwards Log",
+        "prompt": "Written backwards — reverse it to find the tall pole that carries a ship’s sails: T S A M",
+        "answer": "MAST",
+        "takeChar": "M",
+        "hint": "How it works: read the letters from right to left. Look up from the deck.",
+        "reveal": "TSAM reversed spells MAST."
+      },
+      {
+        "title": "The Harbour Word",
+        "prompt": "Shift each letter back 2 to read a safe harbour — and the left side of a ship: R Q T V",
+        "answer": "PORT",
+        "takeChar": "P",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Opposite of starboard.",
+        "reveal": "R Q T V shifted back 2 spells PORT."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Take the first letter of each answer, top to bottom.",
+      "prompt": "Spell what the keeper lights at dusk.",
+      "answer": "LAMP",
+      "hint": "It burns at the top of the tower."
+    }
+  },
+  {
+    "cardNumber": 6,
+    "difficulty": "Easy",
+    "questionText": "The Bakery Till",
+    "escapeIntro": "The baker stepped out and the till locked itself. Four notes pinned to the counter each yield a digit — read them top to bottom.",
+    "escapeStations": [
+      {
+        "title": "The Recipe Card",
+        "prompt": "How many letters are in the word BISCUIT, written on the recipe card?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "Count every letter.",
+        "reveal": "BISCUIT has 7 letters."
+      },
+      {
+        "title": "The Batch Count",
+        "prompt": "What is 18 / 9?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "Loaves per tray.",
+        "reveal": "18 / 9 = 2."
+      },
+      {
+        "title": "The Egg Basket",
+        "prompt": "How many eggs are in half a dozen?",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "A dozen is twelve.",
+        "reveal": "Half a dozen is 6."
+      },
+      {
+        "title": "The Cooling Racks",
+        "prompt": "What single digit continues the pattern (each rack holds four fewer): 16, 12, 8, ?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "Keep subtracting the same amount.",
+        "reveal": "The pattern continues with 4."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Read the four digits from top to bottom.",
+      "prompt": "Enter the four-digit code to open the till.",
+      "answer": "7264",
+      "hint": "Just the digits, in order."
+    }
+  },
+  {
+    "cardNumber": 7,
+    "difficulty": "Easy",
+    "questionText": "The Toy Chest",
+    "escapeIntro": "An old toy chest with a four-dial lock. Four toys each carry a digit — read them top to bottom.",
+    "escapeStations": [
+      {
+        "title": "The Painted Block",
+        "prompt": "What digit is the Roman numeral V, painted on a wooden block?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). One letter, one numeral.",
+        "reveal": "V is 5."
+      },
+      {
+        "title": "The Toy Robot",
+        "prompt": "Convert the binary number 110 to a decimal digit, stamped under the toy robot.",
+        "answer": "6",
+        "takeChar": "6",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13. Two columns light up.",
+        "reveal": "Binary 110 is 6."
+      },
+      {
+        "title": "The Tricycle",
+        "prompt": "How many wheels does a tricycle have?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "The name says it — \"tri\".",
+        "reveal": "A tricycle has 3 wheels."
+      },
+      {
+        "title": "The Kite String",
+        "prompt": "Add the digits of 10, then keep adding until a single digit remains — its digital root.",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left. The tag on the kite string reads 10.",
+        "reveal": "The digital root of 10 is 1."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Read the four digits from top to bottom.",
+      "prompt": "Enter the four-digit code to open the chest.",
+      "answer": "5631",
+      "hint": "Just the digits, in order."
+    }
+  },
+  {
+    "cardNumber": 11,
+    "difficulty": "Medium",
+    "questionText": "The Agora at Dusk",
+    "escapeIntro": "The marketplace empties and the gate bars itself behind you. Five stalls each yield a letter — but the gate reads them from the last stall back to the first.",
+    "escapeStations": [
+      {
+        "title": "The Sworn Word",
+        "prompt": "A solemn promise, sworn before the gods, that a Greek would sooner die than break.",
+        "answer": "OATH",
+        "takeChar": "O",
+        "hint": "Witnesses swear one in court.",
+        "reveal": "It is an OATH."
+      },
+      {
+        "title": "The Numbered Ideal",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode what every honest argument aims at: 20 18 21 20 8",
+        "answer": "TRUTH",
+        "takeChar": "T",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. What the honest tongue tells.",
+        "reveal": "20 18 21 20 8 reads (1=A, 2=B…) as TRUTH."
+      },
+      {
+        "title": "The Open Square",
+        "prompt": "The open marketplace where Socrates buttonholed passers-by with questions.",
+        "answer": "AGORA",
+        "takeChar": "A",
+        "hint": "The civic heart of a Greek city.",
+        "reveal": "It is the AGORA."
+      },
+      {
+        "title": "The Rival School",
+        "prompt": "The school Aristotle founded in Athens, where he lectured while strolling its walks.",
+        "answer": "LYCEUM",
+        "takeChar": "L",
+        "hint": "Its students were called the Peripatetics — the walkers.",
+        "reveal": "It is the LYCEUM."
+      },
+      {
+        "title": "The Hidden Soul",
+        "prompt": "Shift each letter back 4 to read the Greek word for the soul: T W C G L I",
+        "answer": "PSYCHE",
+        "takeChar": "P",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). It gives psychology its name.",
+        "reveal": "T W C G L I shifted back 4 spells PSYCHE."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Take the first letter of each answer — then read them from the last station up to the first.",
+      "prompt": "Name the philosopher whose dialogues made Socrates immortal.",
+      "answer": "PLATO",
+      "hint": "Student of Socrates, teacher of Aristotle."
+    }
+  },
+  {
+    "cardNumber": 12,
+    "difficulty": "Medium",
+    "questionText": "The Observatory",
+    "escapeIntro": "The dome closes for the night with you inside. Five instruments each yield a letter — but they come out jumbled. Collect them, then rearrange.",
+    "escapeStations": [
+      {
+        "title": "The Silver Disc",
+        "prompt": "Earth's only natural satellite, keeper of the tides.",
+        "answer": "MOON",
+        "takeChar": "M",
+        "hint": "Full once a month.",
+        "reveal": "It is the MOON."
+      },
+      {
+        "title": "The Numbered Path",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode the path a planet traces around its star: 15 18 2 9 20",
+        "answer": "ORBIT",
+        "takeChar": "O",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. An ellipse, said Kepler.",
+        "reveal": "15 18 2 9 20 reads (1=A, 2=B…) as ORBIT."
+      },
+      {
+        "title": "The Pocked Surface",
+        "prompt": "Rearrange TRACER to a bowl-shaped scar left by an impact.",
+        "answer": "CRATER",
+        "takeChar": "C",
+        "hint": "The Moon is covered in them.",
+        "reveal": "TRACER is an anagram of CRATER."
+      },
+      {
+        "title": "The Long Eye",
+        "prompt": "An instrument of lenses and mirrors for viewing the distant sky.",
+        "answer": "TELESCOPE",
+        "takeChar": "T",
+        "hint": "Galileo turned one on Jupiter.",
+        "reveal": "It is the TELESCOPE."
+      },
+      {
+        "title": "The Shadowed Sun",
+        "prompt": "Shift each letter back 3 to read when one heavenly body hides another: H F O L S V H",
+        "answer": "ECLIPSE",
+        "takeChar": "E",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Never look at one directly.",
+        "reveal": "H F O L S V H shifted back 3 spells ECLIPSE."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The five first letters come out jumbled — rearrange them.",
+      "prompt": "Unscramble them to name the dirty snowball with the glowing tail.",
+      "answer": "COMET",
+      "hint": "Halley's is the most famous."
+    }
+  },
+  {
+    "cardNumber": 13,
+    "difficulty": "Medium",
+    "questionText": "The Night Train",
+    "escapeIntro": "The last train is locked until departure. Four tickets each carry a digit — but the board reads them from the last ticket back to the first.",
+    "escapeStations": [
+      {
+        "title": "The Empty Seat",
+        "prompt": "How many even prime numbers are greater than two?",
+        "answer": "0",
+        "takeChar": "0",
+        "hint": "Every even number above two can be split in half.",
+        "reveal": "None — every even number above 2 is divisible by 2, so 0."
+      },
+      {
+        "title": "The Platform Sign",
+        "prompt": "What is the 3rd prime number?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "How it works: primes are whole numbers greater than 1 divisible only by 1 and themselves — 2, 3, 5, 7, 11… The platform bears the third of a famous family of numbers.",
+        "reveal": "The 3rd prime is 5."
+      },
+      {
+        "title": "The Ticket Stub",
+        "prompt": "What is the remainder when 14 is divided by 4?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "How it works: divide and keep only what is left over (the modulo).",
+        "reveal": "14 ÷ 4 leaves a remainder of 2."
+      },
+      {
+        "title": "The Punched Card",
+        "prompt": "Convert the binary number 1 to a decimal digit, punched into the card.",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13.",
+        "reveal": "Binary 1 is 1."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Read the four digits from the last station back to the first.",
+      "prompt": "Enter the departure time shown on the board.",
+      "answer": "1250",
+      "hint": "Ten to one, just after midday."
+    }
+  },
+  {
+    "cardNumber": 17,
+    "difficulty": "Hard",
+    "questionText": "The Alchemist's Attic",
+    "escapeIntro": "The trapdoor thuds shut above the alchemist's attic. Six curiosities each conceal a letter — encoded, disguised, and out of order.",
+    "escapeStations": [
+      {
+        "title": "The Faded Bestiary",
+        "prompt": "The vowels have been stripped out — put them back to find the fire-breathing guardian of hoarded gold: D R G N",
+        "answer": "DRAGON",
+        "takeChar": "D",
+        "hint": "How it works: only the consonants remain. Slot the vowels A, E, I, O, U back in until it reads as a word. It sleeps on treasure in the old tales.",
+        "reveal": "Restoring the vowels of DRGN spells DRAGON."
+      },
+      {
+        "title": "The Zig-Zag Gem",
+        "prompt": "A two-row rail-fence cipher — unzip it to find a milky gemstone that flashes many colours: O A P L",
+        "answer": "OPAL",
+        "takeChar": "O",
+        "hint": "How a rail-fence works: the letters were written in a two-row zig-zag (1st on top, 2nd on the bottom, 3rd on top…), then read off — all of the top row, then all of the bottom row. Split the code in half and interleave the two halves back together. An October birthstone.",
+        "reveal": "Interleaving the two rows of OAPL spells OPAL."
+      },
+      {
+        "title": "The Quenching Element",
+        "prompt": "One of the four classical elements — it quenches the second of them.",
+        "answer": "WATER",
+        "takeChar": "W",
+        "hint": "Rivers and rain are made of it.",
+        "reveal": "It is WATER."
+      },
+      {
+        "title": "The Numbered Metal",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode the stubborn metal the alchemists despaired of turning to gold: 9 18 15 14",
+        "answer": "IRON",
+        "takeChar": "I",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. Blacksmiths forge it.",
+        "reveal": "9 18 15 14 reads (1=A, 2=B…) as IRON."
+      },
+      {
+        "title": "The Keyed Element",
+        "prompt": "A Vigenère cipher with the keyword FIRE — decode the yellow, evil-smelling element of the old laboratories: X C C J Z Z",
+        "answer": "SULFUR",
+        "takeChar": "S",
+        "hint": "How Vigenère works: write the keyword under the code, repeating it. Each key letter is a shift amount (A=0, B=1, C=2 …); shift each code letter back by its key letter to reveal the plaintext. Brimstone, by its older name.",
+        "reveal": "Decoding XCCJZZ with key FIRE spells SULFUR."
+      },
+      {
+        "title": "The Mirrored Metal",
+        "prompt": "Written backwards — reverse it to find the silver metal that runs liquid at room temperature: Y R U C R E M",
+        "answer": "MERCURY",
+        "takeChar": "M",
+        "hint": "How it works: read the letters from right to left. Quicksilver — and a planet.",
+        "reveal": "YRUCREM reversed spells MERCURY."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The six first letters arrive scrambled — rearrange them.",
+      "prompt": "Unscramble them to name what the true alchemist sought to refine within.",
+      "answer": "WISDOM",
+      "hint": "Not gold — the owl of Athena symbolises it."
+    }
+  },
+  {
+    "cardNumber": 18,
+    "difficulty": "Hard",
+    "questionText": "The Clockmaker's Cellar",
+    "escapeIntro": "The cellar door swings shut among the ticking. Six mechanisms each yield a digit — and a note: 'I wound every dial forward three.' Wind them back.",
+    "escapeStations": [
+      {
+        "title": "The Mantel Clock",
+        "prompt": "A clock reads 2 o'clock. What hour will it show 3 hours later, on a 12-hour clock?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "Count around the dial.",
+        "reveal": "3 hours after 2 o'clock is 5 o'clock."
+      },
+      {
+        "title": "The Odd Gears",
+        "prompt": "What single digit continues the pattern (the gear teeth grow by two): 1, 3, 5, ?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "Keep adding the same amount.",
+        "reveal": "The pattern continues with 7."
+      },
+      {
+        "title": "The Serial Plate",
+        "prompt": "Add the digits of 81, then keep adding until a single digit remains — its digital root.",
+        "answer": "9",
+        "takeChar": "9",
+        "hint": "How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left. The serial plate reads 81.",
+        "reveal": "The digital root of 81 is 9."
+      },
+      {
+        "title": "The Escapement",
+        "prompt": "What is the remainder when 25 is divided by 8?",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "How it works: divide and keep only what is left over (the modulo).",
+        "reveal": "25 ÷ 8 leaves a remainder of 1."
+      },
+      {
+        "title": "The Square Weight",
+        "prompt": "What is the square root of 16?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "How it works: find the number that, multiplied by itself, gives this value. The weight is stamped 16.",
+        "reveal": "√16 = 4."
+      },
+      {
+        "title": "The Second Spring",
+        "prompt": "What is the 2nd prime number?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "How it works: primes are whole numbers greater than 1 divisible only by 1 and themselves — 2, 3, 5, 7, 11… The spring bears the second of a famous family of numbers.",
+        "reveal": "The 2nd prime is 3."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Every dial was wound forward 3 (past 9 rolls back to 0). Wind each digit back by 3.",
+      "prompt": "Enter the six-digit code once every dial is wound back.",
+      "answer": "246810",
+      "hint": "Wound back correctly, the clockmaker counts by twos."
+    }
+  },
+  {
+    "cardNumber": 19,
+    "difficulty": "Hard",
+    "questionText": "The Pirate's Hold",
+    "escapeIntro": "The hold hatch slams above you. Six pieces of plunder each carry a digit — and pirates being pirates, the lock wants them greediest-first.",
+    "escapeStations": [
+      {
+        "title": "The Odd One Out",
+        "prompt": "What is the only even prime number?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "Every other even number has it as a divisor.",
+        "reveal": "The only even prime is 2."
+      },
+      {
+        "title": "The Grog Barrel",
+        "prompt": "How many letters are in the word RUM, branded on the barrel?",
+        "answer": "3",
+        "takeChar": "3",
+        "hint": "Count the letters of the drink.",
+        "reveal": "RUM has 3 letters."
+      },
+      {
+        "title": "The Powder Keg",
+        "prompt": "Convert the binary number 1000 to a decimal digit, burned into the powder keg.",
+        "answer": "8",
+        "takeChar": "8",
+        "hint": "How binary works: it is base-2. Reading right to left, the columns are worth 1, 2, 4, 8, 16… Add up the column values wherever there is a 1 — for example 1101 = 8 + 4 + 0 + 1 = 13.",
+        "reveal": "Binary 1000 is 8."
+      },
+      {
+        "title": "The Map Corner",
+        "prompt": "Add the digits of 19, then keep adding until a single digit remains — its digital root.",
+        "answer": "1",
+        "takeChar": "1",
+        "hint": "How it works: sum the digits; if that still has more than one digit, sum again, and repeat until one digit is left. A 19 is scratched into the map corner.",
+        "reveal": "The digital root of 19 is 1."
+      },
+      {
+        "title": "The Carved Mast",
+        "prompt": "What digit is the Roman numeral V, carved deep in the mast?",
+        "answer": "5",
+        "takeChar": "5",
+        "hint": "How Roman numerals work: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. A smaller numeral before a larger one subtracts (IV = 4); otherwise you add (VI = 6). One letter of the old empire.",
+        "reveal": "V is 5."
+      },
+      {
+        "title": "The Logbook Leagues",
+        "prompt": "What single digit continues the pattern (the leagues fall by the same amount each day): 28, 21, 14, ?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "Keep subtracting.",
+        "reveal": "The pattern continues with 7."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Set the six digits from largest to smallest — greediest first.",
+      "prompt": "Enter the six-digit code to open the captain’s chest.",
+      "answer": "875321",
+      "hint": "Biggest digit first, smallest last."
+    }
+  },
+  {
+    "cardNumber": 23,
+    "difficulty": "Extreme",
+    "questionText": "The Cave of Shadows",
+    "escapeIntro": "Chains fall away and you turn from the cave wall at last — but the way out is barred. Six carvings each yield a letter, and the lock does not read them as they are.",
+    "escapeStations": [
+      {
+        "title": "The Utter Emptiness",
+        "prompt": "What Democritus said atoms move through — sheer nothingness.",
+        "answer": "VOID",
+        "takeChar": "V",
+        "hint": "Nature abhors a vacuum; this is one.",
+        "reveal": "It is the VOID."
+      },
+      {
+        "title": "The Stripped Vision",
+        "prompt": "The vowels have been stripped out — put them back to find a sudden flash of deep understanding: N S G H T",
+        "answer": "INSIGHT",
+        "takeChar": "I",
+        "hint": "How it works: only the consonants remain. Slot the vowels A, E, I, O, U back in until it reads as a word. Seeing into the heart of a problem.",
+        "reveal": "Restoring the vowels of NSGHT spells INSIGHT."
+      },
+      {
+        "title": "The Numbered Nature",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode what a thing most truly is, beneath all appearances: 5 19 19 5 14 3 5",
+        "answer": "ESSENCE",
+        "takeChar": "E",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. Perfume-makers borrow the word.",
+        "reveal": "5 19 19 5 14 3 5 reads (1=A, 2=B…) as ESSENCE."
+      },
+      {
+        "title": "The First Feeling",
+        "prompt": "Aristotle said philosophy begins in this — the feeling that sets us questioning.",
+        "answer": "WONDER",
+        "takeChar": "W",
+        "hint": "Alice found a land of it.",
+        "reveal": "It is WONDER."
+      },
+      {
+        "title": "The Zig-Zag Name",
+        "prompt": "A two-row rail-fence cipher — unzip it to find the barefoot questioner of Athens: S C A E O R T S",
+        "answer": "SOCRATES",
+        "takeChar": "S",
+        "hint": "How a rail-fence works: the letters were written in a two-row zig-zag (1st on top, 2nd on the bottom, 3rd on top…), then read off — all of the top row, then all of the bottom row. Split the code in half and interleave the two halves back together. He drank the hemlock.",
+        "reveal": "Interleaving the two rows of SCAEORTS spells SOCRATES."
+      },
+      {
+        "title": "The Keyed Truth",
+        "prompt": "A Vigenère cipher with the keyword CAVE — decode what the prisoners in the cave never see directly: T E V P K T T",
+        "answer": "REALITY",
+        "takeChar": "R",
+        "hint": "How Vigenère works: write the keyword under the code, repeating it. Each key letter is a shift amount (A=0, B=1, C=2 …); shift each code letter back by its key letter to reveal the plaintext. The shadows are only its copy.",
+        "reveal": "Decoding TEVPKTT with key CAVE spells REALITY."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "The six letters stand one fixed shift away from the true word. Find the shift and step every letter back.",
+      "prompt": "Reveal the faculty Plato said could climb out of the cave.",
+      "answer": "REASON",
+      "hint": "Try small shifts first — stop when the letters read as a word for clear thinking."
+    }
+  },
+  {
+    "cardNumber": 24,
+    "difficulty": "Extreme",
+    "questionText": "The Midnight Museum",
+    "escapeIntro": "The gallery lights die and the doors seal. Five exhibits each surrender a letter — but the lock reads the alphabet in a mirror.",
+    "escapeStations": [
+      {
+        "title": "The Carved Tusk",
+        "prompt": "The smooth white material of carved tusks in the antiquities case.",
+        "answer": "IVORY",
+        "takeChar": "I",
+        "hint": "Piano keys were once cut from it.",
+        "reveal": "It is IVORY."
+      },
+      {
+        "title": "The Sealed Chamber",
+        "prompt": "A sealed, guarded chamber where a museum keeps its greatest treasures.",
+        "answer": "VAULT",
+        "takeChar": "V",
+        "hint": "Banks have them too.",
+        "reveal": "It is a VAULT."
+      },
+      {
+        "title": "The Mirrored Frame",
+        "prompt": "Written backwards — reverse it to find the shape of the gallery’s grandest frame: L A V O",
+        "answer": "OVAL",
+        "takeChar": "O",
+        "hint": "How it works: read the letters from right to left. An egg has this shape.",
+        "reveal": "LAVO reversed spells OVAL."
+      },
+      {
+        "title": "The Famous Stone",
+        "prompt": "Shift each letter back 5 to read the stone that unlocked the hieroglyphs: W T X J Y Y F",
+        "answer": "ROSETTA",
+        "takeChar": "R",
+        "hint": "To shift a letter back, step earlier in the alphabet — e.g. D back 3 is A (D→C→B→A). Found near a delta town in 1799.",
+        "reveal": "W T X J Y Y F shifted back 5 spells ROSETTA."
+      },
+      {
+        "title": "The Security Scan",
+        "prompt": "A code of numbers, each the position of a letter in the alphabet — decode the scan every crate passes through at the door: 24 18 1 25",
+        "answer": "XRAY",
+        "takeChar": "X",
+        "hint": "How it works: each number is a letter’s position in the alphabet — 1=A, 2=B, 3=C, … 26=Z. Count to that position for each number, then read the letters in order. It sees through the packaging.",
+        "reveal": "24 18 1 25 reads (1=A, 2=B…) as XRAY."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Each letter has traded places with its opposite end of the alphabet — the first with the last, the second with the second-from-last.",
+      "prompt": "Reflect the letters to name what every museum guards: an object left over from the deep past.",
+      "answer": "RELIC",
+      "hint": "Swap A with Z, B with Y, C with X — and so on."
+    }
+  },
+  {
+    "cardNumber": 25,
+    "difficulty": "Extreme",
+    "questionText": "The Grandmaster's Vault",
+    "escapeIntro": "The chess club's trophy vault clicks shut. Six positions each yield a digit — and a note in the grandmaster's hand: 'Every dial has advanced by the same secret step.'",
+    "escapeStations": [
+      {
+        "title": "The Fourth Rank",
+        "prompt": "What is the 4th prime number?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "How it works: primes are whole numbers greater than 1 divisible only by 1 and themselves — 2, 3, 5, 7, 11… The lock wants the fourth of a famous family of numbers.",
+        "reveal": "The 4th prime is 7."
+      },
+      {
+        "title": "The Front Line",
+        "prompt": "How many pawns does each side command at the start of a chess game?",
+        "answer": "8",
+        "takeChar": "8",
+        "hint": "A full second rank of them.",
+        "reveal": "Each side starts with 8 pawns."
+      },
+      {
+        "title": "The Faithful Bishop",
+        "prompt": "How many squares can a bishop ever reach that are NOT its own starting colour?",
+        "answer": "0",
+        "takeChar": "0",
+        "hint": "A bishop moves only on diagonals — it can never change square colour.",
+        "reveal": "None — a bishop never leaves its colour, so 0."
+      },
+      {
+        "title": "The Smallest Piece",
+        "prompt": "How many letters are in the word PAWN, the humblest piece on the board?",
+        "answer": "4",
+        "takeChar": "4",
+        "hint": "Count the letters.",
+        "reveal": "PAWN has 4 letters."
+      },
+      {
+        "title": "The Odd Files",
+        "prompt": "What single digit continues the pattern (the files climb by two): 1, 3, 5, ?",
+        "answer": "7",
+        "takeChar": "7",
+        "hint": "Keep adding the same amount.",
+        "reveal": "The pattern continues with 7."
+      },
+      {
+        "title": "The Paired Clergy",
+        "prompt": "How many bishops does each side start with?",
+        "answer": "2",
+        "takeChar": "2",
+        "hint": "One for each square colour.",
+        "reveal": "Each side starts with 2 bishops."
+      }
+    ],
+    "escapeFinal": {
+      "rule": "Every dial has advanced by the same secret step (past 9 wrapping to 0). Find the step and wind them all back.",
+      "prompt": "Enter the six-digit code once you have found and reversed the step.",
+      "answer": "124816",
+      "hint": "Wound back correctly, each of the first four digits is double the one before it."
     }
   }
 ]

@@ -77,9 +77,11 @@ import { Category } from '../../core/models/category.model';
               } @else {
                 <div class="station-entry">
                   <input class="station-input" type="text" autocomplete="off" autocapitalize="characters"
+                    [attr.inputmode]="isDigitStation(i) ? 'numeric' : 'text'" spellcheck="false"
+                    [class.input-error]="!!stationFeedback()[i]"
                     [value]="stationInputs()[i] ?? ''" (input)="onStation(i, $event)"
                     (keyup.enter)="checkStation(i)" placeholder="Answer" />
-                  <button class="btn small" (click)="checkStation(i)">Check</button>
+                  <button class="btn small" (click)="checkStation(i)" [disabled]="!(stationInputs()[i] ?? '').trim()">Check</button>
                 </div>
                 @if (stationFeedback()[i]) { <p class="mini-error">{{ stationFeedback()[i] }}</p> }
                 @if (st.hint && hintShown()['s' + i]) { <p class="hint-text">Hint: {{ st.hint }}</p> }
@@ -91,7 +93,9 @@ import { Category } from '../../core/models/category.model';
 
         @if (finalPuzzle(); as fin) {
           <div class="final-panel" [class.open]="solved()">
-            <h3 class="final-title">🔒 Final Lock</h3>
+            <h3 class="final-title">🔒 Final Lock
+              <span class="pieces">{{ solvedCount() }} / {{ stations().length }} pieces</span>
+            </h3>
             <p class="final-rule">{{ fin.rule }}</p>
             <div class="lock-assembly">
               @for (st of stations(); track $index; let i = $index) {
@@ -102,8 +106,10 @@ import { Category } from '../../core/models/category.model';
             @if (!solved()) {
               <div class="station-entry">
                 <input class="station-input final-input" type="text" autocomplete="off" autocapitalize="characters"
+                  [attr.inputmode]="finalIsNumeric() ? 'numeric' : 'text'" spellcheck="false"
+                  [class.input-error]="!!finalFeedback()"
                   [value]="finalInput()" (input)="onFinal($event)" (keyup.enter)="tryEscape()" placeholder="Final answer" />
-                <button class="btn primary small" (click)="tryEscape()">Escape</button>
+                <button class="btn primary small" (click)="tryEscape()" [disabled]="!finalInput().trim()">Escape</button>
               </div>
               @if (finalFeedback()) { <p class="mini-error">{{ finalFeedback() }}</p> }
               @if (fin.hint && hintShown()['final']) { <p class="hint-text">Hint: {{ fin.hint }}</p> }
@@ -169,6 +175,7 @@ import { Category } from '../../core/models/category.model';
     .station-prompt { font-size: 0.92rem; line-height: 1.5; margin: 0 0 10px; }
     .station-entry { display: flex; gap: 8px; }
     .station-input { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 8px; background: var(--bg-surface); border: 1.5px solid transparent; color: var(--text); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; &:focus { outline: none; border-color: var(--accent); } }
+    .station-input.input-error { border-color: #e94560; &:focus { border-color: #e94560; } }
     .final-input { font-family: 'Poppins', sans-serif; font-weight: 700; }
     .station-answer { font-family: 'Poppins', sans-serif; font-weight: 700; color: #00b894; letter-spacing: 0.05em; }
     .contributes { color: var(--text-muted); font-weight: 600; }
@@ -179,7 +186,8 @@ import { Category } from '../../core/models/category.model';
 
     .final-panel { width: 100%; background: var(--bg-card); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; border: 2px dashed var(--grid-border); }
     .final-panel.open { border-style: solid; border-color: #00b894; }
-    .final-title { font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 700; margin: 0 0 4px; }
+    .final-title { font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 700; margin: 0 0 4px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .pieces { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); font-variant-numeric: tabular-nums; }
     .final-rule { font-size: 0.85rem; color: var(--text-muted); margin: 0 0 12px; }
     .lock-assembly { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 12px; }
     .lock-slot { width: 38px; height: 46px; border-radius: 8px; background: var(--bg-surface); display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-muted); }
@@ -292,6 +300,17 @@ export class EscapeComponent implements OnDestroy {
     const st = this.stations()[i];
     return !!st && this.norm(this.confirmed()[i]) === this.norm(st.answer);
   }
+
+  solvedCount(): number {
+    return this.stations().filter((_, i) => this.stationSolved(i)).length;
+  }
+
+  isDigitStation(i: number): boolean {
+    const st = this.stations()[i];
+    return !!st && /^[0-9]+$/.test(st.answer);
+  }
+
+  finalIsNumeric = computed(() => /^[0-9]+$/.test(this.finalPuzzle()?.answer ?? ''));
 
   onStation(i: number, e: Event): void {
     const v = (e.target as HTMLInputElement).value;
